@@ -7,7 +7,7 @@
 
 ![GitHub Actions Coda Linting](https://github.com/nf-core/modules/workflows/Code%20Linting/badge.svg)
 
-> [!NOTE] 
+> [!NOTE]
 > THIS REPOSITORY IS A SUBSET OF THE [nf-core/modules](https://github.com/nf-core/modules) REPOSITORY
 
 > [!WARNING]
