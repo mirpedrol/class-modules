@@ -30,6 +30,8 @@ input:
         type: file
         description: Input sequences in FASTA format
         pattern: "*.{fa,fasta}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta2:
         qualifier: val
         type: map
@@ -60,6 +62,8 @@ output:
           type: file
           description: Alignment file, in gzipped fasta format
           pattern: "*.aln{.gz,}"
+          ontologies:
+            - edam: http://edamontology.org/format_1984
   - versions:
       - versions.yml:
           qualifier: path

@@ -40,7 +40,6 @@ output:
           qualifier: path
           type: file
           description: File containing the irmsd of the alignment
-          pattern: "*"
   - versions:
       - versions.yml:
           qualifier: path

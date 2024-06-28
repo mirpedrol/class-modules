@@ -30,6 +30,8 @@ input:
         type: file
         description: Input sequences for alignment must be in FASTA format
         pattern: "*.{fasta,fa,fna}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - compress:
         qualifier: val
         type: boolean

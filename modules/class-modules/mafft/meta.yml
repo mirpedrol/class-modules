@@ -18,7 +18,7 @@ tools:
       description: "Parallel implementation of the gzip algorithm."
       homepage: "https://zlib.net/pigz/"
       documentation: "https://zlib.net/pigz/pigz.pdf"
-      identifier: biotools:MAFFT
+
 input:
   - - meta:
         qualifier: val
@@ -32,6 +32,8 @@ input:
         description: FASTA file containing the sequences to align. May be gzipped or
           uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta2:
         qualifier: val
         type: map
@@ -44,6 +46,8 @@ input:
         description: FASTA file containing sequences to align to the sequences in `fasta`
           using `--add`. May be gzipped or uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta3:
         qualifier: val
         type: map
@@ -56,6 +60,8 @@ input:
         description: FASTA file containing sequences to align to the sequences in `fasta`
           using `--addfragments`. May be gzipped or uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta4:
         qualifier: val
         type: map
@@ -68,6 +74,8 @@ input:
         description: FASTA file containing sequences to align to the sequences in `fasta`
           using `--addfull`. May be gzipped or uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta5:
         qualifier: val
         type: map
@@ -80,6 +88,8 @@ input:
         description: FASTA file containing sequences to align to the sequences in `fasta`
           using `--addprofile`. May be gzipped or uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta6:
         qualifier: val
         type: map
@@ -92,6 +102,8 @@ input:
         description: FASTA file containing sequences to align to the sequences in `fasta`
           using `--addlong`. May be gzipped or uncompressed.
         pattern: "*.{fa,fasta}{.gz,}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - compress:
         qualifier: val
         type: boolean
@@ -111,6 +123,8 @@ output:
           type: file
           description: Aligned sequences in FASTA format. May be gzipped or uncompressed.
           pattern: "*.fas{.gz,}"
+          ontologies:
+            - edam: http://edamontology.org/format_1984
   - versions:
       - versions.yml:
           qualifier: path

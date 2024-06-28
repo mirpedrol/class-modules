@@ -30,6 +30,8 @@ input:
         type: file
         description: Input sequences in FASTA format
         pattern: "*.{fa,fasta}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
   - - meta2:
         qualifier: val
         type: map
@@ -52,13 +54,11 @@ input:
         type: file
         description: T_coffee template file that maps sequences to the accessory information
           files to be used.
-        pattern: "*"
     - accessory_informations:
         qualifier: path
         type: file
         description: Accessory files to be used in the alignment. For example, it could
           be protein structures or secondary structures.
-        pattern: "*"
   - - compress:
         qualifier: val
         type: boolean
@@ -78,6 +78,8 @@ output:
           type: file
           description: Alignment file in FASTA format. May be gzipped.
           pattern: "*.aln{.gz,}"
+          ontologies:
+            - edam: http://edamontology.org/format_1984
   - lib:
       - meta:
           qualifier: val
