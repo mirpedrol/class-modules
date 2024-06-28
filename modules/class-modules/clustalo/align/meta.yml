@@ -13,12 +13,11 @@ tools:
       tool_dev_url: "http://www.clustal.org/omega/"
       doi: "10.1038/msb.2011.75"
       licence: ["GPL v2"]
-      identifier: ""
+      identifier: "biotools:clustalo"
   - "pigz":
       description: "Parallel implementation of the gzip algorithm."
       homepage: "https://zlib.net/pigz/"
       documentation: "https://zlib.net/pigz/pigz.pdf"
-      identifier: ""
 input:
   - - meta:
         qualifier: val

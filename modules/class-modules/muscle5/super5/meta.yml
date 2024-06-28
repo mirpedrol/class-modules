@@ -7,18 +7,17 @@ keywords:
   - msa
   - multiple sequence alignment
 tools:
-  - muscle -super5:
+  - muscle-super5:
       description: "Muscle v5 is a major re-write of MUSCLE based on new algorithms."
       homepage: "https://drive5.com/muscle5/"
       documentation: "https://drive5.com/muscle5/manual/"
       doi: "10.1101/2021.06.20.449169"
       licence: ["Public Domain"]
-      identifier: ""
+      identifier: "biotools:muscle"
   - "pigz":
       description: "Parallel implementation of the gzip algorithm."
       homepage: "https://zlib.net/pigz/"
       documentation: "https://zlib.net/pigz/pigz.pdf"
-      identifier: ""
 input:
   - - meta:
         qualifier: val

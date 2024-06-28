@@ -13,7 +13,7 @@ tools:
       tool_dev_url: "https://github.com/cbcrg/tcoffee"
       doi: "10.1006/jmbi.2000.4042"
       licence: ["GPL v3"]
-      identifier: ""
+      identifier: "biotools:tcoffee"
 input:
   - - meta:
         qualifier: val
