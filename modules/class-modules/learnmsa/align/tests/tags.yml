@@ -1,2 +1,2 @@
 learnmsa/align:
-  - "modules/nf-core/learnmsa/align/**"
+  - "modules/class-modules/learnmsa/align/**"

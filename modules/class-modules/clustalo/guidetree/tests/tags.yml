@@ -1,2 +1,2 @@
 clustalo/guidetree:
-  - "modules/nf-core/clustalo/guidetree/**"
+  - "modules/class-modules/clustalo/guidetree/**"

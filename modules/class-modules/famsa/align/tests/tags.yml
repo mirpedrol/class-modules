@@ -1,2 +1,2 @@
 famsa/align:
-  - "modules/nf-core/famsa/align/**"
+  - "modules/class-modules/famsa/align/**"
