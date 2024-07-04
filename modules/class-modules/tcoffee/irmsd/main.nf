@@ -7,13 +7,13 @@ process TCOFFEE_IRMSD {
         'https://depot.galaxyproject.org/singularity/mulled-v2-a76a981c07359a31ff55b9dc13bd3da5ce1909c1:84c8f17f1259b49e2f7783b95b7a89c6f2cb199e-0':
         'biocontainers/mulled-v2-a76a981c07359a31ff55b9dc13bd3da5ce1909c1:84c8f17f1259b49e2f7783b95b7a89c6f2cb199e-0' }"
 
-    input:
-    tuple  val(meta),  file (msa)
-    tuple  val(meta2), file(template), file(structures)
+    input: 
+    tuple val(meta), file(msa)
+    tuple val(meta2), file(template), file(structures)
 
     output:
-    tuple val(meta), path ("${prefix}.irmsd"), emit: irmsd
-    path "versions.yml"                      , emit: versions
+    tuple val(meta), path("${prefix}.irmsd"), emit: irmsd
+    path "versions.yml"                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
