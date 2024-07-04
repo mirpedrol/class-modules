@@ -33,7 +33,7 @@ input:
           or uncompressed.
         pattern: "*.{aln,fa,fasta,fas}{.gz,}"
         ontologies:
-            - edam: http://edamontology.org/format_1984
+          - edam: http://edamontology.org/format_1984
   - - meta2:
     - lib:
         type: file

@@ -31,14 +31,14 @@ input:
           or uncompressed
         pattern: "*.{aln,fa,fasta,fas}{.gz,}"
         ontologies:
-            - edam: http://edamontology.org/format_1984
+          - edam: http://edamontology.org/format_1984
     - ref_msa:
         type: file
         description: fasta file containing the reference alignment used for the evaluation.
           Can be gzipped or uncompressed
         pattern: "*.{aln,fa,fasta,fas}{.gz,}"
         ontologies:
-            - edam: http://edamontology.org/format_1984
+          - edam: http://edamontology.org/format_1984
 output:
   - scores:
       - meta:
