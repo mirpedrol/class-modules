@@ -6,7 +6,7 @@ nextflow_process {
     process "KALIGN_ALIGN"
 
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_classmodules"
     tag "kalign"
     tag "kalign/align"
 

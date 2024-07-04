@@ -1,2 +1,2 @@
 mafft:
-  - modules/nf-core/mafft/**
+  - modules/class-modules/mafft/**

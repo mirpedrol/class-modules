@@ -4,7 +4,7 @@ nextflow_process {
     script "../main.nf"
     process "MAFFT"
     tag "modules"
-    tag "modules_nfcore"
+    tag "modules_classmodules"
     tag "mafft"
 
     test("SARS-CoV-2 scaffolds fasta - uncompressed") {

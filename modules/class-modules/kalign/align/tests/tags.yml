@@ -1,2 +1,2 @@
 kalign/align:
-  - "modules/nf-core/kalign/align/**"
+  - "modules/class-modules/kalign/align/**"
