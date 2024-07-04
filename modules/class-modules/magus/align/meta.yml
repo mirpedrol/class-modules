@@ -18,26 +18,22 @@ tools:
 
 input:
   - - meta:
-        qualifier: val
         type: map
         description: |
           Groovy Map containing the fasta meta information
           e.g. `[ id:'test', single_end:false ]`
     - fasta:
-        qualifier: path
         type: file
         description: Input sequences in FASTA format.
         pattern: "*.{fa,fna,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
   - - meta2:
-        qualifier: val
         type: map
         description: |
           Groovy Map containing sample information for the specified guide tree (if supplied)
           e.g. `[ id:'test', single_end:false ]`
     - tree:
-        qualifier: path
         type: file
         description: Optional path to a file containing a guide tree in newick format
           to use as input. If empty, or overwritten by passing `-t [fasttree|fasttree-noml|clustal|parttree]`,
@@ -45,7 +41,6 @@ input:
           default.
         pattern: "*.{dnd,tree}"
   - - compress:
-        qualifier: val
         type: boolean
         description: Flag representing whether the output MSA should be compressed.
           Set to true to enable/false to disable compression. Compression is done using
@@ -53,13 +48,11 @@ input:
 output:
   - alignment:
       - meta:
-          qualifier: val
           type: map
           description: |
             Groovy Map containing sample meta information.
             e.g. `[ id:'test', single_end:false ]`
       - "*.aln{.gz,}":
-          qualifier: path
           type: file
           description: File containing the output alignment, in FASTA format containing
             gaps. The sequences may be in a different order than in the input FASTA. The
@@ -70,7 +63,6 @@ output:
             - edam: http://edamontology.org/format_1984
   - versions:
       - versions.yml:
-          qualifier: path
           type: file
           description: File containing software versions
           pattern: "versions.yml"

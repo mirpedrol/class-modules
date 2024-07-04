@@ -23,13 +23,11 @@ tools:
 
 input:
   - - meta:
-        qualifier: val
         type: map
         description: |
           Groovy Map containing sample information
           e.g. [ id:'test', ... ]
     - msa:
-        qualifier: path
         type: file
         description: fasta file containing the alignment to be evaluated. May be gzipped
           or uncompressed.
@@ -37,40 +35,33 @@ input:
         ontologies:
             - edam: http://edamontology.org/format_1984
   - - meta2:
-        qualifier: val
     - lib:
-        qualifier: path
         type: file
         description: lib file containing the alignment library of the given msa.
         pattern: "*{.tc_lib,*_lib}"
 output:
   - tcs:
       - meta:
-          qualifier: val
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
       - "*.tcs":
-          qualifier: path
           type: file
           description: The msa represented in tcs format, prepended with TCS scores
           pattern: "*.tcs"
   - scores:
       - meta:
-          qualifier: val
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
       - "*.scores":
-          qualifier: path
           type: file
           description: a file containing the score of the alignment in csv format
           pattern: "*.scores"
   - versions:
       - versions.yml:
-          qualifier: path
           type: file
           description: File containing software versions
           pattern: "versions.yml"

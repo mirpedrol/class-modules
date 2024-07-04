@@ -18,13 +18,11 @@ tools:
 
 input:
   - - meta:
-        qualifier: val
         type: map
         description: |
           Groovy Map containing fasta meta information
           e.g. `[ id:'test', single_end:false ]`
     - fasta:
-        qualifier: path
         type: file
         description: Input sequences in FASTA format.
         pattern: "*.{fa,fna,fasta}"
@@ -33,19 +31,16 @@ input:
 output:
   - tree:
       - meta:
-          qualifier: val
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
       - "*.tree":
-          qualifier: path
           type: file
           description: File containing the output guidetree, in newick format.
           pattern: "*.tree"
   - versions:
       - versions.yml:
-          qualifier: path
           type: file
           description: File containing software versions
           pattern: "versions.yml"

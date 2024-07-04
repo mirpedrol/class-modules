@@ -21,13 +21,11 @@ tools:
 
 input:
   - - meta:
-        qualifier: val
         type: map
         description: |
           Groovy Map containing sample information
           e.g. [ id:'test', ... ]
     - msa:
-        qualifier: path
         type: file
         description: fasta file containing the alignment to be evaluated. Can be gzipped
           or uncompressed
@@ -35,7 +33,6 @@ input:
         ontologies:
             - edam: http://edamontology.org/format_1984
     - ref_msa:
-        qualifier: path
         type: file
         description: fasta file containing the reference alignment used for the evaluation.
           Can be gzipped or uncompressed
@@ -45,19 +42,16 @@ input:
 output:
   - scores:
       - meta:
-          qualifier: val
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:'test', single_end:false ]
       - "*.scores":
-          qualifier: path
           type: file
           description: a file containing the score of the alignment
           pattern: "*.scores"
   - versions:
       - versions.yml:
-          qualifier: path
           type: file
           description: File containing software versions
           pattern: "versions.yml"
