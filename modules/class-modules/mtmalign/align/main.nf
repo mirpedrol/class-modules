@@ -11,12 +11,11 @@ process MTMALIGN_ALIGN {
 
     input:
     tuple val(meta), path(pdbs)
-    val(compress)
 
     output:
-    tuple val(meta), path("${prefix}.aln${compress ? '.gz' : ''}"), emit: alignment
-    tuple val(meta), path("${prefix}.pdb${compress ? '.gz' : ''}"), emit: structure
-    path "versions.yml"                                           , emit: versions
+    tuple val(meta), path("${prefix}.aln.gz"), emit: alignment
+    tuple val(meta), path("${prefix}.pdb.gz"), emit: structure
+    path "versions.yml"                      , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -42,9 +41,7 @@ process MTMALIGN_ALIGN {
     sed -i 's/\\.pdb//g' ./mTM_result/${prefix}.aln
 
     # compress both output files
-    if ${compress}; then
-        pigz -p ${task.cpus} ./mTM_result/${prefix}.aln ./mTM_result/${prefix}.pdb
-    fi
+    pigz -p ${task.cpus} ./mTM_result/${prefix}.aln ./mTM_result/${prefix}.pdb
 
     # move everything in mTM_result to the working directory
     mv ./mTM_result/* .
@@ -60,8 +57,8 @@ process MTMALIGN_ALIGN {
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln${compress ? '.gz' : ''}
-    touch ${prefix}.pdb${compress ? '.gz' : ''}
+    touch ${prefix}.aln.gz
+    touch ${prefix}.pdb.gz
 
     # mtm-align -v prints the wrong version 20180725, so extract it from the cosmetic output in the help message
     cat <<-END_VERSIONS > versions.yml

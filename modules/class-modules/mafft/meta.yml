@@ -92,11 +92,6 @@ input:
         pattern: "*.{fa,fasta}{.gz,}"
         ontologies:
           - edam: http://edamontology.org/format_1929
-  - - compress:
-        type: boolean
-        description: Flag representing whether the output MSA should be compressed.
-          Set to true to enable/false to disable compression. Compression is done using
-          pigz, and is multithreaded.
 output:
   - fas:
       - meta:
@@ -104,10 +99,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. [ id:'test', single_end:false ]
-      - "*.fas{.gz,}":
+      - "*.fas.gz":
           type: file
-          description: Aligned sequences in FASTA format. May be gzipped or uncompressed.
-          pattern: "*.fas{.gz,}"
+          description: Aligned sequences in FASTA format.
+          pattern: "*.fas.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
   - versions:

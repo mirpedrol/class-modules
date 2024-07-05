@@ -14,11 +14,10 @@ process MAFFT {
     tuple val(meta4), path(addfull)
     tuple val(meta5), path(addprofile)
     tuple val(meta6), path(addlong)
-    val(compress)
 
     output:
-    tuple val(meta), path("*.fas{.gz,}"), emit: fas
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*.fas.gz"), emit: fas
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -31,7 +30,6 @@ process MAFFT {
     def addfull      = addfull         ? "--addfull <(unpigz -cdf ${addfull})"           : ''
     def addprofile   = addprofile      ? "--addprofile <(unpigz -cdf ${addprofile})"     : ''
     def addlong      = addlong         ? "--addlong <(unpigz -cdf ${addlong})"           : ''
-    def write_output = compress ? " | pigz -cp ${task.cpus} > ${prefix}.fas.gz" : "> ${prefix}.fas"
     // this will not preserve MAFFTs return value, but mafft crashes when it receives a process substitution
     if ("$fasta" == "${prefix}.fas" ) error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
@@ -44,7 +42,7 @@ process MAFFT {
         ${addlong} \\
         ${args} \\
         ${fasta} \\
-        ${write_output}
+        | pigz -cp ${task.cpus} > ${prefix}.fas.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -63,7 +61,7 @@ process MAFFT {
     def addlong      = addlong         ? "--addlong ${addlong}"           : ''
     if ("$fasta" == "${prefix}.fas" )  error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
-    touch ${prefix}.fas${compress ? '.gz' : ''}
+    touch ${prefix}.fas.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
