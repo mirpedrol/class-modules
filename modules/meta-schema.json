@@ -104,7 +104,16 @@
               "identifier": {
                 "type": "string",
                 "description": "bio.tools identifier of the tool",
-                "pattern": "^biotools:.*$"
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^biotools:.*$"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [""]
+                  }
+                ]
               }
             },
             "required": ["description"],
