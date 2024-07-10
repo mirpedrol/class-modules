@@ -9,14 +9,9 @@ process MAFFT {
 
     input:
     tuple val(meta) , path(fasta)
-    tuple val(meta2), path(add)
-    tuple val(meta3), path(addfragments)
-    tuple val(meta4), path(addfull)
-    tuple val(meta5), path(addprofile)
-    tuple val(meta6), path(addlong)
 
     output:
-    tuple val(meta), path("*.fas.gz"), emit: fas
+    tuple val(meta), path("*.aln.gz"), emit: alignment
     path "versions.yml"              , emit: versions
 
     when:
@@ -25,24 +20,13 @@ process MAFFT {
     script:
     def args         = task.ext.args   ?: ''
     def prefix       = task.ext.prefix ?: "${meta.id}"
-    def add          = add             ? "--add <(unpigz -cdf ${add})"                   : ''
-    def addfragments = addfragments    ? "--addfragments <(unpigz -cdf ${addfragments})" : ''
-    def addfull      = addfull         ? "--addfull <(unpigz -cdf ${addfull})"           : ''
-    def addprofile   = addprofile      ? "--addprofile <(unpigz -cdf ${addprofile})"     : ''
-    def addlong      = addlong         ? "--addlong <(unpigz -cdf ${addlong})"           : ''
-    // this will not preserve MAFFTs return value, but mafft crashes when it receives a process substitution
-    if ("$fasta" == "${prefix}.fas" ) error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
     mafft \\
         --thread ${task.cpus} \\
-        ${add} \\
-        ${addfragments} \\
-        ${addfull} \\
-        ${addprofile} \\
-        ${addlong} \\
         ${args} \\
         ${fasta} \\
-        | pigz -cp ${task.cpus} > ${prefix}.fas.gz
+        > ${prefix}.aln
+        | pigz -cp ${task.cpus} > ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -54,14 +38,8 @@ process MAFFT {
     stub:
     def args         = task.ext.args   ?: ''
     def prefix       = task.ext.prefix ?: "${meta.id}"
-    def add          = add             ? "--add ${add}"                   : ''
-    def addfragments = addfragments    ? "--addfragments ${addfragments}" : ''
-    def addfull      = addfull         ? "--addfull ${addfull}"           : ''
-    def addprofile   = addprofile      ? "--addprofile ${addprofile}"     : ''
-    def addlong      = addlong         ? "--addlong ${addlong}"           : ''
-    if ("$fasta" == "${prefix}.fas" )  error "Input and output names are the same, set prefix in module configuration to disambiguate!"
     """
-    touch ${prefix}.fas.gz
+    touch ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

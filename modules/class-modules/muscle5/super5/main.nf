@@ -35,7 +35,7 @@ process MUSCLE5_SUPER5 {
 
 
     # output may be multiple files if -perm all is set
-    # compress these individually if set to compress output
+    # compress these individually
     if ${args.contains('-perm all')}; then
         pigz -p ${task.cpus} *.aln
     fi
