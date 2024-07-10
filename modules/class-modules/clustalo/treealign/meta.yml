@@ -1,7 +1,8 @@
-name: "clustalo_align"
+name: "clustalo_treealign"
 description: Align sequences using Clustal Omega
 keywords:
   - alignment
+  - treealignment
   - MSA
   - genomics
 tools:
@@ -30,6 +31,15 @@ input:
         pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing tree information
+          e.g. `[ id:'test_tree']`
+    - tree:
+        type: file
+        description: Input guide tree in Newick format
+        pattern: "*.{dnd}"
 output:
   - alignment:
       - meta:

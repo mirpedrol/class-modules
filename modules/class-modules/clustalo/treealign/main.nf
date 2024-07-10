@@ -1,4 +1,4 @@
-process CLUSTALO_ALIGN {
+process CLUSTALO_TREEALIGN {
     tag "$meta.id"
     label 'process_medium'
 
@@ -9,6 +9,7 @@ process CLUSTALO_ALIGN {
 
     input:
     tuple val(meta) , path(fasta)
+    tuple val(meta2), path(tree)
 
     output:
     tuple val(meta), path("*.aln.gz"), emit: alignment
@@ -28,6 +29,7 @@ process CLUSTALO_ALIGN {
     """
     clustalo \
         -i ${fasta} \
+        --guidetree-in=${tree} \
         --threads=${task.cpus} \
         $args \
         --force -o >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)
