@@ -67,14 +67,14 @@
     "versions_guidetree": {
         "content": [
             [
-                "versions.yml:md5,fb187c9186b50a8076d08cd3be3c1b70"
+                
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
-            "nextflow": "24.01.0"
+            "nextflow": "24.04.3"
         },
-        "timestamp": "2024-02-28T19:00:10.618213"
+        "timestamp": "2024-07-10T16:33:47.083399"
     },
     "alignment - lib": {
         "content": [
@@ -125,18 +125,13 @@
     "alignment_guidetree": {
         "content": [
             [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test.aln.gz:md5,93bc8adfcd88f7913718eacc13da8e4a"
-                ]
+                
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
-            "nextflow": "24.01.0"
+            "nextflow": "24.04.3"
         },
-        "timestamp": "2024-02-28T19:00:10.611489"
+        "timestamp": "2024-07-10T16:33:47.037522"
     }
 }

@@ -14,8 +14,6 @@ nextflow_process {
 
     test("fasta - align_with_lib") {
 
-        config "./lib.config"
-
         when {
             process {
                 """

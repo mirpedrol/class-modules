@@ -16,7 +16,7 @@ nextflow_process {
         setup {
 
             run("FAMSA_GUIDETREE") {
-                script "../../../famsa/guidetree//main.nf"
+                script "../../../famsa/guidetree/main.nf"
                 process {
                     """
                     input[0] = [ [ id:'test' ],
