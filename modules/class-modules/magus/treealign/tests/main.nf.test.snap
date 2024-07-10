@@ -1,14 +1,14 @@
 {
-    "versions1": {
+    "with_guide_tree_versions": {
         "content": [
             [
-                "versions.yml:md5,ef9456e058ce51bce10dbc3703da29c7"
+                "versions.yml:md5,25c60978b2ebb3f6729b00efae44dcee"
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-03-28T18:17:23.679862847"
+        "timestamp": "2024-07-10T15:18:06.218411"
     }
 }

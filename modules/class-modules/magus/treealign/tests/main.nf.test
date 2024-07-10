@@ -1,16 +1,30 @@
 nextflow_process {
 
-    name "Test Process MAGUS_ALIGN"
+    name "Test Process MAGUS_TREEALIGN"
     script "../main.nf"
-    process "MAGUS_ALIGN"
+    process "MAGUS_TREEALIGN"
 
     tag "modules"
     tag "modules_classmodules"
     tag "magus"
-    tag "magus/align"
+    tag "magus/treealign"
+    tag "magus/guidetree"
 
 
-    test("setoxin - fasta") {
+    test("setoxin - fasta - guide_tree") {
+
+        setup {
+            run("MAGUS_GUIDETREE") {
+                script "../../guidetree/main.nf"
+                process {
+                    """
+                    input[0] = [ [ id:'test' ], // meta map
+                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                               ]
+                    """
+                }
+            }
+        }
 
         when {
             process {
@@ -18,6 +32,7 @@ nextflow_process {
                 input[0] = [ [ id:'test' ], // meta map
                              file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                            ]
+                input[1] = MAGUS_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree]}
                 """
             }
         }
@@ -32,9 +47,8 @@ nextflow_process {
                 { assert path(process.out.alignment[0][1]).getTextGzip().contains(">1atx") },
                 { assert path(process.out.alignment[0][1]).getTextGzip().contains(">1sh1") },
                 { assert path(process.out.alignment[0][1]).getTextGzip().contains(">1bds") },
-                { assert snapshot(process.out.versions).match("versions1") }
+                { assert snapshot(process.out.versions).match("with_guide_tree_versions") }
             )
         }
-
     }
 }

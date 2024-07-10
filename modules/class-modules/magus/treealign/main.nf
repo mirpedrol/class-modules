@@ -1,4 +1,4 @@
-process MAGUS_ALIGN {
+process MAGUS_TREEALIGN {
     tag "$meta.id"
     label 'process_high'
 
@@ -9,6 +9,7 @@ process MAGUS_ALIGN {
 
     input:
     tuple val(meta) , path(fasta)
+    tuple val(meta2), path(tree)
 
     output:
     tuple val(meta), path("*.aln.gz"), emit: alignment
@@ -29,6 +30,7 @@ process MAGUS_ALIGN {
         -i $fasta \\
         -d ./ \\
         --overwrite -o >(pigz -cp ${task.cpus} > ${prefix}.aln.gz) \\
+        -t $tree \\
         $args
 
     cat <<-END_VERSIONS > versions.yml

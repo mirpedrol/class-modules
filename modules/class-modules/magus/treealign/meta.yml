@@ -1,9 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
-name: "magus_align"
+name: "magus_treealign"
 description: Multiple Sequence Alignment using Graph Clustering
 keywords:
   - MSA
   - alignment
+  - treealignment
   - genomics
   - graph
 tools:
@@ -28,6 +29,18 @@ input:
         pattern: "*.{fa,fna,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information for the specified guide tree (if supplied)
+          e.g. `[ id:'test', single_end:false ]`
+    - tree:
+        type: file
+        description: Optional path to a file containing a guide tree in newick format
+          to use as input. If empty, or overwritten by passing `-t [fasttree|fasttree-noml|clustal|parttree]`,
+          MAGUS will construct its own guide tree. If empty, `fasttree` is used as a
+          default.
+        pattern: "*.{dnd,tree}"
 output:
   - alignment:
       - meta:
