@@ -1,24 +1,15 @@
 {
-    "alignment_uncompressed": {
-        "content": [
-            [
-                [
-                    {
-                        "id": "test"
-                    },
-                    "test.aln:md5,7cf7375f2ba360814ea978731838b972"
-                ]
-            ]
-        ],
-        "timestamp": "2024-02-09T19:08:43.577982822"
-    },
-    "versions": {
+    "versions1": {
         "content": [
             [
                 "versions.yml:md5,7d9e0a8c263fa6d9017075fe88c9e9dc"
             ]
         ],
-        "timestamp": "2024-02-09T19:08:43.670136799"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-10T12:06:05.094484"
     },
     "with_guide_tree_alignment": {
         "content": [
@@ -31,9 +22,13 @@
                 ]
             ]
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
         "timestamp": "2024-02-09T19:10:05.167368314"
     },
-    "alignment_compressed": {
+    "alignment": {
         "content": [
             [
                 [
@@ -44,7 +39,11 @@
                 ]
             ]
         ],
-        "timestamp": "2024-02-09T19:09:25.819156831"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-10T12:06:05.047249"
     },
     "with_guide_tree_versions": {
         "content": [
@@ -52,6 +51,10 @@
                 "versions.yml:md5,7d9e0a8c263fa6d9017075fe88c9e9dc"
             ]
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
         "timestamp": "2024-02-09T19:10:05.231995851"
     }
 }

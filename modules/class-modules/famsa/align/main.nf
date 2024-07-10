@@ -26,7 +26,7 @@ process FAMSA_ALIGN {
     def options_tree = tree ? "-gt import $tree" : ""
     """
     famsa $options_tree \\
-        -gz # compress output \\
+        -gz \\
         $args \\
         -t ${task.cpus} \\
         ${fasta} \\
