@@ -1,4 +1,4 @@
-process TCOFFEE_ALIGN {
+process TCOFFEE_LIBALIGN {
     tag "$meta.id"
     label 'process_medium'
 
@@ -12,6 +12,7 @@ process TCOFFEE_ALIGN {
 
     output:
     tuple val(meta), path("*.aln.gz"), emit: alignment
+    tuple val(meta), path("*.*lib")  , emit: lib
     path "versions.yml"              , emit: versions
 
     when:
@@ -23,8 +24,9 @@ process TCOFFEE_ALIGN {
     """
     export TEMP='./'
     t_coffee -seq ${fasta} \
-        $args \
         -output fasta_aln \
+        -out_lib=sample_lib1.tc_lib \
+        $args \
         -thread ${task.cpus} \
         -outfile stdout \
         | pigz -cp ${task.cpus} > ${prefix}.aln.gz

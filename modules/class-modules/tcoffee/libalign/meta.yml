@@ -1,4 +1,4 @@
-name: "tcoffee_align"
+name: "tcoffee_libalign"
 description: Aligns sequences using T_COFFEE
 keywords:
   - alignment
@@ -30,6 +30,28 @@ input:
         pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing tree information
+          e.g. `[ id:'test_tree']`
+    - tree:
+        type: file
+        description: Input guide tree in Newick format
+        pattern: "*.{dnd}"
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing tree information
+          e.g. `[ id:'test_infos']`
+    - template:
+        type: file
+        description: T_coffee template file that maps sequences to the accessory information
+          files to be used.
+    - accessory_informations:
+        type: file
+        description: Accessory files to be used in the alignment. For example, it could
+          be protein structures or secondary structures.
 output:
   - alignment:
       - meta:
@@ -43,6 +65,16 @@ output:
           pattern: "*.aln.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
+  - lib:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test']`
+      - "*.*lib":
+          type: file
+          description: optional output, the library generated from the MSA file.
+          pattern: "*.*lib"
   - versions:
       - versions.yml:
           type: file

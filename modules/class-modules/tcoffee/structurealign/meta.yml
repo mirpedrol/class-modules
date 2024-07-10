@@ -1,7 +1,8 @@
-name: "tcoffee_align"
+name: "tcoffee_structurealign"
 description: Aligns sequences using T_COFFEE
 keywords:
   - alignment
+  - structurealignment
   - MSA
   - genomics
 tools:
@@ -30,6 +31,19 @@ input:
         pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing tree information
+          e.g. `[ id:'test_infos']`
+    - template:
+        type: file
+        description: T_coffee template file that maps sequences to the accessory information
+          files to be used.
+    - accessory_informations:
+        type: file
+        description: Accessory files to be used in the alignment. For example, it could
+          be protein structures or secondary structures.
 output:
   - alignment:
       - meta:

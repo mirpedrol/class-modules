@@ -1,4 +1,4 @@
-process TCOFFEE_ALIGN {
+process TCOFFEE_TREEALIGN {
     tag "$meta.id"
     label 'process_medium'
 
@@ -9,6 +9,7 @@ process TCOFFEE_ALIGN {
 
     input:
     tuple val(meta) ,  path(fasta)
+    tuple val(meta2),  path(tree)
 
     output:
     tuple val(meta), path("*.aln.gz"), emit: alignment
@@ -23,8 +24,9 @@ process TCOFFEE_ALIGN {
     """
     export TEMP='./'
     t_coffee -seq ${fasta} \
-        $args \
+        -usetree $tree \
         -output fasta_aln \
+        $args \
         -thread ${task.cpus} \
         -outfile stdout \
         | pigz -cp ${task.cpus} > ${prefix}.aln.gz

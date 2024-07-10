@@ -1,16 +1,20 @@
 nextflow_process {
 
-    name "Test Process TCOFFEE_ALIGN"
+    name "Test Process TCOFFEE_LIBALIGN"
     script "../main.nf"
-    process "TCOFFEE_ALIGN"
+    process "TCOFFEE_LIBALIGN"
 
     tag "modules"
     tag "modules_classmodules"
     tag "tcoffee"
-    tag "tcoffee/align"
+    tag "tcoffee/libalign"
+    tag "famsa/guidetree"
     tag "untar"
 
-    test("fasta - align_sequence") {
+
+    test("fasta - align_with_lib") {
+
+        config "./lib.config"
 
         when {
             process {
@@ -25,8 +29,9 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out.alignment).match("alignment")},
-                { assert snapshot(process.out.versions).match("versions") }
+                { assert snapshot(process.out.alignment).match("alignment - lib") },
+                { assert path(process.out.lib.get(0).get(1)).getText().contains("1ahl") },
+                { assert snapshot(process.out.versions).match("versions_lib") }
             )
         }
     }
