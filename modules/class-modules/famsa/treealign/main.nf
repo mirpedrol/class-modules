@@ -1,6 +1,6 @@
 
 
-process FAMSA_ALIGN {
+process FAMSA_TREEALIGN {
     tag "$meta.id"
     label 'process_medium'
 
@@ -11,6 +11,7 @@ process FAMSA_ALIGN {
 
     input:
     tuple val(meta) , path(fasta)
+    tuple val(meta2), path(tree)
 
     output:
     tuple val(meta), path("*.aln.gz"), emit: alignment
@@ -23,7 +24,8 @@ process FAMSA_ALIGN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    famsa -gz \\
+    famsa -gt import $tree \\
+        -gz \\
         $args \\
         -t ${task.cpus} \\
         ${fasta} \\
