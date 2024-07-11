@@ -9,12 +9,10 @@ process CLUSTALO_ALIGN {
 
     input:
     tuple val(meta) , path(fasta)
-    tuple val(meta2), path(tree)
-    val(compress)
 
     output:
-    tuple val(meta), path("*.aln{.gz,}"), emit: alignment
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*.aln.gz"), emit: alignment
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -22,7 +20,6 @@ process CLUSTALO_ALIGN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def write_output = compress ? "--force -o >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)" : "> ${prefix}.aln"
     // using >() is necessary to preserve the return value,
     // so nextflow knows to display an error when it failed
     // the --force -o is necessary, as clustalo expands the commandline input,
@@ -33,7 +30,7 @@ process CLUSTALO_ALIGN {
         -i ${fasta} \
         --threads=${task.cpus} \
         $args \
-        $write_output
+        --force -o >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -46,7 +43,7 @@ process CLUSTALO_ALIGN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln${compress ? '.gz' : ''}
+    touch ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

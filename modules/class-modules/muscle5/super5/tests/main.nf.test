@@ -10,14 +10,14 @@ nextflow_process {
         tag "muscle5"
         tag "muscle5/super5"
 
-        test("fasta - align_sequence - uncompressed") {
+
+        test("fasta - align_sequence") {
             when {
                 process {
                     """
                         input[0] = [ [ id:'test' ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         ]
-                        input[1] = false
                         """
                 }
             }
@@ -25,31 +25,13 @@ nextflow_process {
             then {
                 assertAll(
                         { assert process.success },
-                        { assert snapshot(process.out.alignment).match("alignment - uncompressed")},
+                        { assert snapshot(process.out.alignment).match("alignment") },
+                        { assert snapshot(process.out.versions).match("versions_align") }
                         )
             }
         }
 
-        test("fasta - align_sequence - compressed") {
-            when {
-                process {
-                    """
-                        input[0] = [ [ id:'test' ],
-                        file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        ]
-                        input[1] = true
-                        """
-                }
-            }
-
-            then {
-                assertAll(
-                        { assert process.success },
-                        { assert snapshot(process.out.alignment).match("alignment - compressed")},
-                        )
-            }
-        }
-        test("fasta - align_sequence - compressed - perm_all") {
+        test("fasta - align_sequence - perm_all") {
             config "./perm_all.config"
             when {
                 process {
@@ -57,7 +39,6 @@ nextflow_process {
                         input[0] = [ [ id:'test' ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         ]
-                        input[1] = true
                         """
                 }
             }
@@ -66,6 +47,7 @@ nextflow_process {
                 assertAll(
                         { assert process.success },
                         { assert snapshot(process.out.alignment).match("perm-all")},
+                        { assert snapshot(process.out.versions).match("versions_perm") }
                         )
             }
         }

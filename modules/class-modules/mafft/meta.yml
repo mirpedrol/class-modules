@@ -32,82 +32,17 @@ input:
         pattern: "*.{fa,fasta}{.gz,}"
         ontologies:
           - edam: http://edamontology.org/format_1929
-  - - meta2:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - add:
-        type: file
-        description: FASTA file containing sequences to align to the sequences in `fasta`
-          using `--add`. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
-        ontologies:
-          - edam: http://edamontology.org/format_1929
-  - - meta3:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - addfragments:
-        type: file
-        description: FASTA file containing sequences to align to the sequences in `fasta`
-          using `--addfragments`. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
-        ontologies:
-          - edam: http://edamontology.org/format_1929
-  - - meta4:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - addfull:
-        type: file
-        description: FASTA file containing sequences to align to the sequences in `fasta`
-          using `--addfull`. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
-        ontologies:
-          - edam: http://edamontology.org/format_1929
-  - - meta5:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - addprofile:
-        type: file
-        description: FASTA file containing sequences to align to the sequences in `fasta`
-          using `--addprofile`. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
-        ontologies:
-          - edam: http://edamontology.org/format_1929
-  - - meta6:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. [ id:'test', single_end:false ]
-    - addlong:
-        type: file
-        description: FASTA file containing sequences to align to the sequences in `fasta`
-          using `--addlong`. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
-        ontologies:
-          - edam: http://edamontology.org/format_1929
-  - - compress:
-        type: boolean
-        description: Flag representing whether the output MSA should be compressed.
-          Set to true to enable/false to disable compression. Compression is done using
-          pigz, and is multithreaded.
 output:
-  - fas:
+  - alignment:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:'test', single_end:false ]
-      - "*.fas{.gz,}":
+      - "*.aln.gz":
           type: file
-          description: Aligned sequences in FASTA format. May be gzipped or uncompressed.
-          pattern: "*.fas{.gz,}"
+          description: Aligned sequences in FASTA format.
+          pattern: "*.aln.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
   - versions:

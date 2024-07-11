@@ -8,7 +8,7 @@ nextflow_process {
     tag "tcoffee"
     tag "tcoffee/tcs"
     tag "pigz/compress"
-    tag "tcoffee/align"
+    tag "tcoffee/libalign"
 
     test("tcs - msa") {
 
@@ -74,19 +74,14 @@ nextflow_process {
 
     test("tcs - msa - lib") {
 
-        config "./lib.config"
-
         setup {
-            run("TCOFFEE_ALIGN") {
-                script "../../align/main.nf"
+            run("TCOFFEE_LIBALIGN") {
+                script "../../libalign/main.nf"
                 process {
                     """
                     input[0] = [ [ id:'test' ],
                              file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                            ]
-                    input[1] = [[:],[]]
-                    input[2] = [[:],[],[]]
-                    input[3] = true
                     """
                 }
             }        
@@ -99,7 +94,7 @@ nextflow_process {
                     [ id:'test'], 
                     file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin.ref", checkIfExists: true)
                     ]
-                input[1] = TCOFFEE_ALIGN.out.lib.map { it -> [[  id:'test' ], it[1]] }
+                input[1] = TCOFFEE_LIBALIGN.out.lib.map { it -> [[  id:'test' ], it[1]] }
                 """
             }
         }

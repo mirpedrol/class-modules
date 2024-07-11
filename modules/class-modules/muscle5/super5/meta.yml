@@ -30,11 +30,6 @@ input:
         pattern: "*.{fasta,fa,fna}"
         ontologies:
           - edam: http://edamontology.org/format_1929
-  - - compress:
-        type: boolean
-        description: Flag representing whether the output MSA should be compressed.
-          Set to true to enable/false to disable compression. Compression is done using
-          pigz, and is multithreaded.
 output:
   - alignment:
       - meta:
@@ -42,11 +37,11 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*.aln{.gz,}":
+      - "*.aln.gz":
           type: file
           description: Multiple sequence alignment produced in gzipped FASTA format. If
             '-perm all' is passed in ext.args, this will be multiple files per input!
-          pattern: "*.{aln.gz}"
+          pattern: "*.aln.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
   - versions:

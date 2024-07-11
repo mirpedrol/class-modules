@@ -9,15 +9,10 @@ process TCOFFEE_ALIGN {
 
     input:
     tuple val(meta) ,  path(fasta)
-    tuple val(meta2),  path(tree)
-    tuple val(meta3),  path(template), path(accessory_informations)
-    val(compress)
 
     output:
-    tuple val(meta), path("*.aln{.gz,}"), emit: alignment
-    // in the args there might be the request to generate a lib file, so the following is an optional output
-    tuple val(meta), path("*.*lib")     , emit: lib, optional : true
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*.aln.gz"), emit: alignment
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -25,24 +20,19 @@ process TCOFFEE_ALIGN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def tree_args = tree ? "-usetree $tree" : ""
-    def template_args = template ? "-template_file $template" : ""
-    def outfile = compress ? "stdout" : "${prefix}.aln"
-    def write_output = compress ? " | pigz -cp ${task.cpus} > ${prefix}.aln.gz" : ""
     """
     export TEMP='./'
     t_coffee -seq ${fasta} \
-        $tree_args \
-        $template_args \
         $args \
+        -output fasta_aln \
         -thread ${task.cpus} \
-        -outfile $outfile \
-        $write_output
+        -outfile stdout \
+        | pigz -cp ${task.cpus} > ${prefix}.aln.gz
 
-    # If stdout file exist and compress is true, then compress the file
+    # If stdout file exist, then compress the file
     # This is a patch for the current behaviour of the regressive algorithm
     # that does not support the stdout redirection
-    if [ -f stdout ] && [ "$compress" = true ]; then
+    if [ -f stdout ]; then
         pigz -cp ${task.cpus} < stdout > ${prefix}.aln.gz
         rm stdout
     fi
@@ -57,7 +47,7 @@ process TCOFFEE_ALIGN {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln${compress ? '.gz':''}
+    touch ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

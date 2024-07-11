@@ -23,6 +23,18 @@
         },
         "timestamp": "2024-03-19T14:04:06.031557"
     },
+    "versions": {
+        "content": [
+            [
+                "versions.yml:md5,fb187c9186b50a8076d08cd3be3c1b70"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-10T15:28:18.280597"
+    },
     "alignment - uncompressed": {
         "content": [
             [

@@ -30,12 +30,7 @@ input:
         type: file
         description: Input protein structures in PDB format. Files may be gzipped or
           uncompressed. They should contain exactly one chain!
-        pattern: "*.{pdb}"
-  - - compress:
-        type: boolean
-        description: Flag representing whether the output MSA should be compressed.
-          Set to true to enable/false to disable compression. Compression is done using
-          pigz, and is multithreaded.
+        pattern: "*.pdb{.gz}"
 output:
   - alignment:
       - meta:
@@ -43,10 +38,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test']`
-      - "${prefix}.aln${compress ? '.gz' : ''}":
+      - "${prefix}.aln.gz":
           type: file
-          description: Alignment in FASTA format. May be gzipped or uncompressed.
-          pattern: "*.aln{.gz,}"
+          description: Alignment in FASTA format.
+          pattern: "*.aln.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
   - structure:
@@ -55,9 +50,9 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test']`
-      - "${prefix}.pdb${compress ? '.gz' : ''}":
+      - "${prefix}.pdb.gz":
           type: file
-          description: Overlaid structures in PDB format. May be gzipped or uncompressed.
+          description: Overlaid structures in PDB format.
           pattern: "${prefix}.pdb{.gz,}"
   - versions:
       - versions.yml:

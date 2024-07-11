@@ -28,23 +28,6 @@ input:
         pattern: "*.{fa,fna,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
-  - - meta2:
-        type: map
-        description: |
-          Groovy Map containing sample information for the specified guide tree (if supplied)
-          e.g. `[ id:'test', single_end:false ]`
-    - tree:
-        type: file
-        description: Optional path to a file containing a guide tree in newick format
-          to use as input. If empty, or overwritten by passing `-t [fasttree|fasttree-noml|clustal|parttree]`,
-          MAGUS will construct its own guide tree. If empty, `fasttree` is used as a
-          default.
-        pattern: "*.{dnd,tree}"
-  - - compress:
-        type: boolean
-        description: Flag representing whether the output MSA should be compressed.
-          Set to true to enable/false to disable compression. Compression is done using
-          pigz, and is multithreaded.
 output:
   - alignment:
       - meta:
@@ -52,13 +35,11 @@ output:
           description: |
             Groovy Map containing sample meta information.
             e.g. `[ id:'test', single_end:false ]`
-      - "*.aln{.gz,}":
+      - "*.aln.gz":
           type: file
           description: File containing the output alignment, in FASTA format containing
-            gaps. The sequences may be in a different order than in the input FASTA. The
-            output file may or may not be gzipped, depending on the value supplied to
-            `compress`.
-          pattern: "*.aln{.gz,}"
+            gaps. The sequences may be in a different order than in the input FASTA.
+          pattern: "*.aln.gz"
           ontologies:
             - edam: http://edamontology.org/format_1984
   - versions:

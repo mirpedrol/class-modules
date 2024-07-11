@@ -9,11 +9,10 @@ process KALIGN_ALIGN {
 
     input:
     tuple val(meta), path(fasta)
-    val(compress)
 
     output:
-    tuple val(meta), path("*.aln{.gz,}"), emit: alignment
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*.aln.gz"), emit: alignment
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -21,12 +20,11 @@ process KALIGN_ALIGN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def write_output = compress ? ">(pigz -cp ${task.cpus} > ${prefix}.aln.gz)" : "${prefix}.aln"
     """
     unpigz -cdf $fasta | \\
     kalign \\
         $args \\
-        -o ${write_output}
+        -o >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -39,7 +37,7 @@ process KALIGN_ALIGN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln${compress ? '.gz' : ''}
+    touch ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

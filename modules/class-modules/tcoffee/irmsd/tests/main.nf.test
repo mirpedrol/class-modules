@@ -49,7 +49,7 @@ nextflow_process {
 
     }
 
-    test("seatoxin - compressed") {
+    test("seatoxin - compressed input") {
 
         setup {
 

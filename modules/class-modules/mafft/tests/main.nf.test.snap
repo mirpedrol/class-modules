@@ -28,7 +28,46 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:08:41.735774847"
+    },
+    "SARS-CoV-2 scaffolds fasta": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.aln.gz:md5,23426611f4a0df532b6708f072bd445b"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,6e930f6a5acc19ff3a7849536a9fd0ee"
+                ],
+                "alignment": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.aln.gz:md5,23426611f4a0df532b6708f072bd445b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,6e930f6a5acc19ff3a7849536a9fd0ee"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-11T09:20:32.608521064"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta multiple": {
         "content": [
@@ -59,6 +98,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:10:38.940555785"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta normal": {
@@ -90,6 +133,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:09:35.656248409"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta long": {
@@ -121,6 +168,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:10:26.372655394"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta profile": {
@@ -152,6 +203,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:10:14.039053212"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta fragments": {
@@ -183,6 +238,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:09:49.737364197"
     },
     "SARS-CoV-2 scaffolds fasta - add informative sites fasta full": {
@@ -214,6 +273,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:10:02.952480822"
     },
     "SARS-CoV-2 scaffolds fasta - compressed": {
@@ -245,6 +308,10 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
         "timestamp": "2024-02-09T19:09:21.096197597"
     }
 }

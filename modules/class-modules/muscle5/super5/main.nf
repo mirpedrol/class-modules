@@ -8,11 +8,10 @@ process MUSCLE5_SUPER5 {
 
     input:
     tuple val(meta), path(fasta)
-    val(compress)
 
     output:
-    tuple val(meta), path("*.aln{.gz,}"), emit: alignment
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*.aln.gz"), emit: alignment
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -21,7 +20,7 @@ process MUSCLE5_SUPER5 {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     prefix = args.contains('-perm all') ? "${prefix}@" : "${prefix}"
-    def write_output = (compress && !args.contains('-perm all')) ? " -output >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)" : "-output ${prefix}.aln"
+    def write_output = (!args.contains('-perm all')) ? " -output >(pigz -cp ${task.cpus} > ${prefix}.aln.gz)" : "-output ${prefix}.aln"
     // muscle internally expands the shell pipe to a file descriptor of the form /dev/fd/<id>
     // this causes it to fail, unless -output is left at the end of the call
     // see also clustalo/align
@@ -36,8 +35,8 @@ process MUSCLE5_SUPER5 {
 
 
     # output may be multiple files if -perm all is set
-    # compress these individually if set to compress output
-    if ${args.contains('-perm all') && compress}; then
+    # compress these individually
+    if ${args.contains('-perm all')}; then
         pigz -p ${task.cpus} *.aln
     fi
 
@@ -52,7 +51,7 @@ process MUSCLE5_SUPER5 {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln${compress ? '.gz' : ''}
+    touch ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
