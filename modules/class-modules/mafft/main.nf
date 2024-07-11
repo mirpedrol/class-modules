@@ -25,7 +25,6 @@ process MAFFT {
         --thread ${task.cpus} \\
         ${args} \\
         ${fasta} \\
-        > ${prefix}.aln
         | pigz -cp ${task.cpus} > ${prefix}.aln.gz
 
     cat <<-END_VERSIONS > versions.yml

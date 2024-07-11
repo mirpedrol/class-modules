@@ -14,14 +14,14 @@
     "versions_lib": {
         "content": [
             [
-                "versions.yml:md5,fb187c9186b50a8076d08cd3be3c1b70"
+                "versions.yml:md5,be68908a79a64a38aaa38acc306feed6"
             ]
         ],
         "meta": {
             "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nextflow": "24.04.2"
         },
-        "timestamp": "2024-03-19T14:04:06.031557"
+        "timestamp": "2024-07-11T09:16:44.594472737"
     },
     "versions": {
         "content": [
