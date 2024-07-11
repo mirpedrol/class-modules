@@ -1,36 +1,35 @@
-// TODO nf-core: If in doubt look at other nf-core/subworkflows to see how we are doing things! :)
-//               https://github.com/nf-core/modules/tree/master/subworkflows
-//               You can also ask for help via your pull request or on the #subworkflows channel on the nf-core Slack workspace:
-//               https://nf-co.re/join
-// TODO nf-core: A subworkflow SHOULD import at least two modules
-
-include { SAMTOOLS_SORT      } from '../../../modules/nf-core/samtools/sort/main'
-include { SAMTOOLS_INDEX     } from '../../../modules/nf-core/samtools/index/main'
+if ( params.aligner == "clustalo/align" ) {
+    include { CLUSTALO_ALIGN as ALIGNER } from '../../../modules/class-modules/clustalo/align/main'
+} else if ( params.aligner == "famsa/align" ) {
+    include { FAMSA_ALIGN    as ALIGNER } from '../../../modules/class-modules/famsa/align/main'
+} else if ( params.aligner == "kalign/align" ) {
+    include { KALIGN_ALIGN   as ALIGNER } from '../../../modules/class-modules/kalign/align/main'
+} else if ( params.aligner == "learnmsa/align" ) {
+    include { LEARNMSA_ALIGN as ALIGNER } from '../../../modules/class-modules/learnmsa/align/main'
+} else if ( params.aligner == "mafft" ) {
+    include { MAFFT          as ALIGNER } from '../../../modules/class-modules/mafft/main'
+} else if ( params.aligner == "magus/align" ) {
+    include { MAGUS_ALIGN    as ALIGNER } from '../../../modules/class-modules/magus/align/main'
+} else if ( params.aligner == "muscle5/super5" ) {
+    include { MUSCLE5_SUPER5 as ALIGNER } from '../../../modules/class-modules/muscle5/super5/main'
+} else if ( params.aligner == "tcoffee/align" ) {
+    include { TCOFFEE_ALIGN  as ALIGNER } from '../../../modules/class-modules/tcoffee/align/main'
+}
 
 workflow MSA_ALIGNMENT {
 
     take:
-    // TODO nf-core: edit input (take) channels
-    ch_bam // channel: [ val(meta), [ bam ] ]
+    ch_fasta // channel: [ meta, fasta ]
 
     main:
 
     ch_versions = Channel.empty()
 
-    // TODO nf-core: substitute modules here for the modules of your subworkflow
-
-    SAMTOOLS_SORT ( ch_bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
-
-    SAMTOOLS_INDEX ( SAMTOOLS_SORT.out.bam )
-    ch_versions = ch_versions.mix(SAMTOOLS_INDEX.out.versions.first())
+    ALIGNER ( ch_fasta )
+    ch_versions = ch_versions.mix(ALIGNER.out.versions.first())
 
     emit:
-    // TODO nf-core: edit emitted channels
-    bam      = SAMTOOLS_SORT.out.bam           // channel: [ val(meta), [ bam ] ]
-    bai      = SAMTOOLS_INDEX.out.bai          // channel: [ val(meta), [ bai ] ]
-    csi      = SAMTOOLS_INDEX.out.csi          // channel: [ val(meta), [ csi ] ]
-
-    versions = ch_versions                     // channel: [ versions.yml ]
+    alignment = ALIGNER.out.alignment // channel: [ meta, *.aln.gz ]
+    versions  = ch_versions           // channel: [ versions.yml ]
 }
 
