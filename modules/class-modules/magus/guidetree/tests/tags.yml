@@ -1,2 +1,2 @@
 magus/guidetree:
-  - "modules/class-modules/magus/guidetree/**"
+  - "modules/nf-class/magus/guidetree/**"

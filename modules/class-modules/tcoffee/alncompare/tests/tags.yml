@@ -1,2 +1,2 @@
 tcoffee/alncompare:
-  - "modules/class-modules/tcoffee/alncompare/**"
+  - "modules/nf-class/tcoffee/alncompare/**"

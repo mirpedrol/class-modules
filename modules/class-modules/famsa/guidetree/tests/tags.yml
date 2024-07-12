@@ -1,2 +1,2 @@
 famsa/guidetree:
-  - "modules/class-modules/famsa/guidetree/**"
+  - "modules/nf-class/famsa/guidetree/**"

@@ -1,2 +1,2 @@
 magus/align:
-  - "modules/class-modules/magus/align/**"
+  - "modules/nf-class/magus/align/**"

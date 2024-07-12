@@ -14,7 +14,7 @@ nextflow_process {
             setup {
 
                 run("UNTAR") {
-                    script "../../../../../modules/class-modules/untar/main.nf"
+                    script "../../../../../modules/nf-class/untar/main.nf"
                         process {
                             """
                                 archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)

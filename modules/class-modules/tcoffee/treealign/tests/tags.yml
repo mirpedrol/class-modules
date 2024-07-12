@@ -1,2 +1,2 @@
 tcoffee/align:
-  - "modules/class-modules/tcoffee/align/**"
+  - "modules/nf-class/tcoffee/align/**"

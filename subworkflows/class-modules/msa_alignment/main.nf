@@ -1,19 +1,19 @@
 if ( params.aligner == "clustalo/align" ) {
-    include { CLUSTALO_ALIGN as ALIGNER } from '../../../modules/class-modules/clustalo/align/main'
+    include { CLUSTALO_ALIGN as ALIGNER } from '../../../modules/nf-class/clustalo/align/main'
 } else if ( params.aligner == "famsa/align" ) {
-    include { FAMSA_ALIGN    as ALIGNER } from '../../../modules/class-modules/famsa/align/main'
+    include { FAMSA_ALIGN    as ALIGNER } from '../../../modules/nf-class/famsa/align/main'
 } else if ( params.aligner == "kalign/align" ) {
-    include { KALIGN_ALIGN   as ALIGNER } from '../../../modules/class-modules/kalign/align/main'
+    include { KALIGN_ALIGN   as ALIGNER } from '../../../modules/nf-class/kalign/align/main'
 } else if ( params.aligner == "learnmsa/align" ) {
-    include { LEARNMSA_ALIGN as ALIGNER } from '../../../modules/class-modules/learnmsa/align/main'
+    include { LEARNMSA_ALIGN as ALIGNER } from '../../../modules/nf-class/learnmsa/align/main'
 } else if ( params.aligner == "mafft" ) {
-    include { MAFFT          as ALIGNER } from '../../../modules/class-modules/mafft/main'
+    include { MAFFT          as ALIGNER } from '../../../modules/nf-class/mafft/main'
 } else if ( params.aligner == "magus/align" ) {
-    include { MAGUS_ALIGN    as ALIGNER } from '../../../modules/class-modules/magus/align/main'
+    include { MAGUS_ALIGN    as ALIGNER } from '../../../modules/nf-class/magus/align/main'
 } else if ( params.aligner == "muscle5/super5" ) {
-    include { MUSCLE5_SUPER5 as ALIGNER } from '../../../modules/class-modules/muscle5/super5/main'
+    include { MUSCLE5_SUPER5 as ALIGNER } from '../../../modules/nf-class/muscle5/super5/main'
 } else if ( params.aligner == "tcoffee/align" ) {
-    include { TCOFFEE_ALIGN  as ALIGNER } from '../../../modules/class-modules/tcoffee/align/main'
+    include { TCOFFEE_ALIGN  as ALIGNER } from '../../../modules/nf-class/tcoffee/align/main'
 }
 
 workflow MSA_ALIGNMENT {

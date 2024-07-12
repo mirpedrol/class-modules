@@ -1,2 +1,2 @@
 clustalo/align:
-  - "modules/class-modules/clustalo/align/**"
+  - "modules/nf-class/clustalo/align/**"

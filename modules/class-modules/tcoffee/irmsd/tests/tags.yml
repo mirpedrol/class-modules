@@ -1,2 +1,2 @@
 tcoffee/irmsd:
-  - "modules/class-modules/tcoffee/irmsd/**"
+  - "modules/nf-class/tcoffee/irmsd/**"
