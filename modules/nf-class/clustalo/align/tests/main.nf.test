@@ -5,7 +5,7 @@ nextflow_process {
     process "CLUSTALO_ALIGN"
 
     tag "modules"
-    tag "modules_classmodules"
+    tag "modules_nfclass"
     tag "clustalo"
     tag "clustalo/align"
 

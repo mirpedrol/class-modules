@@ -5,7 +5,7 @@ nextflow_process {
     process "TCOFFEE_TREEALIGN"
 
     tag "modules"
-    tag "modules_classmodules"
+    tag "modules_nfclass"
     tag "tcoffee"
     tag "tcoffee/treealign"
     tag "famsa/guidetree"
