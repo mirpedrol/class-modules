@@ -1,0 +1,2 @@
+clustalo/align:
+  - "modules/nf-class/clustalo/align/**"

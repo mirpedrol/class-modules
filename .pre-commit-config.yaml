@@ -9,8 +9,8 @@ repos:
     rev: 0.28.5
     hooks:
       - id: check-jsonschema
-        # match meta.ymls in one of the subdirectories of modules/class-modules
-        files: ^modules/class-modules/.*/meta\.yml$
+        # match meta.ymls in one of the subdirectories of modules/nf-class
+        files: ^modules/nf-class/.*/meta\.yml$
         args: ["--schemafile", "modules/yaml-schema.json"]
       - id: check-jsonschema
         # match meta.ymls in one of the subdirectories of subworkflows/nf-core

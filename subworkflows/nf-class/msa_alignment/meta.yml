@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "msa_alignment"
+description: Perform a multiple sequence alignment with one of the possible aligners
+keywords:
+  - alignment
+  - MSA
+  - genomics
+components:
+  - clustalo/align
+  - famsa/align
+  - kalign/align
+  - learnmsa/align
+  - mafft
+  - magus/align
+  - muscle5/super5
+  - tcoffee/align
+input:
+  - ch_fasta:
+      type: file
+      description: |
+        Structure: [ val(meta), path(fasta) ]
+        meta: Groovy Map containing sample information
+        fasta: Input sequences in FASTA format (*.{fa,fasta})
+output:
+  - alignment:
+      type: file
+      description: |
+        Structure: [ val(meta), path(alignment) ]
+        meta: Groovy Map containing sample information
+        alignment: Alignment file, in gzipped fasta format (*.aln.gz)
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+authors:
+  - "@mirpedrol"
+maintainers:
+  - "@mirpedrol"

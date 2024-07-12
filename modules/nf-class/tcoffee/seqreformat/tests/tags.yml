@@ -1,0 +1,2 @@
+tcoffee/seqreformat:
+  - "modules/nf-class/tcoffee/seqreformat/**"

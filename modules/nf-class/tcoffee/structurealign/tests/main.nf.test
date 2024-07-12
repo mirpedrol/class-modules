@@ -1,0 +1,50 @@
+nextflow_process {
+
+    name "Test Process TCOFFEE_STRUCTUREALIGN"
+    script "../main.nf"
+    process "TCOFFEE_STRUCTUREALIGN"
+
+    tag "modules"
+    tag "modules_nfclass"
+    tag "tcoffee"
+    tag "tcoffee/structurealign"
+    tag "untar"
+
+    test("fasta - align_with_structure") {
+
+        setup {
+
+            run("UNTAR") {
+                script "../../../untar/main.nf"
+                process {
+                    """
+                    input[0] = [ [ id:'test' ],
+                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)
+                               ]
+                    """
+                }
+            }
+        }
+
+        when {
+            process {
+                """
+                input[0] = [ [ id:'test' ],
+                             file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                           ]
+                input[1] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], [] ,file(dir).listFiles().collect()]}
+                """
+
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert path(process.out.alignment.get(0).get(1)).getTextGzip().contains("1ahl") },
+                { assert snapshot(process.out.versions).match("versions_structure") }
+            )
+        }
+
+    }
+}

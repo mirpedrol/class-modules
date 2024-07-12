@@ -1,0 +1,186 @@
+nextflow_workflow {
+
+    name "Test Subworkflow MSA_ALIGNMENT"
+    script "../main.nf"
+    workflow "MSA_ALIGNMENT"
+
+    tag "subworkflows"
+    tag "subworkflows_classmodules"
+    tag "subworkflows/msa_alignment"
+    tag "clustalo/align"
+    tag "famsa/align"
+    tag "kalign/align"
+    tag "learnmsa/align"
+    tag "mafft"
+    tag "magus/align"
+    tag "muscle5/super5"
+    tag "tcoffee/align"
+
+    test("sarscov2 - clustalo/align") {
+
+        when {
+            params.aligner = "clustalo/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - famsa/align") {
+
+        when {
+            params.aligner = "famsa/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - kalign/align") {
+
+        when {
+            params.aligner = "kalign/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - learnmsa/align") {
+
+        when {
+            params.aligner = "learnmsa/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()}                
+            )
+        }
+    }
+
+    test("sarscov2 - mafft") {
+
+        when {
+            params.aligner = "mafft"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - magus/align") {
+
+        when {
+            params.aligner = "magus/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - muscle5/super5") {
+
+        when {
+            params.aligner = "muscle5/super5"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                        ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("sarscov2 - tcoffee/align") {
+
+        when {
+            params.aligner = "tcoffee/align"
+            workflow {
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                           ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+}
