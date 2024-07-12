@@ -19,7 +19,7 @@ nextflow_process {
         then {
             assertAll (
                 { assert process.success },
-                { assert snapshot(process.out.untar).match("test_untar") },
+                { snapshot(process.out).match() },
             )
         }
 
@@ -38,7 +38,7 @@ nextflow_process {
         then {
             assertAll (
                 { assert process.success },
-                { assert snapshot(process.out.untar).match("test_untar_onlyfiles") },
+                { assert snapshot(process.out).match() },
             )
         }
 

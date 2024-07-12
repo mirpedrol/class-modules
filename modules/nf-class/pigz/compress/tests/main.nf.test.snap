@@ -26,12 +26,43 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
         "timestamp": "2023-12-11T22:39:53.350546"
     },
     "sarscov2 - genome - fasta - stub": {
         "content": [
-            "genome.fasta.gz"
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspace/class-modules/.nf-test/tests/cbd0ab76b4b3687347f157e4c9c9590a/work/6b/517f44e6aff4a9e7e106eb08d78bb5/genome.fasta.gz"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ca30e9e1ffa1394ba7eefdac8cf3a3ad"
+                ],
+                "archive": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/workspace/class-modules/.nf-test/tests/cbd0ab76b4b3687347f157e4c9c9590a/work/6b/517f44e6aff4a9e7e106eb08d78bb5/genome.fasta.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ca30e9e1ffa1394ba7eefdac8cf3a3ad"
+                ]
+            }
         ],
-        "timestamp": "2023-12-11T22:52:24.309192"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-12T14:56:49.608307472"
     }
 }

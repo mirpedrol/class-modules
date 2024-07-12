@@ -86,7 +86,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
-                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                             file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
                            ]
                 """
             }
@@ -94,8 +94,8 @@ nextflow_workflow {
 
         then {
             assertAll(
-                { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match()}                
             )
         }
     }
@@ -148,9 +148,9 @@ nextflow_workflow {
             params.aligner = "muscle5/super5"
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
-                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                           ]
+                input[0] = [ [ id:'test' ],
+                        file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                        ]
                 """
             }
         }
