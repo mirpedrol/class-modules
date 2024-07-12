@@ -1,4 +1,16 @@
 {
+    "versions": {
+        "content": [
+            [
+                "versions.yml:md5,ca30e9e1ffa1394ba7eefdac8cf3a3ad"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-15T13:03:53.584753635"
+    },
     "sarscov2 - genome - fasta": {
         "content": [
             {
@@ -34,35 +46,12 @@
     },
     "sarscov2 - genome - fasta - stub": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "/workspace/class-modules/.nf-test/tests/cbd0ab76b4b3687347f157e4c9c9590a/work/6b/517f44e6aff4a9e7e106eb08d78bb5/genome.fasta.gz"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,ca30e9e1ffa1394ba7eefdac8cf3a3ad"
-                ],
-                "archive": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "/workspace/class-modules/.nf-test/tests/cbd0ab76b4b3687347f157e4c9c9590a/work/6b/517f44e6aff4a9e7e106eb08d78bb5/genome.fasta.gz"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,ca30e9e1ffa1394ba7eefdac8cf3a3ad"
-                ]
-            }
+            "genome.fasta.gz"
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-12T14:56:49.608307472"
+        "timestamp": "2024-07-15T13:00:47.980748429"
     }
 }

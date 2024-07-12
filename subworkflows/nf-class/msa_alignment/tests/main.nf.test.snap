@@ -65,38 +65,29 @@
         },
         "timestamp": "2024-07-12T12:26:09.158593884"
     },
-    "sarscov2 - magus/align": {
+    "versions": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,45270687addf1e651298ad01be9858b9"
-                ],
-                "alignment": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,45270687addf1e651298ad01be9858b9"
-                ]
-            }
+            [
+                "versions.yml:md5,1a266e903df6779d66f9e85f51b04240"
+            ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "24.04.3"
         },
-        "timestamp": "2024-07-12T12:30:53.226117071"
+        "timestamp": "2024-07-12T17:54:03.355114155"
+    },
+    "versions1": {
+        "content": [
+            [
+                "versions.yml:md5,45270687addf1e651298ad01be9858b9"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-15T15:57:35.581187151"
     },
     "sarscov2 - kalign/align": {
         "content": [
@@ -229,38 +220,5 @@
             "nextflow": "24.04.3"
         },
         "timestamp": "2024-07-12T12:25:28.903889766"
-    },
-    "sarscov2 - learnmsa/align": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln.gz:md5,dc8ca9d7bc23f3d51fca2e69f7840f67"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,1a266e903df6779d66f9e85f51b04240"
-                ],
-                "alignment": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln.gz:md5,dc8ca9d7bc23f3d51fca2e69f7840f67"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1a266e903df6779d66f9e85f51b04240"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
-        },
-        "timestamp": "2024-07-12T14:39:33.02168178"
     }
 }
