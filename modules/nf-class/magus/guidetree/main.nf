@@ -11,8 +11,8 @@ process MAGUS_GUIDETREE {
     tuple val(meta), path(fasta)
 
     output:
-    tuple val(meta), path("*.tree"), emit: tree
-    path "versions.yml"            , emit: versions
+    tuple val(meta), path("*.dnd"), emit: tree
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,7 +24,7 @@ process MAGUS_GUIDETREE {
     magus \\
         -np $task.cpus \\
         -i $fasta \\
-        -o ${prefix}.tree \\
+        -o ${prefix}.dnd \\
         --onlyguidetree TRUE \\
         $args
 
@@ -38,7 +38,7 @@ process MAGUS_GUIDETREE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.tree
+    touch ${prefix}.dnd
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
