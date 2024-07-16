@@ -1,0 +1,80 @@
+{
+    "sarscov2 - famsa/guidetree": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,f3ef8b16a7a16cb4548942ebf2e7bad6"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,723b3358beebc97847b4681f562bcea0"
+                ],
+                "guidetree": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,f3ef8b16a7a16cb4548942ebf2e7bad6"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,723b3358beebc97847b4681f562bcea0"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-16T13:12:32.7754812"
+    },
+    "sarscov2 - clustalo/guidetree": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,5428bad500a0a0bd985744bec1a12a70"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b1ee3efbf09bc7cf7b4970916a00fddc"
+                ],
+                "guidetree": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,5428bad500a0a0bd985744bec1a12a70"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b1ee3efbf09bc7cf7b4970916a00fddc"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-16T13:12:06.216087789"
+    },
+    "versions1": {
+        "content": [
+            [
+                "versions.yml:md5,75333144e16039f25cae8e933f30d003"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-07-16T13:13:24.823000398"
+    }
+}

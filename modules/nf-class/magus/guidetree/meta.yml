@@ -3,7 +3,7 @@ name: "magus_guidetree"
 description: Multiple Sequence Alignment using Graph Clustering
 keywords:
   - MSA
-  - guidetree
+  - guide tree
   - genomics
   - graph
 tools:
@@ -35,10 +35,10 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*.tree":
+      - "*.dnd":
           type: file
           description: File containing the output guidetree, in newick format.
-          pattern: "*.tree"
+          pattern: "*.dnd"
   - versions:
       - versions.yml:
           type: file
