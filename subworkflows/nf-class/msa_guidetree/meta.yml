@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "msa_guidetree"
+description: Compute the guide tree of a multiple sequence alignment with one of the possible tools
+keywords:
+  - guide tree
+  - MSA
+  - genomics
+components:
+  - clustalo/guidetree
+  - famsa/guidetree
+  - magus/guidetree
+input:
+  - ch_fasta:
+      type: file
+      description: |
+        Structure: [ val(meta), path(fasta) ]
+        meta: Groovy Map containing sample information
+        fasta: Input sequences in FASTA format (*.{fa,fasta})
+output:
+  - guidetree:
+      type: file
+      description: |
+        Structure: [ val(meta), path(guidetree) ]
+        meta: Groovy Map containing sample information
+        guidetree: Tree file, in gzipped newick format (*.dnd)
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+authors:
+  - "@mirpedrol"
+maintainers:
+  - "@mirpedrol"
