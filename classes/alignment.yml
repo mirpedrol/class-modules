@@ -1,0 +1,36 @@
+name: "alignment"
+description: Perform multiple sequence alignment
+keywords:
+  - alignment
+  - msa
+  - align
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - fasta:
+        type: file
+        description: Input sequences in FASTA format
+        pattern: "*.{fa,fasta}"
+        ontologies:
+          - edam: http://edamontology.org/format_1929
+output:
+  - alignment:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test']`
+      - "*.aln.gz":
+          type: file
+          description: Alignment file, in FASTA format.
+          pattern: "*.aln.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_1984
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
