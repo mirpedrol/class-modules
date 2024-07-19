@@ -80,8 +80,8 @@ jobs:
       - name: Separate modules and subworkflows
         id: outputs
         run: |
-          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/nf-class/"; ""))') >> $GITHUB_OUTPUT
-          echo modules=$(echo '${{ steps.list.outputs.components }}' | jq -c '. | map(select(contains("modules"))) | map(gsub("modules/nf-class/"; ""))') >> $GITHUB_OUTPUT
+          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/mirpedrol/"; ""))') >> $GITHUB_OUTPUT
+          echo modules=$(echo '${{ steps.list.outputs.components }}' | jq -c '. | map(select(contains("modules"))) | map(gsub("modules/mirpedrol/"; ""))') >> $GITHUB_OUTPUT
 
       - name: debug
         run: |
@@ -176,7 +176,7 @@ jobs:
         profile: [conda, docker, singularity]
         exclude:
           - profile: conda
-            path: modules/nf-class/learnmsa/align
+            path: modules/mirpedrol/learnmsa/align
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
