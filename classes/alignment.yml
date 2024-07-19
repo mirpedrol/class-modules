@@ -1,20 +1,9 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
-name: "{{ component_name_underscore }}"
-description: Align sequences using {{ component }}
+name: "alignment"
+description: Perform multiple sequence alignment
 keywords:
   - alignment
   - msa
-  - genomics
-tools:
-  - "{{ component }}":
-      description: "{{ tool_description }}"
-      homepage: "{{ tool_doc_url }}"
-      documentation: "{{ tool_doc_url }}"
-      tool_dev_url: "{{ tool_dev_url }}"
-      doi: ""
-      licence: { { tool_licence } }
-      identifier: { { tool_identifier } }
-
+  - align
 input:
   - - meta:
         type: map
@@ -27,7 +16,6 @@ input:
         pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
-
 output:
   - alignment:
       - meta:
@@ -46,8 +34,3 @@ output:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
-
-authors:
-  - "{{ author }}"
-maintainers:
-  - "{{ author }}"
