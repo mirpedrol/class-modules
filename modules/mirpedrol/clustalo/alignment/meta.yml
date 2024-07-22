@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
+name: "clustalo_alignment"
+description: Perform multiple sequence alignment
+keywords: ["alignment", "msa", "align"]
+tools:
+  - "clustalo":
+      description: "Latest version of Clustal: a multiple sequence alignment program for DNA or proteins"
+      homepage: "None"
+      documentation: "None"
+      tool_dev_url: "None"
+      doi: ""
+      licence: ["GPL v2"]
+      identifier:
+
+input:
+  - - meta:
+        description: "Groovy Map containing sample information
+
+          e.g. `[ id:'sample1', single_end:false ]`
+
+          "
+        type: map
+    - fasta:
+        description: Input sequences in FASTA format
+        ontologies:
+          - edam: http://edamontology.org/format_1929
+        pattern: "*.{fa,fasta}"
+        type: file
+
+output:
+  - alignment:
+      - meta:
+          description: "Groovy Map containing sample information
+
+            e.g. `[ id:'test']`
+
+            "
+          type: map
+      - "*.aln.gz":
+          description: Alignment file, in FASTA format.
+          ontologies:
+            - edam: http://edamontology.org/format_1984
+          pattern: "*.aln.gz"
+          type: file
+  - versions:
+      - versions.yml:
+          description: File containing software versions
+          pattern: versions.yml
+          type: file
+
+authors:
+  - "@mirpedrol"
+maintainers:
+  - "@mirpedrol"

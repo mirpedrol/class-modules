@@ -1,0 +1,60 @@
+nextflow_process {
+
+    name "Test Process CLUSTALO_ALIGNMENT"
+    script "../main.nf"
+    process "CLUSTALO_ALIGNMENT"
+
+    tag "modules"
+    tag "modules_mirpedrol"
+    tag "clustalo"
+    tag "clustalo/alignment"
+
+    // TODO nf-class: Change the test name.
+    test("sarscov2 - fasta") {
+
+        when {
+            process {
+                // TODO nf-class: Update the input to match the test data.
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                    file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    // TODO nf-class: Change the test name.
+    test("sarscov2 - bam - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                // TODO nf-class: Update the input to match the test data.
+                """
+                input[0] = [ [ id:'test' ], // meta map
+                    file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
