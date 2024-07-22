@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Module class yaml",
+  "description": "Validate the yaml file for a module class",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the class"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the class"
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords for the class",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3
+    },
+    "input": {
+      "type": "array",
+      "description": "Input channels for the class modules",
+      "items": {
+        "type": "array",
+        "items": { "$ref": "#/definitions/elementProperties" }
+      }
+    },
+    "output": {
+      "type": "array",
+      "description": "Output channels for the class modules",
+      "items": {
+        "type": "object",
+        "items": { "$ref": "#/definitions/elementProperties" }
+      }
+    }
+  },
+  "definitions": {
+    "elementProperties": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of the channel element",
+              "enum": ["map", "file", "directory", "string", "integer", "float", "boolean", "list"]
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the channel"
+            },
+            "pattern": {
+              "type": "string",
+              "description": "Pattern of the channel, given in Java glob syntax"
+            },
+            "enum": {
+              "type": "array",
+              "description": "List of allowed values for the channel",
+              "items": {
+                "type": ["string", "number", "boolean", "array", "object"]
+              },
+              "uniqueItems": true
+            },
+            "ontologies": {
+              "type": "array",
+              "description": "List of ontologies for the channel",
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "patternProperties": {
+                  ".*": {
+                    "type": "string",
+                    "pattern": "^(http|https)://.*"
+                  }
+                }
+              }
+            }
+          },
+          "required": ["type", "description"]
+        }
+      }
+    }
+  },
+  "required": ["name", "description", "keywords", "input", "output"]
+}
