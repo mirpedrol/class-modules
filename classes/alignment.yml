@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/classes/class-schema.json
 name: "alignment"
 description: Perform multiple sequence alignment
 keywords:
