@@ -4,6 +4,8 @@ keywords:
   - alignment
   - MSA
   - genomics
+  - msa
+  - align
 tools:
   - "tcoffee":
       description: "A collection of tools for Computing, Evaluating and Manipulating

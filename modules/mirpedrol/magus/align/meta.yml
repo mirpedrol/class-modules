@@ -6,6 +6,8 @@ keywords:
   - alignment
   - genomics
   - graph
+  - msa
+  - align
 tools:
   - "magus":
       description: "Multiple Sequence Alignment using Graph Clustering"

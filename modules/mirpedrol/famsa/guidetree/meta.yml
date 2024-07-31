@@ -5,6 +5,8 @@ keywords:
   - guide tree
   - msa
   - newick
+  - align
+  - guidetree
 tools:
   - "famsa":
       description: "Algorithm for large-scale multiple sequence alignments"

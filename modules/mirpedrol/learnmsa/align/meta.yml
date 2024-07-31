@@ -4,6 +4,8 @@ keywords:
   - alignment
   - MSA
   - genomics
+  - msa
+  - align
 tools:
   - "learnmsa":
       description: "learnMSA: Learning and Aligning large Protein Families"

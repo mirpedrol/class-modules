@@ -5,6 +5,8 @@ keywords:
   - guide tree
   - msa
   - newick
+  - align
+  - guidetree
 tools:
   - "clustalo":
       description: "Latest version of Clustal: a multiple sequence alignment program

@@ -4,6 +4,8 @@ keywords:
   - fasta
   - msa
   - multiple sequence alignment
+  - alignment
+  - align
 tools:
   - "mafft":
       description: Multiple alignment program for amino acid or nucleotide sequences

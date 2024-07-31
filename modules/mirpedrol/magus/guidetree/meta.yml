@@ -6,6 +6,9 @@ keywords:
   - guide tree
   - genomics
   - graph
+  - align
+  - guidetree
+  - msa
 tools:
   - "magus":
       description: "Multiple Sequence Alignment using Graph Clustering"
