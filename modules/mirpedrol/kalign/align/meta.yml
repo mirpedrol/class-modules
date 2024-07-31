@@ -24,7 +24,7 @@ input:
     - fasta:
         type: file
         description: Input sequences in FASTA format. May be gzipped or uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
+        pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
 output:
