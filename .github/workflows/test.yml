@@ -177,6 +177,8 @@ jobs:
         exclude:
           - profile: conda
             path: modules/mirpedrol/learnmsa/align
+          - profile: conda
+            path: subworkflows/mirpedrol/msa_alignment
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
