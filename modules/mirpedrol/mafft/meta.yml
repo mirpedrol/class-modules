@@ -4,6 +4,8 @@ keywords:
   - fasta
   - msa
   - multiple sequence alignment
+  - alignment
+  - align
 tools:
   - "mafft":
       description: Multiple alignment program for amino acid or nucleotide sequences
@@ -29,7 +31,7 @@ input:
         type: file
         description: FASTA file containing the sequences to align. May be gzipped or
           uncompressed.
-        pattern: "*.{fa,fasta}{.gz,}"
+        pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
 output:

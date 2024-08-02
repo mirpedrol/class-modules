@@ -3,6 +3,8 @@ description: Align sequences using Clustal Omega
 keywords:
   - alignment
   - MSA
+  - msa
+  - align
   - genomics
 tools:
   - "clustalo":

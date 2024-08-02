@@ -6,6 +6,8 @@ keywords:
   - align
   - msa
   - multiple sequence alignment
+  - msa
+  - align
 tools:
   - muscle-super5:
       description: "Muscle v5 is a major re-write of MUSCLE based on new algorithms."
