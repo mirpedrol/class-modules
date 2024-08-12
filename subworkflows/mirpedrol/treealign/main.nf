@@ -12,14 +12,14 @@ workflow TREEALIGN {
 
     take:
     ch_fasta
-	ch_meta2
+	ch_tree
 
     main:
 
     ch_versions = Channel.empty()
 
-    TREEALIGN ( ch_fasta, ch_meta2 )
-    ch_versions = ch_versions.mix(treealign.out.versions)
+    TREEALIGN ( ch_fasta, ch_tree )
+    ch_versions = ch_versions.mix(TREEALIGN.out.versions)
 
     emit:
 	alignment = TREEALIGN.out.alignment

@@ -6,7 +6,7 @@ nextflow_workflow {
 
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
-    tag "subworkflows/"
+    tag "subworkflows/treealign"
 	tag "famsa/treealign"
 	tag "magus/treealign"
 	tag "clustalo/treealign"
@@ -15,14 +15,22 @@ nextflow_workflow {
 
 	test("run famsa/treealign") {
 
-		when {
-			params.treealign = "famsa/treealign"
-			workflow {
+        setup {
+            run("FAMSA_GUIDETREE") {
+                script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
+                process {
                     """
                     input[0] = [ [ id:'test' ], // meta map
                                  file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
                                ]
                     """
+                }
+            }
+        }
+
+		when {
+			params.treealign = "famsa/treealign"
+			workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                              file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
@@ -43,14 +51,22 @@ nextflow_workflow {
 
 	test("run magus/treealign") {
 
-		when {
-			params.treealign = "magus/treealign"
-			workflow {
+        setup {
+            run("MAGUS_GUIDETREE") {
+                script "../../../../modules/mirpedrol/magus/guidetree/main.nf"
+                process {
                     """
                     input[0] = [ [ id:'test' ], // meta map
                                  file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                                ]
                     """
+                }
+            }
+        }
+
+		when {
+			params.treealign = "magus/treealign"
+			workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                              file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
@@ -77,14 +93,23 @@ nextflow_workflow {
 
 	test("run clustalo/treealign") {
 
-		when {
-			params.treealign = "clustalo/treealign"
-			workflow {
+        setup {
+
+            run("CLUSTALO_GUIDETREE") {
+                script "../../../../modules/mirpedrol/clustalo/guidetree/main.nf"
+                process {
                     """
                     input[0] = [ [ id:'test' ], // meta map
                                  file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
                                ]
                     """
+                }
+            }
+        }
+
+		when {
+			params.treealign = "clustalo/treealign"
+			workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                              file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
@@ -104,16 +129,24 @@ nextflow_workflow {
 	}
 
 	test("run tcoffee/treealign") {
+        setup {
 
-		when {
-			params.treealign = "tcoffee/treealign"
-			workflow {
+            run("FAMSA_GUIDETREE") {
+                script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
+                process {
                     """
                     input[0] = [ [ id:'test' ],
                                  file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
                                ]
 
                     """
+                }
+            }
+        }
+
+		when {
+			params.treealign = "tcoffee/treealign"
+			workflow {
                 """
                 input[0] = [ [ id:'test' ],
                              file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
