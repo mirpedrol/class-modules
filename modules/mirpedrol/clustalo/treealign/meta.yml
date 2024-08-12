@@ -4,6 +4,7 @@ keywords:
   - alignment
   - treealignment
   - MSA
+  - msa
   - genomics
 tools:
   - "clustalo":
