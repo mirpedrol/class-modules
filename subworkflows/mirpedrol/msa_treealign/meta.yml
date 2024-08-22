@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/yaml-schema.json
+name: "msa_treealign"
+description: Perform multiple sequence alignment from a provided guide tree
+keywords: ["alignment", "treealignment", "msa"]
+components: ["famsa/treealign", "magus/treealign", "clustalo/treealign", "tcoffee/treealign"]
+
+input:
+  - ch_fasta:
+      description: "Channel containing: meta, fasta"
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - fasta:
+            description: Input sequences in FASTA format
+            ontologies:
+              - edam: http://edamontology.org/format_1929
+            pattern: "*.{fa,fasta}"
+            type: file
+  - ch_tree:
+      description: "Channel containing: meta, fasta"
+      structure:
+        - meta2:
+            description: "Groovy Map containing tree information
+
+              e.g. `[ id:'test_tree']`
+
+              "
+            type: map
+        - tree:
+            description: Input guide tree in Newick format
+            pattern: "*.{dnd}"
+            type: file
+
+output:
+  - alignment:
+      description: Output channel alignment
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - "*.aln.gz":
+            description: Alignment file, in gzipped fasta format
+            ontologies:
+              - edam: http://edamontology.org/format_1984
+            pattern: "*.aln.gz"
+            type: file
+  - versions:
+      description: Output channel versions
+      structure:
+        - versions.yml:
+            description: File containing software versions
+            pattern: versions.yml
+            type: file
+
+authors:
+  - "@mirpedrol"
+maintainers:
+  - "@mirpedrol"

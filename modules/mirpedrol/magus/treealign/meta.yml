@@ -5,6 +5,7 @@ keywords:
   - MSA
   - alignment
   - treealignment
+  - msa
   - genomics
   - graph
 tools:
@@ -26,7 +27,7 @@ input:
     - fasta:
         type: file
         description: Input sequences in FASTA format.
-        pattern: "*.{fa,fna,fasta}"
+        pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
   - - meta2:
@@ -40,7 +41,7 @@ input:
           to use as input. If empty, or overwritten by passing `-t [fasttree|fasttree-noml|clustal|parttree]`,
           MAGUS will construct its own guide tree. If empty, `fasttree` is used as a
           default.
-        pattern: "*.{dnd,tree}"
+        pattern: "*.{dnd}"
 output:
   - alignment:
       - meta:

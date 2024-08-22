@@ -1,0 +1,101 @@
+{
+    "famsa_alignment": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,7cf7375f2ba360814ea978731838b972"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:17.914586"
+    },
+    "famsa_versions": {
+        "content": [
+            [
+                "versions.yml:md5,3002c8ce2c4f1b9a4b084b61efc0c2b4"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:17.922286"
+    },
+    "clustalo_alignment": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,74bb9a2820a91cf68db94dbd46787722"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:52.483352"
+    },
+    "clustalo_versions": {
+        "content": [
+            [
+                "versions.yml:md5,2c9f1ab1c3e8a431546fda2ef0170713"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:52.490603"
+    },
+    "tcoffee_versions": {
+        "content": [
+            [
+                "versions.yml:md5,c6bb7f0fcab261972bd722de048f36b1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:57.324541"
+    },
+    "magus_versions": {
+        "content": [
+            [
+                "versions.yml:md5,6bd0fc2decf3dd8e3b43a4d5b9c0cc58"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:31.000053"
+    },
+    "tcoffee_alignment": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,93bc8adfcd88f7913718eacc13da8e4a"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:57.317953"
+    }
+}
