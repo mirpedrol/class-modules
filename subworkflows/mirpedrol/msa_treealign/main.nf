@@ -1,12 +1,8 @@
-if ( params.treealign == "famsa/treealign" ) {
-    include { FAMSA_TREEALIGN as TREEALIGN } from '../../../modules/mirpedrol/famsa/treealign/main'
-} else if ( params.treealign == "magus/treealign" ) {
-    include { MAGUS_TREEALIGN as TREEALIGN } from '../../../modules/mirpedrol/magus/treealign/main'
-} else if ( params.treealign == "clustalo/treealign" ) {
-    include { CLUSTALO_TREEALIGN as TREEALIGN } from '../../../modules/mirpedrol/clustalo/treealign/main'
-} else if ( params.treealign == "tcoffee/treealign" ) {
-    include { TCOFFEE_TREEALIGN as TREEALIGN } from '../../../modules/mirpedrol/tcoffee/treealign/main'
-} 
+include { FAMSA_TREEALIGN } from '../../../modules/mirpedrol/famsa/treealign/main'
+include { MAGUS_TREEALIGN } from '../../../modules/mirpedrol/magus/treealign/main'
+include { CLUSTALO_TREEALIGN } from '../../../modules/mirpedrol/clustalo/treealign/main'
+include { TCOFFEE_TREEALIGN } from '../../../modules/mirpedrol/tcoffee/treealign/main'
+
 
 workflow MSA_TREEALIGN {
 
@@ -15,15 +11,33 @@ workflow MSA_TREEALIGN {
 	ch_tree
 
     main:
+	def ch_out_alignment = Channel.empty()
+	def ch_out_versions = Channel.empty()
+	if ( params.treealign == "famsa/treealign" ) {
+		FAMSA_TREEALIGN( ch_fasta, ch_tree )
+		ch_out_alignment = ch_out_alignment.mix(FAMSA_TREEALIGN.out.alignment)
+		ch_out_versions = ch_out_versions.mix(FAMSA_TREEALIGN.out.versions)
+	}
+	else if ( params.treealign == "magus/treealign" ) {
+		MAGUS_TREEALIGN( ch_fasta, ch_tree )
+		ch_out_alignment = ch_out_alignment.mix(MAGUS_TREEALIGN.out.alignment)
+		ch_out_versions = ch_out_versions.mix(MAGUS_TREEALIGN.out.versions)
+	}
+	else if ( params.treealign == "clustalo/treealign" ) {
+		CLUSTALO_TREEALIGN( ch_fasta, ch_tree )
+		ch_out_alignment = ch_out_alignment.mix(CLUSTALO_TREEALIGN.out.alignment)
+		ch_out_versions = ch_out_versions.mix(CLUSTALO_TREEALIGN.out.versions)
+	}
+	else if ( params.treealign == "tcoffee/treealign" ) {
+		TCOFFEE_TREEALIGN( ch_fasta, ch_tree )
+		ch_out_alignment = ch_out_alignment.mix(TCOFFEE_TREEALIGN.out.alignment)
+		ch_out_versions = ch_out_versions.mix(TCOFFEE_TREEALIGN.out.versions)
+	}
 
-    ch_versions = Channel.empty()
-
-    TREEALIGN ( ch_fasta, ch_tree )
-    ch_versions = ch_versions.mix(TREEALIGN.out.versions)
 
     emit:
-	alignment = TREEALIGN.out.alignment
-	versions = ch_versions
+	alignment = ch_out_alignment
+	versions = ch_out_versions
 
 }
 
