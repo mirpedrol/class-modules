@@ -1,38 +1,62 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/yaml-schema.json
 name: "msa_alignment"
-description: Perform a multiple sequence alignment with one of the possible aligners
-keywords:
-  - alignment
-  - MSA
-  - genomics
+description: Perform multiple sequence alignment
+keywords: ["alignment", "msa", "align"]
 components:
-  - clustalo/align
-  - famsa/align
-  - kalign/align
-  - learnmsa/align
-  - mafft
-  - magus/align
-  - muscle5/super5
-  - tcoffee/align
+  [
+    "mafft",
+    "kalign/align",
+    "famsa/align",
+    "muscle5/super5",
+    "magus/align",
+    "clustalo/align",
+    "tcoffee/align",
+    "learnmsa/align",
+  ]
+
 input:
   - ch_fasta:
-      type: file
-      description: |
-        Structure: [ val(meta), path(fasta) ]
-        meta: Groovy Map containing sample information
-        fasta: Input sequences in FASTA format (*.{fa,fasta})
+      description: "Channel containing: meta, fasta"
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'sample1', single_end:false ]`
+
+              "
+            type: map
+        - fasta:
+            description: Input sequences in FASTA format
+            ontologies:
+              - edam: http://edamontology.org/format_1929
+            pattern: "*.{fa,fasta}"
+            type: file
+
 output:
   - alignment:
-      type: file
-      description: |
-        Structure: [ val(meta), path(alignment) ]
-        meta: Groovy Map containing sample information
-        alignment: Alignment file, in gzipped fasta format (*.aln.gz)
+      description: Output channel alignment
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - "*.aln.gz":
+            description: Alignment file, in FASTA format.
+            ontologies:
+              - edam: http://edamontology.org/format_1984
+            pattern: "*.aln.gz"
+            type: file
   - versions:
-      type: file
-      description: |
-        File containing software versions
-        Structure: [ path(versions.yml) ]
+      description: Output channel versions
+      structure:
+        - versions.yml:
+            description: File containing software versions
+            pattern: versions.yml
+            type: file
+
 authors:
   - "@mirpedrol"
 maintainers:
