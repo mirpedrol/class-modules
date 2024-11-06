@@ -1,25 +1,36 @@
-if ( params.guidetree == "clustalo/guidetree" ) {
-    include { CLUSTALO_GUIDETREE as GUIDETREE } from '../../../modules/mirpedrol/clustalo/guidetree/main'
-} else if ( params.guidetree == "famsa/guidetree" ) {
-    include { FAMSA_GUIDETREE    as GUIDETREE } from '../../../modules/mirpedrol/famsa/guidetree/main'
-} else if ( params.guidetree == "magus/guidetree" ) {
-    include { MAGUS_GUIDETREE    as GUIDETREE } from '../../../modules/mirpedrol/magus/guidetree/main'
-}
+include { FAMSA_GUIDETREE } from '../../../modules/mirpedrol/famsa/guidetree/main'
+include { MAGUS_GUIDETREE } from '../../../modules/mirpedrol/magus/guidetree/main'
+include { CLUSTALO_GUIDETREE } from '../../../modules/mirpedrol/clustalo/guidetree/main'
+
 
 workflow MSA_GUIDETREE {
 
     take:
-    ch_fasta // channel: [ meta, fasta ]
+    ch_fasta
 
     main:
+	def ch_out_tree = Channel.empty()
+	def ch_out_versions = Channel.empty()
+	if ( params.guidetree == "famsa/guidetree" ) {
+		FAMSA_GUIDETREE( ch_fasta )
+		ch_out_tree = ch_out_tree.mix(FAMSA_GUIDETREE.out.tree)
+		ch_out_versions = ch_out_versions.mix(FAMSA_GUIDETREE.out.versions)
+	}
+	else if ( params.guidetree == "magus/guidetree" ) {
+		MAGUS_GUIDETREE( ch_fasta )
+		ch_out_tree = ch_out_tree.mix(MAGUS_GUIDETREE.out.tree)
+		ch_out_versions = ch_out_versions.mix(MAGUS_GUIDETREE.out.versions)
+	}
+	else if ( params.guidetree == "clustalo/guidetree" ) {
+		CLUSTALO_GUIDETREE( ch_fasta )
+		ch_out_tree = ch_out_tree.mix(CLUSTALO_GUIDETREE.out.tree)
+		ch_out_versions = ch_out_versions.mix(CLUSTALO_GUIDETREE.out.versions)
+	}
 
-    ch_versions = Channel.empty()
-
-    GUIDETREE ( ch_fasta )
-    ch_versions = ch_versions.mix(GUIDETREE.out.versions)
 
     emit:
-    guidetree = GUIDETREE.out.tree // channel: [ meta, *.dnd ]
-    versions  = ch_versions        // channel: [ versions.yml ]
+	tree = ch_out_tree
+	versions = ch_out_versions
+
 }
 
