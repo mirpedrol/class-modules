@@ -28,7 +28,7 @@ input:
     - fasta:
         type: file
         description: Input sequences in FASTA format.
-        pattern: "*.{fa,fna,fasta}"
+        pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
 output:
