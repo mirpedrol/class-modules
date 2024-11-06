@@ -41,7 +41,7 @@ output:
       - "*.dnd":
           type: file
           description: File containing the output guidetree, in newick format.
-          pattern: "*.dnd"
+          pattern: "*.{dnd}"
   - versions:
       - versions.yml:
           type: file
