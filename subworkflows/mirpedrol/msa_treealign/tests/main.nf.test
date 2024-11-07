@@ -11,9 +11,9 @@ nextflow_workflow {
 	tag "magus/treealign"
 	tag "clustalo/treealign"
 	tag "tcoffee/treealign"
-    tag "clustalo/guidetree"
-    tag "famsa/guidetree"
-    tag "magus/guidetree" 
+	tag "famsa/guidetree"
+	tag "magus/guidetree"
+	tag "clustalo/guidetree"
 
 
 	test("run famsa/treealign") {
@@ -46,8 +46,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("famsa_alignment")},
-                { assert snapshot(workflow.out.versions).match("famsa_versions") }
+                { assert snapshot(workflow.out.alignment).match("famsa_treealign_alignment")},
+                { assert snapshot(workflow.out.versions).match("famsa_treealign_versions") }
             )
 		}
 	}
@@ -89,7 +89,7 @@ nextflow_workflow {
                 { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1atx") },
                 { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1sh1") },
                 { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1bds") },
-                { assert snapshot(workflow.out.versions).match("magus_versions") }
+                { assert snapshot(workflow.out.versions).match("magus_treealign_versions") }
             )
 		}
 	}
@@ -125,13 +125,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("clustalo_alignment")},
-                { assert snapshot(workflow.out.versions).match("clustalo_versions") }
+                { assert snapshot(workflow.out.alignment).match("clustalo_treealign_alignment")},
+                { assert snapshot(workflow.out.versions).match("clustalo_treealign_versions") }
             )
 		}
 	}
 
 	test("run tcoffee/treealign") {
+
         setup {
 
             run("FAMSA_GUIDETREE") {
@@ -162,8 +163,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("tcoffee_alignment")},
-                { assert snapshot(workflow.out.versions).match("tcoffee_versions") }
+                { assert snapshot(workflow.out.alignment).match("tcoffee_treealign_alignment")},
+                { assert snapshot(workflow.out.versions).match("tcoffee_treealign_versions") }
             )
 		}
 	}

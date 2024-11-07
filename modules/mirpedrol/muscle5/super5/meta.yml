@@ -7,7 +7,7 @@ keywords:
   - msa
   - multiple sequence alignment
   - msa
-  - align
+  - alignment
 tools:
   - muscle-super5:
       description: "Muscle v5 is a major re-write of MUSCLE based on new algorithms."
@@ -29,7 +29,7 @@ input:
     - fasta:
         type: file
         description: Input sequences for alignment must be in FASTA format
-        pattern: "*.{fasta,fa,fna}"
+        pattern: "*.{fa,fasta}"
         ontologies:
           - edam: http://edamontology.org/format_1929
 output:

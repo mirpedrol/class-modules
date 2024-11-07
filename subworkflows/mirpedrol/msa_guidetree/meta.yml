@@ -1,33 +1,50 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/yaml-schema.json
 name: "msa_guidetree"
-description: Compute the guide tree of a multiple sequence alignment with one of the possible tools
-keywords:
-  - guide tree
-  - MSA
-  - genomics
-components:
-  - clustalo/guidetree
-  - famsa/guidetree
-  - magus/guidetree
+description: Compute a guide tree for multiple sequence alignment
+keywords: ["align", "guide tree", "guidetree", "msa"]
+components: ["famsa/guidetree", "magus/guidetree", "clustalo/guidetree"]
+
 input:
   - ch_fasta:
-      type: file
-      description: |
-        Structure: [ val(meta), path(fasta) ]
-        meta: Groovy Map containing sample information
-        fasta: Input sequences in FASTA format (*.{fa,fasta})
+      description: "Channel containing: meta, fasta"
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - fasta:
+            description: Input sequences in FASTA format
+            ontologies:
+              - edam: http://edamontology.org/format_1929
+            pattern: "*.{fa,fasta}"
+            type: file
+
 output:
-  - guidetree:
-      type: file
-      description: |
-        Structure: [ val(meta), path(guidetree) ]
-        meta: Groovy Map containing sample information
-        guidetree: Tree file, in gzipped newick format (*.dnd)
+  - tree:
+      description: Output channel tree
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - "*.dnd":
+            description: Guide tree file in Newick format
+            pattern: "*.{dnd}"
+            type: file
   - versions:
-      type: file
-      description: |
-        File containing software versions
-        Structure: [ path(versions.yml) ]
+      description: Output channel versions
+      structure:
+        - versions.yml:
+            description: File containing software versions
+            pattern: versions.yml
+            type: file
+
 authors:
   - "@mirpedrol"
 maintainers:
