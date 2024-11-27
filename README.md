@@ -26,5 +26,5 @@ These modules are part of classes of modules depending on their usage. Alternati
 The usual nf-core/tools can be used by specifying the appropriate repository.
 
 ```bash
-nf-core modules --git-remote https://github.com/mirpedrol/class-modules <YOUR COMMAND>
+nf-core modules --git-remote https://github.com/mirpedrol/class-modules.git <YOUR COMMAND>
 ```
