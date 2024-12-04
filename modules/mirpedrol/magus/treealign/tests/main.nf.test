@@ -19,8 +19,8 @@ nextflow_process {
                 process {
                     """
                     input[0] = [ [ id:'test' ], // meta map
-                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                               ]
+                                    file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                                ]
                     """
                 }
             }
@@ -30,8 +30,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [ [ id:'test' ], // meta map
-                             file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                           ]
+                                file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                            ]
                 input[1] = MAGUS_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree]}
                 """
             }

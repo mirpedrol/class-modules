@@ -16,8 +16,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [ [ id:'test' ],
-                             file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                           ]
+                                file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                            ]
                 """
             }
         }
