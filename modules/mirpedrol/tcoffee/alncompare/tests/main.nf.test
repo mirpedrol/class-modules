@@ -6,7 +6,7 @@ nextflow_process {
     tag "modules"
     tag "modules_mirpedrol"
     tag "tcoffee"
-    tag "tcoffee/alncompare" 
+    tag "tcoffee/alncompare"
 
     test("seatoxin") {
 
@@ -20,14 +20,12 @@ nextflow_process {
                             ]
                 """
             }
-            
+
         }
 
         then {
             assert process.success
             assert snapshot(process.out).match()
         }
-
     }
-
 }
