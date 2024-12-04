@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/meta-schema.json
 name: "msa_treealign"
 description: Perform multiple sequence alignment from a provided guide tree
 keywords: ["alignment", "treealignment", "msa"]

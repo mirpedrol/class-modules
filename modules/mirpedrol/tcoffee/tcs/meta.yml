@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/meta-schema.json
 name: "tcoffee_tcs"
 description: Compute the TCS score for a MSA or for a MSA plus a library file. Outputs
   the tcs as it is and a csv with just the total TCS score.

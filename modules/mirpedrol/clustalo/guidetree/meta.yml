@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/meta-schema.json
 name: "clustalo_guidetree"
 description: Renders a guidetree in clustalo
 keywords:
