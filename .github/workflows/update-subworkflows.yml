@@ -1,0 +1,84 @@
+name: Update subworkflows
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  module-added:
+    runs-on: ubuntu-latest
+    outputs:
+      directory_added: ${{ steps.check-module.outputs.directory_added }}
+      meta_file: ${{ steps.check-module.outputs.meta_file }}
+      class_name: ${{ steps.get-class-name.outputs.class_name }}
+
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4∫
+
+      - name: Check if a new module is added
+        id: check-module
+        run: |
+          # Fetch the main branch
+          git fetch origin main
+
+          # Get the base branch commit
+          base_sha=$(git rev-parse origin/main)
+
+          # Check if any new directories have been added in modules/mirpedrol in this PR
+          new_dirs=$(git diff --name-only --diff-filter=A $base_sha HEAD | grep '^modules/mirpedrol/' || true)
+
+          if [[ -n $new_dirs ]]; then
+            # Look for meta.yml files in the new directories
+            meta_file=$(git diff --name-only --diff-filter=A $base_sha HEAD | grep '^modules/mirpedrol/.*/meta\.yml$' || true)
+            if [[ -n $meta_file ]]; then
+              echo "directory_added=true" >> $GITHUB_OUTPUT
+              echo """meta_file="$meta_file"""" >> $GITHUB_OUTPUT
+            else
+              echo "directory_added=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "directory_added=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get class name
+        id: get-class-name
+        if: ${{ steps.check-module.outputs.directory_added == 'true' }}
+        run: |
+          echo "class_name=$(yq eval '.class' ${{ steps.check-module.outputs.meta_file }})" >> $GITHUB_OUTPUT
+
+  update-subworkflow:
+    runs-on: ubuntu-latest
+    needs: module-added
+    if: needs.module-added.outputs.directory_added == 'true'
+
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@v2
+
+      - name: Install nf-class
+        run: pip install git+https://github.com/mirpedrol/nf-class.git@dev
+
+      - name: Get author
+        id: get-author
+        run: |
+          echo "author=$(yq eval '.authors[0]' subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}/meta.yml)" >> $GITHUB_OUTPUT
+
+      - name: Update subworkflows
+        run: nf-class subworkflows expand-class ${{ needs.module-added.outputs.class_name }} --force --author ${{ steps.get-author.outputs.author }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add subworkflows/
+          git commit -m "[automated] Update expanded subworkflows for class ${{ needs.module-added.outputs.class_name }}"
+          git push
