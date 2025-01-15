@@ -6,6 +6,7 @@ keywords:
   - MSA
   - genomics
   - msa
+class: "msa_treealing"
 tools:
   - "tcoffee":
       description: "A collection of tools for Computing, Evaluating and Manipulating

@@ -6,6 +6,7 @@ keywords:
   - multiple sequence alignment
   - alignment
   - align
+class: "msa_alignment"
 tools:
   - "mafft":
       description: Multiple alignment program for amino acid or nucleotide sequences

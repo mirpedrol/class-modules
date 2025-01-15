@@ -20,6 +20,10 @@
             },
             "minItems": 3
         },
+        "class": {
+            "type": "string",
+            "description": "Class of the module"
+        },
         "authors": {
             "type": "array",
             "description": "Authors of the module",

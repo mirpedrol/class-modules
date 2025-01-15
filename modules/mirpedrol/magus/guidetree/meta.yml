@@ -9,6 +9,7 @@ keywords:
   - align
   - guidetree
   - msa
+class: "msa_guidetree"
 tools:
   - "magus":
       description: "Multiple Sequence Alignment using Graph Clustering"

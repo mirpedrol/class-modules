@@ -8,6 +8,7 @@ keywords:
   - msa
   - genomics
   - graph
+class: "msa_treealing"
 tools:
   - "magus":
       description: "Multiple Sequence Alignment using Graph Clustering"

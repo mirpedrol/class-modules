@@ -7,6 +7,7 @@ keywords:
   - genomics
   - msa
   - align
+class: "msa_alignment"
 tools:
   - "famsa":
       description: "Algorithm for large-scale multiple sequence alignments"
