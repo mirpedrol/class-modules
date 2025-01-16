@@ -83,4 +83,4 @@ jobs:
           git add subworkflows/
           git status
           git commit -m "[automated] Update expanded subworkflows for class ${{ needs.module-added.outputs.class_name }}"
-          git push
+          git push origin ${GITHUB_HEAD_REF}
