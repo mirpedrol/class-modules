@@ -3,7 +3,6 @@ on:
   pull_request_target:
     types: [opened, synchronize]
     branches: [main]
-  workflow_dispatch:
 
 # Cancel if a newer run is started
 concurrency:
