@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/classes/class-schema.json
-name: "guidetree"
+name: "msa_guidetree"
 description: Compute a guide tree for multiple sequence alignment
 keywords:
   - align

@@ -6,6 +6,7 @@ keywords:
   - msa
   - align
   - genomics
+class: "msa_alignment"
 tools:
   - "clustalo":
       description: "Latest version of Clustal: a multiple sequence alignment program
