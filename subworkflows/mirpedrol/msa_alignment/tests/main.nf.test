@@ -20,7 +20,7 @@ nextflow_workflow {
     test("run mafft") {
 
         when {
-            params.alignment = "mafft"
+            params.msa_alignment = "mafft"
             workflow {
                 """
                 input[0] = [
@@ -43,7 +43,7 @@ nextflow_workflow {
     test("run kalign/align") {
 
         when {
-            params.alignment = "kalign/align"
+            params.msa_alignment = "kalign/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -65,7 +65,7 @@ nextflow_workflow {
     test("run famsa/align") {
 
         when {
-            params.alignment = "famsa/align"
+            params.msa_alignment = "famsa/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -87,7 +87,7 @@ nextflow_workflow {
     test("run muscle5/super5") {
 
         when {
-            params.alignment = "muscle5/super5"
+            params.msa_alignment = "muscle5/super5"
             workflow {
                     """
                         input[0] = [ [ id:'test' ],
@@ -109,7 +109,7 @@ nextflow_workflow {
     test("run magus/align") {
 
         when {
-            params.alignment = "magus/align"
+            params.msa_alignment = "magus/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -137,7 +137,7 @@ nextflow_workflow {
     test("run clustalo/align") {
 
         when {
-            params.alignment = "clustalo/align"
+            params.msa_alignment = "clustalo/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -159,7 +159,7 @@ nextflow_workflow {
     test("run tcoffee/align") {
 
         when {
-            params.alignment = "tcoffee/align"
+            params.msa_alignment = "tcoffee/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ],
@@ -181,7 +181,7 @@ nextflow_workflow {
     test("run learnmsa/align") {
 
         when {
-            params.alignment = "learnmsa/align"
+            params.msa_alignment = "learnmsa/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -199,4 +199,6 @@ nextflow_workflow {
             )
         }
     }
+
+
 }

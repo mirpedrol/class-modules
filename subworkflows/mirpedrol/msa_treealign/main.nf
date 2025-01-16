@@ -13,22 +13,22 @@ workflow MSA_TREEALIGN {
     main:
     def ch_out_alignment = Channel.empty()
     def ch_out_versions = Channel.empty()
-    if ( params.treealign == "famsa/treealign" ) {
+    if ( params.msa_treealign == "famsa/treealign" ) {
         FAMSA_TREEALIGN( ch_fasta, ch_tree )
         ch_out_alignment = ch_out_alignment.mix(FAMSA_TREEALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(FAMSA_TREEALIGN.out.versions)
     }
-    else if ( params.treealign == "magus/treealign" ) {
+    else if ( params.msa_treealign == "magus/treealign" ) {
         MAGUS_TREEALIGN( ch_fasta, ch_tree )
         ch_out_alignment = ch_out_alignment.mix(MAGUS_TREEALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(MAGUS_TREEALIGN.out.versions)
     }
-    else if ( params.treealign == "clustalo/treealign" ) {
+    else if ( params.msa_treealign == "clustalo/treealign" ) {
         CLUSTALO_TREEALIGN( ch_fasta, ch_tree )
         ch_out_alignment = ch_out_alignment.mix(CLUSTALO_TREEALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(CLUSTALO_TREEALIGN.out.versions)
     }
-    else if ( params.treealign == "tcoffee/treealign" ) {
+    else if ( params.msa_treealign == "tcoffee/treealign" ) {
         TCOFFEE_TREEALIGN( ch_fasta, ch_tree )
         ch_out_alignment = ch_out_alignment.mix(TCOFFEE_TREEALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(TCOFFEE_TREEALIGN.out.versions)

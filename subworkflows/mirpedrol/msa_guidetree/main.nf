@@ -11,17 +11,17 @@ workflow MSA_GUIDETREE {
     main:
     def ch_out_tree = Channel.empty()
     def ch_out_versions = Channel.empty()
-    if ( params.guidetree == "famsa/guidetree" ) {
+    if ( params.msa_guidetree == "famsa/guidetree" ) {
         FAMSA_GUIDETREE( ch_fasta )
         ch_out_tree = ch_out_tree.mix(FAMSA_GUIDETREE.out.tree)
         ch_out_versions = ch_out_versions.mix(FAMSA_GUIDETREE.out.versions)
     }
-    else if ( params.guidetree == "magus/guidetree" ) {
+    else if ( params.msa_guidetree == "magus/guidetree" ) {
         MAGUS_GUIDETREE( ch_fasta )
         ch_out_tree = ch_out_tree.mix(MAGUS_GUIDETREE.out.tree)
         ch_out_versions = ch_out_versions.mix(MAGUS_GUIDETREE.out.versions)
     }
-    else if ( params.guidetree == "clustalo/guidetree" ) {
+    else if ( params.msa_guidetree == "clustalo/guidetree" ) {
         CLUSTALO_GUIDETREE( ch_fasta )
         ch_out_tree = ch_out_tree.mix(CLUSTALO_GUIDETREE.out.tree)
         ch_out_versions = ch_out_versions.mix(CLUSTALO_GUIDETREE.out.versions)

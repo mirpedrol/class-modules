@@ -32,7 +32,7 @@ nextflow_workflow {
         }
 
         when {
-            params.treealign = "famsa/treealign"
+            params.msa_treealign = "famsa/treealign"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -68,7 +68,7 @@ nextflow_workflow {
         }
 
         when {
-            params.treealign = "magus/treealign"
+            params.msa_treealign = "magus/treealign"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -111,7 +111,7 @@ nextflow_workflow {
         }
 
         when {
-            params.treealign = "clustalo/treealign"
+            params.msa_treealign = "clustalo/treealign"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
@@ -149,7 +149,7 @@ nextflow_workflow {
         }
 
         when {
-            params.treealign = "tcoffee/treealign"
+            params.msa_treealign = "tcoffee/treealign"
             workflow {
                 """
                 input[0] = [ [ id:'test' ],
@@ -168,4 +168,6 @@ nextflow_workflow {
             )
         }
     }
+
+
 }
