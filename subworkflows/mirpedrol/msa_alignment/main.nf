@@ -16,42 +16,42 @@ workflow MSA_ALIGNMENT {
     main:
     def ch_out_alignment = Channel.empty()
     def ch_out_versions = Channel.empty()
-    if ( params.alignment == "mafft" ) {
+    if ( params.msa_alignment == "mafft" ) {
         MAFFT( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(MAFFT.out.alignment)
         ch_out_versions = ch_out_versions.mix(MAFFT.out.versions)
     }
-    else if ( params.alignment == "kalign/align" ) {
+    else if ( params.msa_alignment == "kalign/align" ) {
         KALIGN_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(KALIGN_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(KALIGN_ALIGN.out.versions)
     }
-    else if ( params.alignment == "famsa/align" ) {
+    else if ( params.msa_alignment == "famsa/align" ) {
         FAMSA_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(FAMSA_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(FAMSA_ALIGN.out.versions)
     }
-    else if ( params.alignment == "muscle5/super5" ) {
+    else if ( params.msa_alignment == "muscle5/super5" ) {
         MUSCLE5_SUPER5( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(MUSCLE5_SUPER5.out.alignment)
         ch_out_versions = ch_out_versions.mix(MUSCLE5_SUPER5.out.versions)
     }
-    else if ( params.alignment == "magus/align" ) {
+    else if ( params.msa_alignment == "magus/align" ) {
         MAGUS_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(MAGUS_ALIGN.out.versions)
     }
-    else if ( params.alignment == "clustalo/align" ) {
+    else if ( params.msa_alignment == "clustalo/align" ) {
         CLUSTALO_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(CLUSTALO_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(CLUSTALO_ALIGN.out.versions)
     }
-    else if ( params.alignment == "tcoffee/align" ) {
+    else if ( params.msa_alignment == "tcoffee/align" ) {
         TCOFFEE_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
     }
-    else if ( params.alignment == "learnmsa/align" ) {
+    else if ( params.msa_alignment == "learnmsa/align" ) {
         LEARNMSA_ALIGN( ch_fasta )
         ch_out_alignment = ch_out_alignment.mix(LEARNMSA_ALIGN.out.alignment)
         ch_out_versions = ch_out_versions.mix(LEARNMSA_ALIGN.out.versions)
