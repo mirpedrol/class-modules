@@ -89,6 +89,7 @@ jobs:
           git config push.default upstream
           git add subworkflows/
           git status
-          git checkout ${{ github.head_ref }}
+          git fetch origin ${{ github.head_ref }}
+          git checkout -b ${{ github.head_ref }} origin/${{ github.head_ref }}
           git commit -m "[automated] Update expanded subworkflows for class ${{ needs.module-added.outputs.class_name }}"
           git push origin ${{ github.head_ref }}
