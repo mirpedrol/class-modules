@@ -1,6 +1,6 @@
 name: Update subworkflows
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
     branches: [main]
 
@@ -18,7 +18,14 @@ jobs:
       class_name: ${{ steps.get-class-name.outputs.class_name }}
 
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4∫
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+
+      - name: Checkout Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          gh pr checkout $PR_NUMBER
 
       - name: Check if a new module is added
         id: check-module
@@ -58,8 +65,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v2
@@ -79,9 +84,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config push.default upstream
           git add subworkflows/
           git status
           git commit -m "[automated] Update expanded subworkflows for class ${{ needs.module-added.outputs.class_name }}"
-          git push origin HEAD:${GITHUB_HEAD_REF}
+          git push
