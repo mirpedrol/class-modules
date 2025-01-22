@@ -15,12 +15,12 @@ nextflow_workflow {
     test("run famsa/guidetree") {
 
         when {
-            params.msa_guidetree = "famsa/guidetree"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
+                        , 'famsa_guidetree'
+                    ]
                 """
             }
         }
@@ -37,12 +37,12 @@ nextflow_workflow {
     test("run magus/guidetree") {
 
         when {
-            params.msa_guidetree = "magus/guidetree"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                            ]
+                        , 'magus_guidetree'
+                    ]
                 """
             }
         }
@@ -66,12 +66,12 @@ nextflow_workflow {
     test("run clustalo/guidetree") {
 
         when {
-            params.msa_guidetree = "clustalo/guidetree"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
+                        , 'clustalo_guidetree'
+                    ]
                 """
             }
         }
