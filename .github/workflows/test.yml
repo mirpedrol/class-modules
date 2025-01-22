@@ -107,9 +107,9 @@ jobs:
         with:
           filters: |
             modules:
-              - added|modified: 'modules/nf-core/**'
+              - added|modified: 'modules/mirpedrol/**'
             subworkflows:
-              - added|modified: 'subworkflows/nf-core/**'
+              - added|modified: 'subworkflows/mirpedrol/**'
           token: ""
           list-files: "json"
 
@@ -195,7 +195,7 @@ jobs:
 
   nf-core-lint-subworkflows:
     runs-on: ubuntu-latest
-    name: nf-core-lint-modules
+    name: nf-core-lint-subworkflows
     needs: lint-changes
     if: ${{ (needs.nf-core-changes.outputs.subworkflows == 'true') }}
     strategy:
