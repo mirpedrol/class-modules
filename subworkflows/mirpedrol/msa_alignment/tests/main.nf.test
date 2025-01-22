@@ -20,12 +20,12 @@ nextflow_workflow {
     test("run mafft") {
 
         when {
-            params.msa_alignment = "mafft"
             workflow {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                         file(params.test_data['sarscov2']['illumina']['scaffolds_fasta'], checkIfExists: true)
+                        , 'mafft'
                     ]
                 """
             }
@@ -43,12 +43,12 @@ nextflow_workflow {
     test("run kalign/align") {
 
         when {
-            params.msa_alignment = "kalign/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                             file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                        ]
+                        , 'kalign_align'
+                    ]
                 """
             }
         }
@@ -65,12 +65,12 @@ nextflow_workflow {
     test("run famsa/align") {
 
         when {
-            params.msa_alignment = "famsa/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
+                        , 'famsa_align'
+                    ]
                 """
             }
         }
@@ -87,12 +87,12 @@ nextflow_workflow {
     test("run muscle5/super5") {
 
         when {
-            params.msa_alignment = "muscle5/super5"
             workflow {
                     """
                         input[0] = [ [ id:'test' ],
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        ]
+                        , 'muscle5_super5'
+                    ]
                         """
             }
         }
@@ -109,12 +109,12 @@ nextflow_workflow {
     test("run magus/align") {
 
         when {
-            params.msa_alignment = "magus/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                            ]
+                        , 'magus_align'
+                    ]
                 """
             }
         }
@@ -137,12 +137,12 @@ nextflow_workflow {
     test("run clustalo/align") {
 
         when {
-            params.msa_alignment = "clustalo/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
+                        , 'clustalo_align'
+                    ]
                 """
             }
         }
@@ -159,12 +159,12 @@ nextflow_workflow {
     test("run tcoffee/align") {
 
         when {
-            params.msa_alignment = "tcoffee/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ],
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                            ]
+                        , 'tcoffee_align'
+                    ]
                 """
             }
         }
@@ -181,12 +181,12 @@ nextflow_workflow {
     test("run learnmsa/align") {
 
         when {
-            params.msa_alignment = "learnmsa/align"
             workflow {
                 """
                 input[0] = [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
-                            ]
+                        , 'learnmsa_align'
+                    ]
                 """
             }
         }
