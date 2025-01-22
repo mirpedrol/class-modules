@@ -23,22 +23,22 @@ nextflow_workflow {
                 script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
                 process {
                     """
-                    input[0] = [ [ id:'test' ], // meta map
+                    input[0] = Channel.of( [ [ id:'test' ], // meta map
                                     file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                                ]
+                                ])
                     """
                 }
             }
         }
 
         when {
-            params.msa_treealign = "famsa/treealign"
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
-                input[1] = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree]}
+                        , 'famsa_treealign'
+                    ])
+                input[1]  = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'famsa_treealign']}
                 """
             }
         }
@@ -68,13 +68,13 @@ nextflow_workflow {
         }
 
         when {
-            params.msa_treealign = "magus/treealign"
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                            ]
-                input[1] = MAGUS_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree]}
+                        , 'magus_treealign'
+                    ])
+                input[1]  = MAGUS_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'magus_treealign']}
                 """
             }
         }
@@ -111,13 +111,13 @@ nextflow_workflow {
         }
 
         when {
-            params.msa_treealign = "clustalo/treealign"
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                            ]
-                input[1] = CLUSTALO_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree]}
+                        , 'clustalo_treealign'
+                    ])
+                input[1]  = CLUSTALO_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'clustalo_treealign']}
                 """
             }
         }
@@ -149,13 +149,13 @@ nextflow_workflow {
         }
 
         when {
-            params.msa_treealign = "tcoffee/treealign"
             workflow {
                 """
-                input[0] = [ [ id:'test' ],
+                input[0]  = Channel.of( [ [ id:'test' ],
                                 file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
-                            ]
-                input[1] = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test'], tree]}
+                        , 'tcoffee_treealign'
+                    ])
+                input[1]  = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test'], tree, 'tcoffee_treealign']}
                 """
             }
         }

@@ -31,6 +31,9 @@ input:
               - edam: http://edamontology.org/format_1929
             pattern: "*.{fa,fasta}"
             type: file
+        - tool:
+            description: The name of the tool to run
+            type: string
 
 output:
   - alignment:
