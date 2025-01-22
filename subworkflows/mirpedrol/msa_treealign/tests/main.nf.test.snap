@@ -1,4 +1,86 @@
 {
+    "clustalo_treealign_alignment": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,74bb9a2820a91cf68db94dbd46787722"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T16:01:01.611023951"
+    },
+    "magus_treealign_versions": {
+        "content": [
+            [
+                "versions.yml:md5,32409a4801ce34648c31cef62c4bb298"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T16:00:05.747842102"
+    },
+    "clustalo_treealign_versions": {
+        "content": [
+            [
+                "versions.yml:md5,7d9dc598369d063294d8ff5b62d02e2f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T16:01:01.661726627"
+    },
+    "magus_versions": {
+        "content": [
+            [
+                "versions.yml:md5,6bd0fc2decf3dd8e3b43a4d5b9c0cc58"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:31.000053"
+    },
+    "tcoffee_alignment": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,93bc8adfcd88f7913718eacc13da8e4a"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-22T15:21:57.317953"
+    },
+    "tcoffee_treealign_versions": {
+        "content": [
+            [
+                "versions.yml:md5,c9000e613bf71e55f37a77eacd606fcf"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T16:01:18.493259432"
+    },
     "famsa_alignment": {
         "content": [
             [
@@ -69,19 +151,24 @@
         },
         "timestamp": "2024-08-22T15:21:57.324541"
     },
-    "magus_versions": {
+    "famsa_treealign_alignment": {
         "content": [
             [
-                "versions.yml:md5,6bd0fc2decf3dd8e3b43a4d5b9c0cc58"
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.aln.gz:md5,7cf7375f2ba360814ea978731838b972"
+                ]
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-22T15:21:31.000053"
+        "timestamp": "2025-01-22T15:59:47.187845271"
     },
-    "tcoffee_alignment": {
+    "tcoffee_treealign_alignment": {
         "content": [
             [
                 [
@@ -93,9 +180,21 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-08-22T15:21:57.317953"
+        "timestamp": "2025-01-22T16:01:18.433917307"
+    },
+    "famsa_treealign_versions": {
+        "content": [
+            [
+                "versions.yml:md5,d62584b93ac23e3e3089a9c50f48e4e8"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-01-22T15:59:47.275076014"
     }
 }
