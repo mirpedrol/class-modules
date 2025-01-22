@@ -123,7 +123,7 @@ jobs:
                 .replace('modules/mirpedrol/', '')
                 .split('/')
                 .slice(0, 2)
-                .filter(x => !x.startsWith('main.nf') && x !== 'tests' && x !== 'templates' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.md'))
+                .filter(x => !x.startsWith('main.nf') && x !== 'tests' && x !== 'templates' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.md') && !x.endsWith('.test'))
                 .join('/'))
               )
             ];
@@ -139,7 +139,7 @@ jobs:
                 .replace('subworkflows/mirpedrol/', '')
                 .split('/')
                 .slice(0, 2)
-                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml')
+                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test'))
                 .join('/'))
               )
             ];
@@ -155,7 +155,7 @@ jobs:
     runs-on: ubuntu-latest
     name: nf-core-lint-modules
     needs: lint-changes
-    if: ${{ (needs.nf-core-changes.outputs.modules == 'true') }}
+    if: ( needs.lint-changes.outputs.modules_files != '[]')
     strategy:
       fail-fast: false
       matrix:
@@ -197,7 +197,7 @@ jobs:
     runs-on: ubuntu-latest
     name: nf-core-lint-subworkflows
     needs: lint-changes
-    if: ${{ (needs.nf-core-changes.outputs.subworkflows == 'true') }}
+    if: ( needs.lint-changes.outputs.subworkflows_files != '[]')
     strategy:
       fail-fast: false
       matrix:
