@@ -17,10 +17,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
                         , 'famsa_guidetree'
-                    ]
+                    ])
                 """
             }
         }
@@ -39,10 +39,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         , 'magus_guidetree'
-                    ]
+                    ])
                 """
             }
         }
@@ -68,10 +68,10 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = [ [ id:'test' ], // meta map
+                input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
                         , 'clustalo_guidetree'
-                    ]
+                    ])
                 """
             }
         }
