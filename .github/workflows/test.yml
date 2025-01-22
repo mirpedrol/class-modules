@@ -88,15 +88,55 @@ jobs:
           echo ${{ steps.outputs.outputs.modules }}
           echo ${{ steps.outputs.outputs.subworkflows }}
 
+  lint-changes:
+    name: lint-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # https://github.com/dorny/paths-filter?tab=readme-ov-file#custom-processing-of-changed-files
+      modules: ${{ steps.filter.outputs.modules }}
+      modules_files: ${{ steps.module_names.outputs.result }}
+      subworkflows: ${{ steps.filter.outputs.subworkflows }}
+      subworkflows_files: ${{ steps.subworkflow_names.outputs.result }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
+        id: filter
+        with:
+          filters: |
+            modules:
+              - added|modified: 'modules/nf-core/**'
+            subworkflows:
+              - added|modified: 'subworkflows/nf-core/**'
+          token: ""
+          list-files: "json"
+
+      - name: Get module name
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        id: module_names
+        with:
+          script: |
+            return [...new Set(${{ steps.filter.outputs.modules_files }}
+              .map(path => path
+                .replace('modules/nf-core/', '')
+                .split('/')
+                .slice(0, 2)
+                .filter(x => !x.startsWith('main.nf') && x !== 'tests' && x !== 'templates' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.md'))
+                .join('/'))
+              )
+            ];
+
   nf-core-lint-modules:
     runs-on: ubuntu-latest
     name: nf-core-lint-modules
-    needs: nf-test-changes
-    if: ( needs.nf-test-changes.outputs.modules != '[]')
+    needs: lint-changes
+    if: ( needs.lint-changes.outputs.modules_files != '[]')
     strategy:
       fail-fast: false
       matrix:
-        tags: ["${{ fromJson(needs.nf-test-changes.outputs.modules) }}"]
+        tags: ["${{ fromJson(needs.lint-changes.outputs.modules_files) }}"]
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
@@ -133,12 +173,12 @@ jobs:
   nf-core-lint-subworkflows:
     runs-on: ubuntu-latest
     name: nf-core-lint-modules
-    needs: nf-test-changes
-    if: ( needs.nf-test-changes.outputs.subworkflows != '[]')
+    needs: lint-changes
+    if: ( needs.lint-changes.outputs.subworkflows_files != '[]')
     strategy:
       fail-fast: false
       matrix:
-        tags: ["${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}"]
+        tags: ["${{ fromJson(needs.lint-changes.outputs.subworkflows_files) }}"]
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
