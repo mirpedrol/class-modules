@@ -128,6 +128,11 @@ jobs:
               )
             ];
 
+      - name: debug
+        run: |
+          echo ${{ steps.filter.outputs.modules_files }}
+          echo ${{ steps.module_names.outputs.result }}
+
   nf-core-lint-modules:
     runs-on: ubuntu-latest
     name: nf-core-lint-modules
