@@ -123,7 +123,7 @@ jobs:
                 .replace('modules/mirpedrol/', '')
                 .split('/')
                 .slice(0, 2)
-                .filter(x => !x.startsWith('main.nf') && x !== 'tests' && x !== 'templates' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.md') && !x.endsWith('.test'))
+                .filter(x => !x.startsWith('main.nf') && x !== 'tests' && x !== 'templates' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.md') && !x.endsWith('.test') && !x.endsWith('.snap'))
                 .join('/'))
               )
             ];
@@ -139,7 +139,7 @@ jobs:
                 .replace('subworkflows/mirpedrol/', '')
                 .split('/')
                 .slice(0, 2)
-                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test'))
+                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test') && !x.endsWith('.snap'))
                 .join('/'))
               )
             ];
