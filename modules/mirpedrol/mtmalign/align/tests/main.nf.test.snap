@@ -10,5 +10,38 @@
             "nextflow": "24.04.2"
         },
         "timestamp": "2024-06-03T11:01:37.28539854"
+    },
+    "seatoxin - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/Users/jmir/Work/class-modules/.nf-test/tests/4fe3d19c96a23d526512dafafb38acbc/work/5f/8b829def671cadf4289d4321710bc1/test.aln.gz"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,7cbacec15bb9e0c8cbb27610bde74c10"
+                ],
+                "alignment": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "/Users/jmir/Work/class-modules/.nf-test/tests/4fe3d19c96a23d526512dafafb38acbc/work/5f/8b829def671cadf4289d4321710bc1/test.aln.gz"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,7cbacec15bb9e0c8cbb27610bde74c10"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2025-01-30T15:10:15.032184"
     }
 }

@@ -1,11 +1,8 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
 name: "mtmalign_align"
-description: Aligns protein structures using mTM-align
-keywords:
-  - alignment
-  - MSA
-  - genomics
-  - structure
+description: Perform multiple sequence alignment of protein structures
+keywords: ["alignment", "msa", "structure"]
+class: "msa_structural_alignment"
 tools:
   - "mTM-align":
       description: "Algorithm for structural multiple sequence alignments"
@@ -14,52 +11,46 @@ tools:
       tool_dev_url: "http://yanglab.nankai.edu.cn/mTM-align/"
       doi: "10.1093/bioinformatics/btx828"
       licence: ["None"]
-      identifier: "biotools:mtm-align"
-  - "pigz":
-      description: "Parallel implementation of the gzip algorithm."
-      homepage: "https://zlib.net/pigz/"
-      documentation: "https://zlib.net/pigz/pigz.pdf"
+      identifier: ""
 
 input:
   - - meta:
+        description: "Groovy Map containing sample information
+
+          e.g. `[ id:'sample1' ]`
+
+          "
         type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'test']`
     - pdbs:
+        description: Input protein structures in PDB format.
+        ontologies:
+          - edam: http://edamontology.org/format_1476
+          - edam: http://edamontology.org/format_1477
+        pattern: "*.{pdb,mmcif}"
         type: file
-        description: Input protein structures in PDB format. Files may be gzipped or
-          uncompressed. They should contain exactly one chain!
-        pattern: "*.pdb{.gz}"
+
 output:
   - alignment:
       - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
+          description: "Groovy Map containing sample information
+
             e.g. `[ id:'test']`
-      - "${prefix}.aln.gz":
-          type: file
-          description: Alignment in FASTA format.
-          pattern: "*.aln.gz"
+
+            "
+          type: map
+      - ${prefix}.aln.gz:
+          description: Alignment in FASTA format. May be gzipped or uncompressed.
           ontologies:
             - edam: http://edamontology.org/format_1984
-  - structure:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'test']`
-      - "${prefix}.pdb.gz":
+          pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
           type: file
-          description: Overlaid structures in PDB format.
-          pattern: "${prefix}.pdb{.gz,}"
   - versions:
       - versions.yml:
-          type: file
           description: File containing software versions
-          pattern: "versions.yml"
+          pattern: versions.yml
+          type: file
+
 authors:
-  - "@lrauschning"
+  - "@mirpedrol"
 maintainers:
-  - "@lrauschning"
+  - "@mirpedrol"

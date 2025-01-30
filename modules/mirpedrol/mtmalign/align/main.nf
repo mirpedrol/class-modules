@@ -1,5 +1,3 @@
-
-
 process MTMALIGN_ALIGN {
     tag "$meta.id"
     label 'process_medium'
@@ -14,8 +12,7 @@ process MTMALIGN_ALIGN {
 
     output:
     tuple val(meta), path("${prefix}.aln.gz"), emit: alignment
-    tuple val(meta), path("${prefix}.pdb.gz"), emit: structure
-    path "versions.yml"                      , emit: versions
+    path("versions.yml")                     , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,28 +20,23 @@ process MTMALIGN_ALIGN {
     script:
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
-    // mTMalign is not capable of writing to stdout
-    // if -o /dev/stdout is specified, the output file will be polluted with debug messages emitted by mTMalign
     """
     # decompress input files if required
-    if ls ./*.pdb.gz 2&> /dev/null; then # check if any files are compressed; calling unpigz with an empty arg will cause it to panic
+    if ls ./*.pdb.gz 2&> /dev/null; then
         unpigz -d ./*.pdb.gz
     fi
 
     # construct input file for mtmalign
     ls *.pdb | sed s/\\ /\\n/ > input_list.txt
 
-    mtm-align -i input_list.txt -o ${prefix}.pdb
-    # -o does not affect the fasta naming, so move it to the new name
-    mv ./mTM_result/result.fasta ./mTM_result/${prefix}.aln
+    mtm-align -i input_list.txt
+    mv ./mTM_result/result.fasta ${prefix}.aln
+
     # Remove ".pdb" from the ids in the alignment file
-    sed -i 's/\\.pdb//g' ./mTM_result/${prefix}.aln
+    sed -i 's/\\.pdb//g' ${prefix}.aln
 
-    # compress both output files
-    pigz -p ${task.cpus} ./mTM_result/${prefix}.aln ./mTM_result/${prefix}.pdb
-
-    # move everything in mTM_result to the working directory
-    mv ./mTM_result/* .
+    # compress output file
+    pigz -p ${task.cpus} ${prefix}.aln
 
     # mtm-align -v prints the wrong version 20180725, so extract it from the cosmetic output in the help message
     cat <<-END_VERSIONS > versions.yml
@@ -58,7 +50,6 @@ process MTMALIGN_ALIGN {
     prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch ${prefix}.aln.gz
-    touch ${prefix}.pdb.gz
 
     # mtm-align -v prints the wrong version 20180725, so extract it from the cosmetic output in the help message
     cat <<-END_VERSIONS > versions.yml
