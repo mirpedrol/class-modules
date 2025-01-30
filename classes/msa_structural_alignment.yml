@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/classes/class-schema.json
+name: "msa_structural_alignment"
+description: Perform multiple sequence alignment of protein structures
+keywords:
+  - alignment
+  - msa
+  - structure
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - pdbs:
+        type: file
+        description: Input protein structures in PDB format.
+        pattern: "*.{pdb,mmcif}"
+        ontologies:
+          - edam: http://edamontology.org/format_1476
+          - edam: http://edamontology.org/format_1477
+
+output:
+  - alignment:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test']`
+      - "${prefix}.aln.gz":
+          type: file
+          description: Alignment in FASTA format. May be gzipped or uncompressed.
+          pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
+          ontologies:
+            - edam: http://edamontology.org/format_1984
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
