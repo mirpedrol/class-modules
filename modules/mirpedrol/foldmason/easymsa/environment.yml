@@ -3,5 +3,5 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - bioconda::mtm-align=20220104
+  - bioconda::foldmason=2.7bd21ed
   - conda-forge::pigz=2.8

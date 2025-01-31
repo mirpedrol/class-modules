@@ -1,17 +1,17 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/modules/yaml-schema.json
-name: "mtmalign_align"
+name: "foldmason_easymsa"
 description: Perform multiple sequence alignment of protein structures
 keywords: ["alignment", "msa", "structure"]
 class: "msa_structural_alignment"
 tools:
-  - "mTM-align":
-      description: "Algorithm for structural multiple sequence alignments"
-      homepage: "http://yanglab.nankai.edu.cn/mTM-align/"
-      documentation: "http://yanglab.nankai.edu.cn/mTM-align/help/"
-      tool_dev_url: "http://yanglab.nankai.edu.cn/mTM-align/"
-      doi: "10.1093/bioinformatics/btx828"
-      licence: ["None"]
-      identifier: ""
+  - "foldmason":
+      description: "Multiple Protein Structure Alignment at Scale with FoldMason"
+      homepage: "https://github.com/steineggerlab/foldmason"
+      documentation: "https://github.com/steineggerlab/foldmason"
+      tool_dev_url: "https://github.com/steineggerlab/foldmason"
+      doi: "10.1101/2024.08.01.606130"
+      licence: ["GPL v3"]
+      identifier: biotools:foldmason
 
 input:
   - - meta:
