@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mirpedrol/class-modules/main/subworkflows/yaml-schema.json
+name: "msa_structural_alignment"
+description: Perform multiple sequence alignment of protein structures
+keywords: ["alignment", "msa", "structure"]
+components: ["foldmason/easymsa", "mtmalign/align"]
+
+input:
+  - ch_pdbs:
+      description: "Channel containing: meta, pdbs"
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'sample1' ]`
+
+              "
+            type: map
+        - pdbs:
+            description: Input protein structures in PDB format.
+            ontologies:
+              - edam: http://edamontology.org/format_1476
+              - edam: http://edamontology.org/format_1477
+            pattern: "*.{pdb,mmcif}"
+            type: file
+        - tool:
+            description: The name of the tool to run
+            type: string
+
+output:
+  - alignment:
+      description: Output channel alignment
+      structure:
+        - meta:
+            description: "Groovy Map containing sample information
+
+              e.g. `[ id:'test']`
+
+              "
+            type: map
+        - ${prefix}.aln.gz:
+            description: Alignment in FASTA format. May be gzipped or uncompressed.
+            ontologies:
+              - edam: http://edamontology.org/format_1984
+            pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
+            type: file
+  - versions:
+      description: Output channel versions
+      structure:
+        - versions.yml:
+            description: File containing software versions
+            pattern: versions.yml
+            type: file
+
+authors:
+  - "@mirpedrol"
+maintainers:
+  - "@mirpedrol"
