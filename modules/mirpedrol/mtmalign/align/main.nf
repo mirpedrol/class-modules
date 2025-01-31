@@ -49,7 +49,8 @@ process MTMALIGN_ALIGN {
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.aln.gz
+    touch ${prefix}.aln
+    pigz ${prefix}.aln
 
     # mtm-align -v prints the wrong version 20180725, so extract it from the cosmetic output in the help message
     cat <<-END_VERSIONS > versions.yml
