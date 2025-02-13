@@ -1,6 +1,7 @@
 include { FOLDMASON_EASYMSA } from '../../../modules/mirpedrol/foldmason/easymsa/main'
 include { MTMALIGN_ALIGN } from '../../../modules/mirpedrol/mtmalign/align/main'
 
+
 workflow MSA_STRUCTURAL_ALIGNMENT {
 
     take:
@@ -28,8 +29,11 @@ workflow MSA_STRUCTURAL_ALIGNMENT {
     ch_out_alignment = ch_out_alignment.mix(MTMALIGN_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(MTMALIGN_ALIGN.out.versions)
 
+
+
     emit:
     alignment = ch_out_alignment
     versions = ch_out_versions
 
 }
+
