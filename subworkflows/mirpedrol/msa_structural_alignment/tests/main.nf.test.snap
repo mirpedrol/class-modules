@@ -43,5 +43,28 @@
             "nextflow": "24.10.4"
         },
         "timestamp": "2025-01-31T14:50:29.846277"
+    },
+    "run foldmason/easymsa": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "alignment": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-02-13T17:05:08.285928"
     }
 }

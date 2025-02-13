@@ -30,7 +30,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                    input[0]  = [UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect()]}, 'foldmason_easymsa']
+                    input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'foldmason_easymsa']}
                 """
             }
         }
@@ -61,7 +61,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                    input[0]  = [UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect()]}, 'mtmalign_align']
+                    input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'mtmalign_align']}
                 """
             }
         }
