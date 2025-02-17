@@ -14,18 +14,18 @@ nextflow_workflow {
 
     test("run foldmason/easymsa") {
 
-        setup {
+    setup {
 
-            run("UNTAR") {
-                script "../../../../modules/mirpedrol/untar/main.nf"
-                    process {
-                        """
-                            archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/af2_structures/seatoxin-ref.tar.gz", checkIfExists: true)
-                            input[0] = Channel.of(tuple([id:'test'], archive))
-                        """
-                    }
-            }
+        run("UNTAR") {
+            script "../../../../modules/mirpedrol/untar/main.nf"
+                process {
+                    """
+                        archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/af2_structures/seatoxin-ref.tar.gz", checkIfExists: true)
+                        input[0] = Channel.of(tuple([id:'test'], archive))
+                    """
+                }
         }
+    }
 
         when {
             workflow {
@@ -38,30 +38,30 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success  },
-                { assert snapshot(workflow.out).match("one") }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
 
     test("run mtmalign/align") {
 
-        setup {
+    setup {
 
-            run("UNTAR") {
-                script "../../../../modules/mirpedrol/untar/main.nf"
-                    process {
-                        """
-                            archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)
-                            input[0] = Channel.of(tuple([id:'test'], archive))
-                        """
-                    }
-            }
+        run("UNTAR") {
+            script "../../../../modules/mirpedrol/untar/main.nf"
+                process {
+                    """
+                        archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)
+                        input[0] = Channel.of(tuple([id:'test'], archive))
+                    """
+                }
         }
+    }
 
         when {
             workflow {
                 """
-                    input[0]  = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'mtmalign_align']}
+                    input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'mtmalign_align']}
                 """
             }
         }
@@ -79,5 +79,6 @@ nextflow_workflow {
             )
         }
     }
+
 
 }
