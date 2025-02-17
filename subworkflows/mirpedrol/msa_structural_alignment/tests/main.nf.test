@@ -1,0 +1,84 @@
+nextflow_workflow {
+
+    name "Test Subworkflow MSA_STRUCTURAL_ALIGNMENT"
+    script "../main.nf"
+    workflow "MSA_STRUCTURAL_ALIGNMENT"
+
+    tag "subworkflows"
+    tag "subworkflows_mirpedrol"
+    tag "subworkflows/msa_structural_alignment"
+    tag "foldmason/easymsa"
+    tag "mtmalign/align"
+    tag "untar"
+
+
+    test("run foldmason/easymsa") {
+
+    setup {
+
+        run("UNTAR") {
+            script "../../../../modules/mirpedrol/untar/main.nf"
+                process {
+                    """
+                        archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/af2_structures/seatoxin-ref.tar.gz", checkIfExists: true)
+                        input[0] = Channel.of(tuple([id:'test'], archive))
+                    """
+                }
+        }
+    }
+
+        when {
+            workflow {
+                """
+                    input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'foldmason_easymsa']}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success  },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("run mtmalign/align") {
+
+    setup {
+
+        run("UNTAR") {
+            script "../../../../modules/mirpedrol/untar/main.nf"
+                process {
+                    """
+                        archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)
+                        input[0] = Channel.of(tuple([id:'test'], archive))
+                    """
+                }
+        }
+    }
+
+        when {
+            workflow {
+                """
+                    input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'mtmalign_align']}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success  },
+                // mTMalign may be nondeterministic, just check if the pdbs are all in there
+                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1ahl") },
+                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1apf") },
+                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1atx") },
+                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1bds") },
+                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1sh1") },
+                { assert snapshot(workflow.out.versions).match("mtmalign_align_versions") }
+            )
+        }
+    }
+
+
+}
