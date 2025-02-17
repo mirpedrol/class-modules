@@ -48,16 +48,26 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
                 ],
                 "alignment": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
                 ]
             }
         ],
@@ -65,6 +75,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-13T17:05:08.285928"
+        "timestamp": "2025-02-17T10:02:20.633878"
     }
 }
