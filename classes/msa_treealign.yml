@@ -44,3 +44,9 @@ output:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
+components:
+  modules:
+    - famsa/align
+    - magus/align
+    - clustalo/align
+    - tcoffee/align

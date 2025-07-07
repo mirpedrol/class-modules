@@ -37,3 +37,7 @@ output:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
+components:
+  modules:
+    - foldmason/easymsa
+    - mtmalign/align
