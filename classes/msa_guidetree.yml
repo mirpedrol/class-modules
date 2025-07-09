@@ -34,3 +34,8 @@ output:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
+components:
+  modules:
+    - famsa/guidetree
+    - magus/guidetree
+    - clustalo/guidetree

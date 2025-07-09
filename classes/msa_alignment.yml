@@ -35,3 +35,13 @@ output:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
+components:
+  modules:
+    - mafft/align
+    - kalign/align
+    - famsa/align
+    - muscle5/super5
+    - magus/align
+    - clustalo/align
+    - tcoffee/align
+    - learnmsa/align
