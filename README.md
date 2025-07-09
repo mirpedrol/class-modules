@@ -34,6 +34,7 @@ nf-core modules --git-remote https://github.com/mirpedrol/class-modules.git <YOU
 A `class` is a way of grouping Nextflow DSL2 modules. All tools which share the same purpose (can be used to perform the same task) and share the same inputs and outputs, belong to the same class.
 
 Essentially, a class is defined through a YAML file specifying the inputs and outputs of that class and some keywords, used to determine the purpose of that class. You can see examples of classes in the [classes directory](https://github.com/mirpedrol/class-modules/tree/main/classes).
+It also contains the list of all nf-core/modules which belong to the class.
 
 The basic structure of a class YAML file is the following:
 
@@ -64,12 +65,12 @@ output:
             type: file
             description: The output file in TXT format of this class
             pattern: "*.txt"
+components:
+  modules:
+    - tool/subtool
+    - tool2
 ```
 
-## The `class_module_index` file
-
-The file [`class_module_index.yml`](https://github.com/mirpedrol/class-modules/tree/main/class_module_index.yml) lists all classes and all nf-core/modules which belong to each of the classes.
-
-This file can be edited to add new nf-core/modules to a class.
+The `components` section of the class YAML file can be edited to add new nf-core/modules to a class.
 This information will then be used to update the existing class subworkflow,
 or to generate a new class subworkflow.
