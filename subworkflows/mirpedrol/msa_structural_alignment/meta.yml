@@ -30,24 +30,26 @@ output:
   - alignment:
       description: Output channel alignment
       structure:
-        - meta:
-            description: "Groovy Map containing sample information
+        - - meta:
+              description: "Groovy Map containing sample information
 
-              e.g. `[ id:'test']`
+                e.g. `[ id:'test']`
 
-              "
-            type: map
-        - ${prefix}.aln.gz:
-            description: Alignment in FASTA format. May be gzipped or uncompressed.
-            ontologies:
-              - edam: http://edamontology.org/format_1984
-            pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
-            type: file
+                "
+              type: map
+          - ${prefix}.aln.gz:
+              description: Alignment in FASTA format. May be gzipped or uncompressed.
+              ontologies:
+                - edam: http://edamontology.org/format_1984
+              pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
+              type: file
   - versions:
       description: Output channel versions
       structure:
         - versions.yml:
             description: File containing software versions
+            ontologies:
+              - edam: http://edamontology.org/format_3750
             pattern: versions.yml
             type: file
 

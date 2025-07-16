@@ -7,38 +7,24 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_treealign"
-    tag "famsa/treealign"
-    tag "magus/treealign"
-    tag "clustalo/treealign"
-    tag "tcoffee/treealign"
-    tag "famsa/guidetree"
-    tag "magus/guidetree"
-    tag "clustalo/guidetree"
+    tag "famsa/align"
+    tag "magus/align"
+    tag "clustalo/align"
+    tag "tcoffee/align"
 
 
-    test("run famsa/treealign") {
-
-        setup {
-            run("FAMSA_GUIDETREE") {
-                script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
-                process {
-                    """
-                    input[0] = Channel.of( [ [ id:'test' ], // meta map
-                                    file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                                ])
-                    """
-                }
-            }
-        }
+    test("run famsa/align") {
 
         when {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                        , 'famsa_treealign'
+                                file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
+                        , 'famsa_align'
                     ])
-                input[1]  = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'famsa_treealign']}
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( false )
                 """
             }
         }
@@ -46,35 +32,24 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("famsa_treealign_alignment")},
-                { assert snapshot(workflow.out.versions).match("famsa_treealign_versions") }
+                { assert snapshot(workflow.out.alignment).match("famsa_align_alignment")},
+                { assert snapshot(workflow.out.versions).match("famsa_align_versions") }
             )
         }
     }
 
-    test("run magus/treealign") {
-
-        setup {
-            run("MAGUS_GUIDETREE") {
-                script "../../../../modules/mirpedrol/magus/guidetree/main.nf"
-                process {
-                    """
-                    input[0] = [ [ id:'test' ], // meta map
-                                    file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                                ]
-                    """
-                }
-            }
-        }
+    test("run magus/align") {
 
         when {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        , 'magus_treealign'
+                        , 'magus_align'
                     ])
-                input[1]  = MAGUS_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'magus_treealign']}
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( false )
                 """
             }
         }
@@ -84,40 +59,32 @@ nextflow_workflow {
                 { assert workflow.success },
                 // tests seem to be reproducible on a single machine, but not across different machines
                 // test the correct samples are in there
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1apf") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1ahl") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1atx") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1sh1") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1bds") },
-                { assert snapshot(workflow.out.versions).match("magus_treealign_versions") }
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1apf") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1ahl") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1atx") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1sh1") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1bds") },
+                { assert snapshot(workflow.out.versions).match("magus_align_versions") }
             )
         }
     }
 
-    test("run clustalo/treealign") {
-
-        setup {
-
-            run("CLUSTALO_GUIDETREE") {
-                script "../../../../modules/mirpedrol/clustalo/guidetree/main.nf"
-                process {
-                    """
-                    input[0] = [ [ id:'test' ], // meta map
-                                    file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                                ]
-                    """
-                }
-            }
-        }
+    test("run clustalo/align") {
 
         when {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
-                        , 'clustalo_treealign'
+                            file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
+                        , 'clustalo_align'
                     ])
-                input[1]  = CLUSTALO_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test_summary'], tree, 'clustalo_treealign']}
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( [] )
+                input[3]  = Channel.of( [] )
+                input[4]  = Channel.of( [] )
+                input[5]  = Channel.of( [] )
+                input[6]  = Channel.of( false )
                 """
             }
         }
@@ -125,37 +92,24 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("clustalo_treealign_alignment")},
-                { assert snapshot(workflow.out.versions).match("clustalo_treealign_versions") }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
 
-    test("run tcoffee/treealign") {
-
-        setup {
-
-            run("FAMSA_GUIDETREE") {
-                script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
-                process {
-                    """
-                    input[0] = [ [ id:'test' ],
-                                    file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
-                                ]
-
-                    """
-                }
-            }
-        }
+    test("run tcoffee/align") {
 
         when {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ],
-                                file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
-                        , 'tcoffee_treealign'
+                                file(params.modules_testdata_base_path + "../../multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                        , 'tcoffee_align'
                     ])
-                input[1]  = FAMSA_GUIDETREE.out.tree.collect{ meta, tree -> tree }.map{ tree -> [[ id: 'test'], tree, 'tcoffee_treealign']}
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( [[:],[],[]] )
+                input[3]  = Channel.of( true )
                 """
             }
         }
@@ -163,8 +117,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("tcoffee_treealign_alignment")},
-                { assert snapshot(workflow.out.versions).match("tcoffee_treealign_versions") }
+                { assert path(workflow.out.alignment.get(0).get(1)).getTextGzip().contains("1ahl") },
+                { assert snapshot(workflow.out.versions).match("tcoffee_align_versions")}
             )
         }
     }
