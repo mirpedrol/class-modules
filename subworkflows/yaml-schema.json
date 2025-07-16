@@ -30,7 +30,19 @@
             "type": "array",
             "description": "Modules and subworkflows used in the subworkflow",
             "items": {
-                "type": "string"
+                "oneOf": [
+                    { "type": "string" },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "git_remote": {
+                                "type": "string",
+                                "description": "Git URL of the remote."
+                            }
+                        },
+                        "required": ["git_remote"]
+                    }
+                ]
             },
             "minItems": 0
         },
