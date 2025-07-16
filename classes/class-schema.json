@@ -29,11 +29,20 @@
             }
         },
         "output": {
-            "type": "array",
+            "type": "object",
             "description": "Output channels for the class modules",
-            "items": {
-                "type": "object",
-                "items": { "$ref": "#/definitions/elementProperties" }
+            "patternProperties": {
+                ".*": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "patternProperties": {
+                            ".*": {
+                                "$ref": "#/definitions/elementProperties"
+                            }
+                        }
+                    }
+                }
             }
         }
     },

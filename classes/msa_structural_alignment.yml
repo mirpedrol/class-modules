@@ -20,8 +20,8 @@ input:
           - edam: http://edamontology.org/format_1477
 
 output:
-  - alignment:
-      - meta:
+  alignment:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -32,13 +32,13 @@ output:
           pattern: "*.{aln.gz,aln,fa,fa.gz,fasta,fasta.gz}"
           ontologies:
             - edam: http://edamontology.org/format_1984
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-          ontologies:
-            - edam: http://edamontology.org/format_3750 # YAML
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
 components:
   modules:
     - foldmason/easymsa
