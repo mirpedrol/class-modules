@@ -1,11 +1,11 @@
-include { MAFFT } from '../../../modules/mirpedrol/mafft/main'
-include { KALIGN_ALIGN } from '../../../modules/mirpedrol/kalign/align/main'
-include { FAMSA_ALIGN } from '../../../modules/mirpedrol/famsa/align/main'
-include { MUSCLE5_SUPER5 } from '../../../modules/mirpedrol/muscle5/super5/main'
-include { MAGUS_ALIGN } from '../../../modules/mirpedrol/magus/align/main'
-include { CLUSTALO_ALIGN } from '../../../modules/mirpedrol/clustalo/align/main'
-include { TCOFFEE_ALIGN } from '../../../modules/mirpedrol/tcoffee/align/main'
-include { LEARNMSA_ALIGN } from '../../../modules/mirpedrol/learnmsa/align/main'
+include { MAFFT_ALIGN } from '../../../modules/nf-core/mafft/align/main'
+include { KALIGN_ALIGN } from '../../../modules/nf-core/kalign/align/main'
+include { FAMSA_ALIGN } from '../../../modules/nf-core/famsa/align/main'
+include { MUSCLE5_SUPER5 } from '../../../modules/nf-core/muscle5/super5/main'
+include { MAGUS_ALIGN } from '../../../modules/nf-core/magus/align/main'
+include { CLUSTALO_ALIGN } from '../../../modules/nf-core/clustalo/align/main'
+include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
+include { LEARNMSA_ALIGN } from '../../../modules/nf-core/learnmsa/align/main'
 
 
 workflow MSA_ALIGNMENT {
@@ -20,7 +20,7 @@ workflow MSA_ALIGNMENT {
     ch_fasta
         .branch {
             meta, fasta, tool ->
-                mafft: tool == "mafft"
+                mafft_align: tool == "mafft_align"
                     return [ meta, fasta ]
                 kalign_align: tool == "kalign_align"
                     return [ meta, fasta ]
@@ -39,31 +39,31 @@ workflow MSA_ALIGNMENT {
         }
         .set { ch_fasta_branch }
 
-    MAFFT( ch_fasta_branch.mafft )
-    ch_out_alignment = ch_out_alignment.mix(MAFFT.out.alignment)
-    ch_out_versions = ch_out_versions.mix(MAFFT.out.versions)
+    MAFFT_ALIGN( ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, [] )
+    ch_out_alignment = ch_out_alignment.mix(MAFFT_ALIGN.out.fas)
+    ch_out_versions = ch_out_versions.mix(MAFFT_ALIGN.out.versions)
 
-    KALIGN_ALIGN( ch_fasta_branch.kalign_align )
+    KALIGN_ALIGN( ch_fasta_branch.kalign_align, [] )
     ch_out_alignment = ch_out_alignment.mix(KALIGN_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(KALIGN_ALIGN.out.versions)
 
-    FAMSA_ALIGN( ch_fasta_branch.famsa_align )
+    FAMSA_ALIGN( ch_fasta_branch.famsa_align, [], [] )
     ch_out_alignment = ch_out_alignment.mix(FAMSA_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(FAMSA_ALIGN.out.versions)
 
-    MUSCLE5_SUPER5( ch_fasta_branch.muscle5_super5 )
+    MUSCLE5_SUPER5( ch_fasta_branch.muscle5_super5, [] )
     ch_out_alignment = ch_out_alignment.mix(MUSCLE5_SUPER5.out.alignment)
     ch_out_versions = ch_out_versions.mix(MUSCLE5_SUPER5.out.versions)
 
-    MAGUS_ALIGN( ch_fasta_branch.magus_align )
+    MAGUS_ALIGN( ch_fasta_branch.magus_align, [], [] )
     ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(MAGUS_ALIGN.out.versions)
 
-    CLUSTALO_ALIGN( ch_fasta_branch.clustalo_align )
+    CLUSTALO_ALIGN( ch_fasta_branch.clustalo_align, [], [], [], [], [], [] )
     ch_out_alignment = ch_out_alignment.mix(CLUSTALO_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(CLUSTALO_ALIGN.out.versions)
 
-    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align )
+    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, [], [], [] )
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 
