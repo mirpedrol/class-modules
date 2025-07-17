@@ -131,7 +131,7 @@ jobs:
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
           cd create-test-wf/nf-core-testpipeline
-          nf-core --verbose subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
+          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
         # This will only work for branches comming from the same repo, not from a fork
         # TODO: possibly change the git-remote if the PR comes from a fork
 
@@ -142,6 +142,7 @@ jobs:
           NFT_DIFF: "pdiff"
           NFT_DIFF_ARGS: "--line-numbers --width 120 --expand-tabs=2"
         run: |
+          cd create-test-wf/nf-core-testpipeline
           PROFILE=${{ matrix.profile }}
 
           NFT_WORKDIR=~ \
