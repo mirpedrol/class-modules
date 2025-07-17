@@ -7,7 +7,7 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_alignment"
-    tag "mafft"
+    tag "mafft/align"
     tag "kalign/align"
     tag "famsa/align"
     tag "muscle5/super5"
@@ -17,16 +17,23 @@ nextflow_workflow {
     tag "learnmsa/align"
 
 
-    test("run mafft") {
+    test("run mafft/align") {
 
         when {
             workflow {
                 """
                 input[0]  = Channel.of( [
                     [ id:'test', single_end:false ], // meta map
-                        file(params.test_data['sarscov2']['illumina']['scaffolds_fasta'], checkIfExists: true)
-                        , 'mafft'
+                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true)
+                        , 'mafft_align'
                     ])
+
+                input[1]  = Channel.of( [[:], []] )
+                input[2]  = Channel.of( [[:], []] )
+                input[3]  = Channel.of( [[:], []] )
+                input[4]  = Channel.of( [[:], []] )
+                input[5]  = Channel.of( [[:], []] )
+                input[6]  = Channel.of( false )
                 """
             }
         }
@@ -34,8 +41,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("mafft_alignment")},
-                { assert snapshot(workflow.out.versions).match("mafft_versions")}
+                { assert snapshot(workflow.out).match()}
             )
         }
     }
@@ -46,9 +52,11 @@ nextflow_workflow {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                            file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                            file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
                         , 'kalign_align'
                     ])
+
+                input[1]  = Channel.of( false )
                 """
             }
         }
@@ -56,8 +64,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("kalign_align_alignment")},
-                { assert snapshot(workflow.out.versions).match("kalign_align_versions")}
+                { assert snapshot(workflow.out).match()}
             )
         }
     }
@@ -68,9 +75,12 @@ nextflow_workflow {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                                file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
                         , 'famsa_align'
                     ])
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( false )
                 """
             }
         }
@@ -93,6 +103,8 @@ nextflow_workflow {
                         file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         , 'muscle5_super5'
                     ])
+
+                        input[1]  = Channel.of( false )
                         """
             }
         }
@@ -100,8 +112,11 @@ nextflow_workflow {
             then {
                 assertAll(
                         { assert workflow.success },
-                        { assert snapshot(workflow.out.alignment).match("muscle5_super5_alignment") },
-                        { assert snapshot(workflow.out.versions).match("muscle5_super5_versions") }
+                        { assert snapshot(
+                                workflow.out.alignment,
+                                workflow.out.versions
+                            ).match("alignment - uncompressed")
+                        },
                         )
         }
     }
@@ -115,6 +130,9 @@ nextflow_workflow {
                                 file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         , 'magus_align'
                     ])
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( false )
                 """
             }
         }
@@ -124,11 +142,11 @@ nextflow_workflow {
                 { assert workflow.success },
                 // tests seem to be reproducible on a single machine, but not across different machines
                 // test the correct samples are in there
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1apf") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1ahl") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1atx") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1sh1") },
-                { assert path(workflow.out.alignment[0][1]).getTextGzip().contains(">1bds") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1apf") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1ahl") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1atx") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1sh1") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains(">1bds") },
                 { assert snapshot(workflow.out.versions).match("magus_align_versions") }
             )
         }
@@ -140,9 +158,16 @@ nextflow_workflow {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.test_data['sarscov2']['illumina']['contigs_fasta'], checkIfExists: true)
+                            file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
                         , 'clustalo_align'
                     ])
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( [] )
+                input[3]  = Channel.of( [] )
+                input[4]  = Channel.of( [] )
+                input[5]  = Channel.of( [] )
+                input[6]  = Channel.of( false )
                 """
             }
         }
@@ -150,8 +175,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("clustalo_align_alignment")},
-                { assert snapshot(workflow.out.versions).match("clustalo_align_versions") }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }
@@ -162,9 +186,13 @@ nextflow_workflow {
             workflow {
                 """
                 input[0]  = Channel.of( [ [ id:'test' ],
-                                file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
+                                file(params.modules_testdata_base_path + "../../multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         , 'tcoffee_align'
                     ])
+
+                input[1]  = Channel.of( [[:],[]] )
+                input[2]  = Channel.of( [[:],[],[]] )
+                input[3]  = Channel.of( true )
                 """
             }
         }
@@ -172,8 +200,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("tcoffee_align_alignment")},
-                { assert snapshot(workflow.out.versions).match("tcoffee_align_versions") }
+                { assert path(workflow.out.alignment.get(0).get(1)).getTextGzip().contains("1ahl") },
+                { assert snapshot(workflow.out.versions).match("tcoffee_align_versions")}
             )
         }
     }
@@ -183,10 +211,11 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.test_data['sarscov2']['genome']['informative_sites_fas'], checkIfExists: true)
+                input[0]  = Channel.of( [ [ id:'test' ],
+                                file(params.modules_testdata_base_path + "../../multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
                         , 'learnmsa_align'
                     ])
+
                 """
             }
         }
@@ -194,8 +223,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert path(workflow.out.alignment.get(0).get(1)).getTextGzip().contains(">sample1") },
-                { assert snapshot(workflow.out.versions).match("learnmsa_align_versions") }
+                { assert snapshot ( workflow.out ).match() }
+
             )
         }
     }

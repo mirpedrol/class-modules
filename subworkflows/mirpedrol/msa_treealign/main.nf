@@ -1,7 +1,7 @@
-include { FAMSA_TREEALIGN } from '../../../modules/mirpedrol/famsa/treealign/main'
-include { MAGUS_TREEALIGN } from '../../../modules/mirpedrol/magus/treealign/main'
-include { CLUSTALO_TREEALIGN } from '../../../modules/mirpedrol/clustalo/treealign/main'
-include { TCOFFEE_TREEALIGN } from '../../../modules/mirpedrol/tcoffee/treealign/main'
+include { FAMSA_ALIGN } from '../../../modules/nf-core/famsa/align/main'
+include { MAGUS_ALIGN } from '../../../modules/nf-core/magus/align/main'
+include { CLUSTALO_ALIGN } from '../../../modules/nf-core/clustalo/align/main'
+include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
 
 
 workflow MSA_TREEALIGN {
@@ -17,45 +17,45 @@ workflow MSA_TREEALIGN {
     ch_fasta
         .branch {
             meta, fasta, tool ->
-                famsa_treealign: tool == "famsa_treealign"
+                famsa_align: tool == "famsa_align"
                     return [ meta, fasta ]
-                magus_treealign: tool == "magus_treealign"
+                magus_align: tool == "magus_align"
                     return [ meta, fasta ]
-                clustalo_treealign: tool == "clustalo_treealign"
+                clustalo_align: tool == "clustalo_align"
                     return [ meta, fasta ]
-                tcoffee_treealign: tool == "tcoffee_treealign"
+                tcoffee_align: tool == "tcoffee_align"
                     return [ meta, fasta ]
         }
         .set { ch_fasta_branch }
     ch_tree
         .branch {
             meta, tree, tool ->
-                famsa_treealign: tool == "famsa_treealign"
+                famsa_align: tool == "famsa_align"
                     return [ meta, tree ]
-                magus_treealign: tool == "magus_treealign"
+                magus_align: tool == "magus_align"
                     return [ meta, tree ]
-                clustalo_treealign: tool == "clustalo_treealign"
+                clustalo_align: tool == "clustalo_align"
                     return [ meta, tree ]
-                tcoffee_treealign: tool == "tcoffee_treealign"
+                tcoffee_align: tool == "tcoffee_align"
                     return [ meta, tree ]
         }
         .set { ch_tree_branch }
 
-    FAMSA_TREEALIGN( ch_fasta_branch.famsa_treealign, ch_tree_branch.famsa_treealign )
-    ch_out_alignment = ch_out_alignment.mix(FAMSA_TREEALIGN.out.alignment)
-    ch_out_versions = ch_out_versions.mix(FAMSA_TREEALIGN.out.versions)
+    FAMSA_ALIGN( ch_fasta_branch.famsa_align, ch_tree_branch.famsa_align, [] )
+    ch_out_alignment = ch_out_alignment.mix(FAMSA_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(FAMSA_ALIGN.out.versions)
 
-    MAGUS_TREEALIGN( ch_fasta_branch.magus_treealign, ch_tree_branch.magus_treealign )
-    ch_out_alignment = ch_out_alignment.mix(MAGUS_TREEALIGN.out.alignment)
-    ch_out_versions = ch_out_versions.mix(MAGUS_TREEALIGN.out.versions)
+    MAGUS_ALIGN( ch_fasta_branch.magus_align, ch_tree_branch.magus_align, [] )
+    ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(MAGUS_ALIGN.out.versions)
 
-    CLUSTALO_TREEALIGN( ch_fasta_branch.clustalo_treealign, ch_tree_branch.clustalo_treealign )
-    ch_out_alignment = ch_out_alignment.mix(CLUSTALO_TREEALIGN.out.alignment)
-    ch_out_versions = ch_out_versions.mix(CLUSTALO_TREEALIGN.out.versions)
+    CLUSTALO_ALIGN( ch_fasta_branch.clustalo_align, ch_tree_branch.clustalo_align, [], [], [], [], [] )
+    ch_out_alignment = ch_out_alignment.mix(CLUSTALO_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(CLUSTALO_ALIGN.out.versions)
 
-    TCOFFEE_TREEALIGN( ch_fasta_branch.tcoffee_treealign, ch_tree_branch.tcoffee_treealign )
-    ch_out_alignment = ch_out_alignment.mix(TCOFFEE_TREEALIGN.out.alignment)
-    ch_out_versions = ch_out_versions.mix(TCOFFEE_TREEALIGN.out.versions)
+    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, ch_tree_branch.tcoffee_align, [], [] )
+    ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 
 
 
