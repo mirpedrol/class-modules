@@ -58,6 +58,7 @@ jobs:
               | map(select(.profile != "conda" or .subworkflow != "msa_alignment"))
             '
           ) >> $GITHUB_OUTPUT
+      # Filter out conda failing testes with a map
 
   nf-test:
     runs-on: ubuntu-latest
@@ -86,8 +87,6 @@ jobs:
         run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
       - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v2
-        with:
-          version: "24.10.2"
 
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
@@ -138,6 +137,8 @@ jobs:
         run: |
           cd create-test-wf/my-prefix-testpipeline
           nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
+        # This will only work for branches comming from the same repo, not from a fork
+        # TODO: possibly change the git-remote if the PR comes from a fork
 
       # Test the component
       - name: Run nf-test
