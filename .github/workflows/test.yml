@@ -117,12 +117,12 @@ jobs:
         run: |
           mkdir create-test-wf
           export NXF_WORK=$(pwd)
-          printf "org: my-prefix\nskip_features: [modules, nf-test]" > create-test-wf/template_skip_modules.yml
+          printf "org: my-prefix\nskip_features: [nf-test]" > create-test-wf/template_skip_nftest.yml
 
       - name: create a pipeline from the template
         run: |
           cd create-test-wf
-          nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me" --template-yaml template_skip_modules.yml
+          nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me" --template-yaml template_skip_nftest.yml
 
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
