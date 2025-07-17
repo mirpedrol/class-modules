@@ -32,7 +32,7 @@ jobs:
       - name: Select subworkflows
         id: outputs
         run: |
-          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/mirpedrol/"; ""))') >> $GITHUB_OUTPUT
+          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/mirpedrol/"; "")) | map(gsub("/tests/main.nf.test"; ""))') >> $GITHUB_OUTPUT
 
       - name: debug
         run: |
