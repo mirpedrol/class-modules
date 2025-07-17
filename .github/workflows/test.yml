@@ -14,10 +14,9 @@ jobs:
     name: nf-test-changes
     runs-on: ubuntu-latest
     outputs:
-      # Expose detected tags as 'workflows' output variables
       paths: ${{ steps.list.outputs.components }}
       subworkflows: ${{ steps.outputs.outputs.subworkflows}}
-      # Prod for version bumping
+      matrix: ${{ steps.zip.outputs.matrix }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -41,6 +40,14 @@ jobs:
         run: |
           echo ${{ steps.outputs.outputs.subworkflows }}
 
+      - name: Zip paths and subworkflows
+        id: zip
+        run: |
+          paths=$(echo '${{ steps.list.outputs.components }}' | jq '.')
+          subworkflows=$(echo '${{ steps.outputs.outputs.subworkflows }}' | jq '.')
+          zipped=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" '$a | to_entries | map({path: .value, subworkflow: $b[.key]})')
+          echo "matrix=${zipped}" >> $GITHUB_OUTPUT
+
   nf-test:
     runs-on: ubuntu-latest
     name: nf-test
@@ -49,8 +56,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
-        subworkflow: ["${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}"]
+        include: ${{ fromJson(needs.nf-test-changes.outputs.matrix) }}
         profile: [conda, docker, singularity]
         exclude:
           - profile: conda
@@ -118,12 +124,12 @@ jobs:
 
       - name: create a pipeline from the template
         run: |
-          cd create-test--wf
+          cd create-test-wf
           nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me" --template-yaml template_skip_modules.yml
 
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
-          cd create-test--wf/my-prefix-testpipeline
+          cd create-test-wf/my-prefix-testpipeline
           nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules install ${{ matrix.subworkflow }}
 
       # Test the component
