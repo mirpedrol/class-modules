@@ -14,8 +14,6 @@ jobs:
     name: nf-test-changes
     runs-on: ubuntu-latest
     outputs:
-      paths: ${{ steps.list.outputs.components }}
-      subworkflows: ${{ steps.outputs.outputs.subworkflows}}
       matrix: ${{ steps.zip.outputs.matrix }}
 
     steps:
@@ -45,22 +43,21 @@ jobs:
         run: |
           paths=$(echo '${{ steps.list.outputs.components }}' | jq '.')
           subworkflows=$(echo '${{ steps.outputs.outputs.subworkflows }}' | jq '.')
-          zipped=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" '$a | to_entries | map({path: .value, subworkflow: $b[.key]})')
-          echo "matrix=${zipped}" >> $GITHUB_OUTPUT
+          echo matrix=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" '$a | to_entries | map({path: .value, subworkflow: $b[.key]})') >> $GITHUB_OUTPUT
 
   nf-test:
     runs-on: ubuntu-latest
     name: nf-test
     needs: nf-test-changes
-    if: ( needs.nf-test-changes.outputs.paths != '[]' )
+    if: ( needs.nf-test-changes.outputs.matrix != '[]' )
     strategy:
       fail-fast: false
       matrix:
         include: ${{ fromJson(needs.nf-test-changes.outputs.matrix) }}
         profile: [conda, docker, singularity]
-        exclude:
-          - profile: conda
-            path: subworkflows/mirpedrol/msa_alignment
+        #exclude:
+        #  - profile: conda
+        #    path: subworkflows/mirpedrol/msa_alignment
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
