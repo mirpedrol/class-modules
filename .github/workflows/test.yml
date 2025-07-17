@@ -127,7 +127,7 @@ jobs:
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
           cd create-test-wf/my-prefix-testpipeline
-          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules install ${{ matrix.subworkflow }}
+          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
 
       # Test the component
       - name: Run nf-test
