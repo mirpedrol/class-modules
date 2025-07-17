@@ -44,12 +44,20 @@ jobs:
           paths=$(echo '${{ steps.list.outputs.components }}' | jq '.')
           subworkflows=$(echo '${{ steps.outputs.outputs.subworkflows }}' | jq '.')
           profiles='["conda", "docker", "singularity"]'
-          zipped=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" --argjson p "$profiles" '
-            [foreach $a as $path (null; . + 1; .) |
-              foreach $p as $profile (null; . + 1; .) |
-                {path: $path, subworkflow: $b[.], profile: $profile}
-            ] | map(select(.profile != "conda" or .subworkflow != "msa_alignment"))')
-          echo matrix=$($zipped) >> $GITHUB_OUTPUT
+          profiles=$(echo $profiles | jq '.')
+          echo matrix=$(
+            jq -n --argjson paths "$paths" --argjson subworkflows "$subworkflows" --argjson profiles "$profiles" '
+              [range(0; ($paths|length)) as $i
+                | $profiles[] as $profile
+                | {
+                    path: $paths[$i],
+                    subworkflow: $subworkflows[$i],
+                    profile: $profile
+                  }
+              ]
+              | map(select(.profile != "conda" or .subworkflow != "msa_alignment"))
+            '
+          ) >> $GITHUB_OUTPUT
 
   nf-test:
     runs-on: ubuntu-latest
