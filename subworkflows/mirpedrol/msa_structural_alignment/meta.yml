@@ -2,7 +2,11 @@
 name: "msa_structural_alignment"
 description: Perform multiple sequence alignment of protein structures
 keywords: ["alignment", "msa", "structure"]
-components: ["foldmason/easymsa", "mtmalign/align"]
+components:
+  - foldmason/easymsa:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - mtmalign/align:
+      git_remote: "https://github.com/nf-core/modules.git"
 
 input:
   - ch_pdbs:
