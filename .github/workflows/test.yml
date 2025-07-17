@@ -122,20 +122,15 @@ jobs:
         run: python -m pip install --upgrade pip cryptography
 
       # Install the subworkflow to a pipeline
-      - name: Create template
+      - name: create a pipeline
         run: |
           mkdir create-test-wf
-          export NXF_WORK=$(pwd)
-          printf "org: my-prefix\nskip_features: [nf-test]" > create-test-wf/template_skip_nftest.yml
-
-      - name: create a pipeline from the template
-        run: |
           cd create-test-wf
-          nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me" --template-yaml template_skip_nftest.yml
+          nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me"
 
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
-          cd create-test-wf/my-prefix-testpipeline
+          cd create-test-wf/nf-core-testpipeline
           nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
         # This will only work for branches comming from the same repo, not from a fork
         # TODO: possibly change the git-remote if the PR comes from a fork
