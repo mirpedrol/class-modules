@@ -43,7 +43,13 @@ jobs:
         run: |
           paths=$(echo '${{ steps.list.outputs.components }}' | jq '.')
           subworkflows=$(echo '${{ steps.outputs.outputs.subworkflows }}' | jq '.')
-          echo matrix=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" '$a | to_entries | map({path: .value, subworkflow: $b[.key]})') >> $GITHUB_OUTPUT
+          profiles='["conda", "docker", "singularity"]'
+          zipped=$(jq -n --argjson a "$paths" --argjson b "$subworkflows" --argjson p "$profiles" '
+            [foreach $a as $path (null; . + 1; .) |
+              foreach $p as $profile (null; . + 1; .) |
+                {path: $path, subworkflow: $b[.], profile: $profile}
+            ] | map(select(.profile != "conda" or .subworkflow != "msa_alignment"))')
+          echo matrix=$($zipped) >> $GITHUB_OUTPUT
 
   nf-test:
     runs-on: ubuntu-latest
@@ -54,10 +60,6 @@ jobs:
       fail-fast: false
       matrix:
         include: ${{ fromJson(needs.nf-test-changes.outputs.matrix) }}
-        profile: [conda, docker, singularity]
-        #exclude:
-        #  - profile: conda
-        #    path: subworkflows/mirpedrol/msa_alignment
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
