@@ -47,3 +47,6 @@ components:
     - magus/align
     - muscle5/super5
     - tcoffee/align
+testdata:
+  - - "[ id:'test', single_end:false ]"
+    - file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true)
