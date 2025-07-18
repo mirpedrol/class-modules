@@ -48,7 +48,12 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 components:
   modules:
+    - clustalo/align
     - famsa/align
     - magus/align
-    - clustalo/align
     - tcoffee/align
+testdata:
+  - - "[ id:'test' ]"
+    - "file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)"
+  - - "[ id:'test' ]"
+    - "file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true)"
