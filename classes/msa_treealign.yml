@@ -48,7 +48,7 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 components:
   modules:
+    - clustalo/align
     - famsa/align
     - magus/align
-    - clustalo/align
     - tcoffee/align

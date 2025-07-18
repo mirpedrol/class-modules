@@ -39,11 +39,11 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 components:
   modules:
-    #- mafft/align # Multiple inputs - to fix upstream
-    - kalign/align
-    - famsa/align
-    - muscle5/super5
-    - magus/align
     - clustalo/align
-    - tcoffee/align
+    - famsa/align
+    - kalign/align
     - learnmsa/align
+    #- mafft/align # Multiple inputs - to fix upstream
+    - magus/align
+    - muscle5/super5
+    - tcoffee/align
