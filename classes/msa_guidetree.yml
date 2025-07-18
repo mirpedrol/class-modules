@@ -40,6 +40,9 @@ output:
           - edam: http://edamontology.org/format_3750 # YAML
 components:
   modules:
+    - clustalo/guidetree
     - famsa/guidetree
     - magus/guidetree
-    - clustalo/guidetree
+testdata:
+  - - "[ id:'test' ]"
+    - file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
