@@ -22,12 +22,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'clustalo_align' )
-                input[1] = Channel.of( [] )
-                input[2] = Channel.of( [] )
-                input[3] = Channel.of( [] )
-                input[4] = Channel.of( [] )
-                input[5] = Channel.of( [] )
-                input[6] = Channel.of( [] )
                 """
             }
         }
@@ -46,8 +40,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'famsa_align' )
-                input[1] = Channel.of( [] )
-                input[2] = Channel.of( [] )
                 """
             }
         }
@@ -66,7 +58,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'kalign_align' )
-                input[1] = Channel.of( [] )
                 """
             }
         }
@@ -103,8 +94,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'magus_align' )
-                input[1] = Channel.of( [] )
-                input[2] = Channel.of( [] )
                 """
             }
         }
@@ -123,7 +112,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'muscle5_super5' )
-                input[1] = Channel.of( [] )
                 """
             }
         }
@@ -142,9 +130,6 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'tcoffee_align' )
-                input[1] = Channel.of( [] )
-                input[2] = Channel.of( [] )
-                input[3] = Channel.of( [] )
                 """
             }
         }
