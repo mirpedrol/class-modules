@@ -19,7 +19,7 @@ nextflow_workflow {
     test("clustalo/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'clustalo_align' )
                 input[1] = Channel.of( [] )
@@ -43,7 +43,7 @@ nextflow_workflow {
     test("famsa/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'famsa_align' )
                 input[1] = Channel.of( [] )
@@ -63,7 +63,7 @@ nextflow_workflow {
     test("kalign/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'kalign_align' )
                 input[1] = Channel.of( [] )
@@ -82,7 +82,7 @@ nextflow_workflow {
     test("learnmsa/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'learnmsa_align' )
                 """
@@ -100,7 +100,7 @@ nextflow_workflow {
     test("magus/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'magus_align' )
                 input[1] = Channel.of( [] )
@@ -120,7 +120,7 @@ nextflow_workflow {
     test("muscle5/super5") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'muscle5_super5' )
                 input[1] = Channel.of( [] )
@@ -139,7 +139,7 @@ nextflow_workflow {
     test("tcoffee/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test', single_end:false ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true), 'tcoffee_align' )
                 input[1] = Channel.of( [] )

@@ -15,7 +15,7 @@ nextflow_workflow {
     test("clustalo/guidetree") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'clustalo_guidetree' )
                 """
@@ -33,7 +33,7 @@ nextflow_workflow {
     test("famsa/guidetree") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'famsa_guidetree' )
                 """
@@ -51,7 +51,7 @@ nextflow_workflow {
     test("magus/guidetree") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'magus_guidetree' )
                 """

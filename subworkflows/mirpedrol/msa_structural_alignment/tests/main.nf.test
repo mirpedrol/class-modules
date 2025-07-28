@@ -14,7 +14,7 @@ nextflow_workflow {
     test("foldmason/easymsa") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'foldmason_easymsa' )
                 input[1] = Channel.of( [] )
@@ -34,7 +34,7 @@ nextflow_workflow {
     test("mtmalign/align") {
 
         when {
-            process {
+            workflow {
                 """
                 input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'mtmalign_align' )
                 input[1] = Channel.of( [] )
