@@ -7,24 +7,24 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_treealign"
+    tag "clustalo/align"
     tag "famsa/align"
     tag "magus/align"
-    tag "clustalo/align"
     tag "tcoffee/align"
 
 
-    test("run famsa/align") {
+    test("clustalo/align") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
-                        , 'famsa_align'
-                    ])
-
-                input[1]  = Channel.of( [[:],[]] )
-                input[2]  = Channel.of( false )
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'clustalo_align' )
+                input[1] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'clustalo_align' )
+                input[2] = Channel.of( [] )
+                input[3] = Channel.of( [] )
+                input[4] = Channel.of( [] )
+                input[5] = Channel.of( [] )
+                input[6] = Channel.of( [] )
                 """
             }
         }
@@ -32,24 +32,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.alignment).match("famsa_align_alignment")},
-                { assert snapshot(workflow.out.versions).match("famsa_align_versions") }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
 
-    test("run magus/align") {
+    test("famsa/align") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        , 'magus_align'
-                    ])
-
-                input[1]  = Channel.of( [[:],[]] )
-                input[2]  = Channel.of( false )
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'famsa_align' )
+                input[1] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'famsa_align' )
+                input[2] = Channel.of( [] )
                 """
             }
         }
@@ -57,34 +52,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                // tests seem to be reproducible on a single machine, but not across different machines
-                // test the correct samples are in there
-                { assert path(workflow.out.alignment[0][1]).getText().contains(">1apf") },
-                { assert path(workflow.out.alignment[0][1]).getText().contains(">1ahl") },
-                { assert path(workflow.out.alignment[0][1]).getText().contains(">1atx") },
-                { assert path(workflow.out.alignment[0][1]).getText().contains(">1sh1") },
-                { assert path(workflow.out.alignment[0][1]).getText().contains(">1bds") },
-                { assert snapshot(workflow.out.versions).match("magus_align_versions") }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
 
-    test("run clustalo/align") {
+    test("magus/align") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                            file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
-                        , 'clustalo_align'
-                    ])
-
-                input[1]  = Channel.of( [[:],[]] )
-                input[2]  = Channel.of( [] )
-                input[3]  = Channel.of( [] )
-                input[4]  = Channel.of( [] )
-                input[5]  = Channel.of( [] )
-                input[6]  = Channel.of( false )
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'magus_align' )
+                input[1] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'magus_align' )
+                input[2] = Channel.of( [] )
                 """
             }
         }
@@ -92,24 +72,20 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
 
-    test("run tcoffee/align") {
+    test("tcoffee/align") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ],
-                                file(params.modules_testdata_base_path + "../../multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        , 'tcoffee_align'
-                    ])
-
-                input[1]  = Channel.of( [[:],[]] )
-                input[2]  = Channel.of( [[:],[],[]] )
-                input[3]  = Channel.of( true )
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'tcoffee_align' )
+                input[1] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'tcoffee_align' )
+                input[2] = Channel.of( [] )
+                input[3] = Channel.of( [] )
                 """
             }
         }
@@ -117,8 +93,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert path(workflow.out.alignment.get(0).get(1)).getTextGzip().contains("1ahl") },
-                { assert snapshot(workflow.out.versions).match("tcoffee_align_versions")}
+                { assert snapshot(workflow.out).match() },
             )
         }
     }

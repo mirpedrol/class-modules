@@ -9,93 +9,44 @@ nextflow_workflow {
     tag "subworkflows/msa_structural_alignment"
     tag "foldmason/easymsa"
     tag "mtmalign/align"
-    tag "untar"
-    tag "famsa/guidetree"
 
 
-    test("run foldmason/easymsa") {
-
-    setup {
-
-        run("UNTAR") {
-            script "../../../../modules/mirpedrol/untar/main.nf"
-                process {
-                    """
-                        archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/af2_structures/seatoxin-ref.tar.gz", checkIfExists: true)
-                        input[0] = Channel.of(tuple([id:'test'], archive))
-                    """
-                }
-        }
-
-        run("FAMSA_GUIDETREE") {
-            script "../../../../modules/mirpedrol/famsa/guidetree/main.nf"
-            process {
-                """
-                input[0] = [ [ id:'test_tree' ], // meta map
-                            file(params.modules_testdata_base_path + "../../multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                            ]
-                """
-            }
-        }
-    }
-
+    test("foldmason/easymsa") {
 
         when {
-            workflow {
+            process {
                 """
-                    input[0] = UNTAR.out.untar.map { meta,dir -> [meta, file(dir).listFiles().collect(), 'foldmason_easymsa']}
-
-                    input[1]  = Channel.of( [[:],[]] )
-                    input[2]  = Channel.of( false )
+                input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'foldmason_easymsa' )
+                input[1] = Channel.of( [] )
+                input[2] = Channel.of( [] )
                 """
             }
         }
 
         then {
             assertAll(
-                { assert workflow.success  },
-                { assert snapshot(workflow.out).match() }
-                )
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+            )
         }
     }
 
-    test("run mtmalign/align") {
-
-        setup {
-
-            run("UNTAR") {
-                script "../../../../modules/mirpedrol/untar/main.nf"
-                    process {
-                        """
-                            archive = file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/structures/seatoxin-ref.tar.gz", checkIfExists: true)
-                            input[0] = Channel.of(tuple([id:'test'], archive))
-                        """
-                    }
-            }
-        }
+    test("mtmalign/align") {
 
         when {
-            workflow {
-                    """
-                        input[0] = UNTAR.out.untar.map { meta,dir -> [[ id:'test' ], file(dir).listFiles().collect(), 'mtmalign_align']}
-
-                        input[1]  = Channel.of( false )
-                    """
+            process {
+                """
+                input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'mtmalign_align' )
+                input[1] = Channel.of( [] )
+                """
             }
         }
 
-            then {
-                assertAll(
-                    { assert workflow.success  },
-                    // mTMalign may be nondeterministic, just check if the pdbs are all in there
-                    //{ assert snapshot(workflow.out).match() }
-                    { assert path(workflow.out.alignment[0][1]).getText().contains(">1ahl") },
-                    { assert path(workflow.out.alignment[0][1]).getText().contains(">1apf") },
-                    { assert path(workflow.out.alignment[0][1]).getText().contains(">1atx") },
-                    { assert path(workflow.out.alignment[0][1]).getText().contains(">1bds") },
-                    { assert path(workflow.out.alignment[0][1]).getText().contains(">1sh1") },
-                    { assert snapshot(workflow.out.versions).match("mtmalign_align_versions") }
-                    )
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() },
+            )
         }
     }
 

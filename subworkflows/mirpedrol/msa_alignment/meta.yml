@@ -3,21 +3,19 @@ name: "msa_alignment"
 description: Perform multiple sequence alignment
 keywords: ["alignment", "msa", "align"]
 components:
-  - mafft/align:
-      git_remote: "https://github.com/nf-core/modules.git"
-  - kalign/align:
+  - clustalo/align:
       git_remote: "https://github.com/nf-core/modules.git"
   - famsa/align:
       git_remote: "https://github.com/nf-core/modules.git"
-  - muscle5/super5:
+  - kalign/align:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - learnmsa/align:
       git_remote: "https://github.com/nf-core/modules.git"
   - magus/align:
       git_remote: "https://github.com/nf-core/modules.git"
-  - clustalo/align:
+  - muscle5/super5:
       git_remote: "https://github.com/nf-core/modules.git"
   - tcoffee/align:
-      git_remote: "https://github.com/nf-core/modules.git"
-  - learnmsa/align:
       git_remote: "https://github.com/nf-core/modules.git"
 
 input:

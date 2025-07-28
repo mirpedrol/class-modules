@@ -3,11 +3,11 @@ name: "msa_treealign"
 description: Perform multiple sequence alignment from a provided guide tree
 keywords: ["alignment", "treealignment", "msa"]
 components:
+  - clustalo/align:
+      git_remote: "https://github.com/nf-core/modules.git"
   - famsa/align:
       git_remote: "https://github.com/nf-core/modules.git"
   - magus/align:
-      git_remote: "https://github.com/nf-core/modules.git"
-  - clustalo/align:
       git_remote: "https://github.com/nf-core/modules.git"
   - tcoffee/align:
       git_remote: "https://github.com/nf-core/modules.git"

@@ -3,11 +3,11 @@ name: "msa_guidetree"
 description: Compute a guide tree for multiple sequence alignment
 keywords: ["align", "guide tree", "guidetree", "msa"]
 components:
+  - clustalo/guidetree:
+      git_remote: "https://github.com/nf-core/modules.git"
   - famsa/guidetree:
       git_remote: "https://github.com/nf-core/modules.git"
   - magus/guidetree:
-      git_remote: "https://github.com/nf-core/modules.git"
-  - clustalo/guidetree:
       git_remote: "https://github.com/nf-core/modules.git"
 
 input:

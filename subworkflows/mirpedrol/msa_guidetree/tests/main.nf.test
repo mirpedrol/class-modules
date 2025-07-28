@@ -7,21 +7,17 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_guidetree"
+    tag "clustalo/guidetree"
     tag "famsa/guidetree"
     tag "magus/guidetree"
-    tag "clustalo/guidetree"
 
 
-    test("run famsa/guidetree") {
+    test("clustalo/guidetree") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
-                        , 'famsa_guidetree'
-                    ])
-
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'clustalo_guidetree' )
                 """
             }
         }
@@ -29,22 +25,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.tree).match("famsa_guidetree_tree")},
-                { assert snapshot(workflow.out.versions).match("famsa_guidetree_versions") }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
 
-    test("run magus/guidetree") {
+    test("famsa/guidetree") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file("https://raw.githubusercontent.com/nf-core/test-datasets/multiplesequencealign/testdata/setoxin-ref.fa", checkIfExists: true)
-                        , 'magus_guidetree'
-                    ])
-
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'famsa_guidetree' )
                 """
             }
         }
@@ -52,29 +43,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                //{ assert snapshot(workflow.out.tree).match("magus_guidetree_tree")},
-                // tests seem to be reproducible on a single machine, but not across different machines
-                // test the correct samples are in there
-                { assert path(workflow.out.tree[0][1]).getText().contains("1apf") },
-                { assert path(workflow.out.tree[0][1]).getText().contains("1ahl") },
-                { assert path(workflow.out.tree[0][1]).getText().contains("1atx") },
-                { assert path(workflow.out.tree[0][1]).getText().contains("1sh1") },
-                { assert path(workflow.out.tree[0][1]).getText().contains("1bds") },
-                { assert snapshot(workflow.out.versions).match("magus_guidetree_versions") }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
 
-    test("run clustalo/guidetree") {
+    test("magus/guidetree") {
 
         when {
-            workflow {
+            process {
                 """
-                input[0]  = Channel.of( [ [ id:'test' ], // meta map
-                                file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)
-                        , 'clustalo_guidetree'
-                    ])
-
+                input[0] = Channel.of( [ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'magus_guidetree' )
                 """
             }
         }
@@ -82,8 +61,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out.tree).match("clustalo_guidetree_tree")},
-                { assert snapshot(workflow.out.versions).match("clustalo_guidetree_versions") }
+                { assert snapshot(workflow.out).match() },
             )
         }
     }
