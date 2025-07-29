@@ -25,7 +25,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("clustalo/guidetree") },
             )
         }
     }
@@ -43,7 +43,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("famsa/guidetree") },
             )
         }
     }
@@ -61,7 +61,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("magus/guidetree") },
             )
         }
     }

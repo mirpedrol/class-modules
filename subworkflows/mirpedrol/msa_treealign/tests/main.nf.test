@@ -27,7 +27,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("clustalo/align") },
             )
         }
     }
@@ -46,7 +46,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("famsa/align") },
             )
         }
     }
@@ -65,7 +65,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("magus/align") },
             )
         }
     }
@@ -84,7 +84,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() },
+                { assert snapshot(workflow.out).match("tcoffee/align") },
             )
         }
     }
