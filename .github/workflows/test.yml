@@ -131,7 +131,7 @@ jobs:
       - name: update resource limits
         run: |
           cd create-test-wf
-          cat <<EOF >> tests/nextflow.config
+          cat <<EOF >> nf-core-testpipeline/tests/nextflow.config
           process {
               cpus = 2
               memory = 3.GB
