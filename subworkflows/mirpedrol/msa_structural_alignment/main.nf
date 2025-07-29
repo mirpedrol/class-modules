@@ -21,7 +21,7 @@ workflow MSA_STRUCTURAL_ALIGNMENT {
         }
         .set { ch_pdbs_branch }
 
-    FOLDMASON_EASYMSA( ch_pdbs_branch.foldmason_easymsa, [], [] )
+    FOLDMASON_EASYMSA( ch_pdbs_branch.foldmason_easymsa, [[], []], [] )
     ch_out_alignment = ch_out_alignment.mix(FOLDMASON_EASYMSA.out.msa_aa)
     ch_out_versions = ch_out_versions.mix(FOLDMASON_EASYMSA.out.versions)
 

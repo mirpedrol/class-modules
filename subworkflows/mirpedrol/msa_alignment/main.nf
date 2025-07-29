@@ -36,11 +36,11 @@ workflow MSA_ALIGNMENT {
         }
         .set { ch_fasta_branch }
 
-    CLUSTALO_ALIGN( ch_fasta_branch.clustalo_align, [], [], [], [], [], [] )
+    CLUSTALO_ALIGN( ch_fasta_branch.clustalo_align, [[], []], [], [], [], [], [] )
     ch_out_alignment = ch_out_alignment.mix(CLUSTALO_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(CLUSTALO_ALIGN.out.versions)
 
-    FAMSA_ALIGN( ch_fasta_branch.famsa_align, [], [] )
+    FAMSA_ALIGN( ch_fasta_branch.famsa_align, [[], []], [] )
     ch_out_alignment = ch_out_alignment.mix(FAMSA_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(FAMSA_ALIGN.out.versions)
 
@@ -52,7 +52,7 @@ workflow MSA_ALIGNMENT {
     ch_out_alignment = ch_out_alignment.mix(LEARNMSA_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(LEARNMSA_ALIGN.out.versions)
 
-    MAGUS_ALIGN( ch_fasta_branch.magus_align, [], [] )
+    MAGUS_ALIGN( ch_fasta_branch.magus_align, [[], []], [] )
     ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(MAGUS_ALIGN.out.versions)
 
@@ -60,7 +60,7 @@ workflow MSA_ALIGNMENT {
     ch_out_alignment = ch_out_alignment.mix(MUSCLE5_SUPER5.out.alignment)
     ch_out_versions = ch_out_versions.mix(MUSCLE5_SUPER5.out.versions)
 
-    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, [], [], [] )
+    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, [[], []], [[], [], []], [] )
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 

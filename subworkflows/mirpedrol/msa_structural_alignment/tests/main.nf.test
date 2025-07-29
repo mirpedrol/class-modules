@@ -16,9 +16,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'foldmason_easymsa' )
-                input[1] = Channel.of( [] )
-                input[2] = Channel.of( [] )
+                input[0] = Channel.of( [[ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'foldmason_easymsa'] )
                 """
             }
         }
@@ -36,8 +34,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'mtmalign_align' )
-                input[1] = Channel.of( [] )
+                input[0] = Channel.of( [[ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true)], 'mtmalign_align'] )
                 """
             }
         }

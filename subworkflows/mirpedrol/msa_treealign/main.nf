@@ -53,7 +53,7 @@ workflow MSA_TREEALIGN {
     ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(MAGUS_ALIGN.out.versions)
 
-    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, ch_tree_branch.tcoffee_align, [], [] )
+    TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, ch_tree_branch.tcoffee_align, [[], [], []], [] )
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 
