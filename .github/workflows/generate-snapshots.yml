@@ -1,32 +1,50 @@
-name: Run Tests
+name: generate-snapshots
+run-name: generate-snapshots (automated)
 on:
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
-
-# Cancel if a newer run is started
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  issue_comment:
+    types: [created]
 
 jobs:
   nf-test-changes:
     name: nf-test-changes
-    runs-on: ubuntu-latest
+
     outputs:
       matrix: ${{ steps.zip.outputs.matrix }}
 
+    # Only run if comment is on a PR with the main repo, and if it contains the magic keywords
+    if: >
+      contains(github.event.comment.html_url, '/pull/') &&
+      contains(github.event.comment.body, '@bot generate snapshots') &&
+      github.repository == 'mirpedrol/class-modules'
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      # indication that the comment was seen
+      - name: React on comment
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
         with:
-          fetch-depth: 0
+          comment-id: ${{ github.event.comment.id }}
+          reactions: eyes
+
+      # Action runs on the issue comment, so we don't get the PR by default
+      # Use the gh cli to check out the PR
+      - name: Checkout Pull Request
+        run: gh pr checkout ${{ github.event.issue.number }}
+
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+
+      - name: Get PR info
+        id: get_pr_info
+        run: |
+          PR_INFO=$(gh pr view ${{ github.event.issue.number }} --json baseRefName,headRefName,baseRefOid)
+          BASE_SHA=$(echo "$PR_INFO" | jq -r '.baseRefOid')
+          echo "base_sha=$BASE_SHA" >> $GITHUB_ENV
 
       - name: List nf-test files
         id: list
         uses: adamrtalbot/detect-nf-test-changes@de3c3c8e113031b4f15a3c1104b5f135e8346997 # v0.0.6
         with:
           head: ${{ github.sha }}
-          base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+          base: ${{ env.base_sha }}
           n_parents: 0
 
       - name: Select subworkflows
@@ -60,23 +78,28 @@ jobs:
           ) >> $GITHUB_OUTPUT
       # Filter out conda failing testes with a map
 
-  nf-test:
-    runs-on: ubuntu-latest
-    name: nf-test
+  generate-snapshots:
+    name: generate-snapshots
     needs: nf-test-changes
+    runs-on: ubuntu-latest
     if: ( needs.nf-test-changes.outputs.matrix != '[]' )
+
     strategy:
       fail-fast: false
       matrix:
         include: ${{ fromJson(needs.nf-test-changes.outputs.matrix) }}
+
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 0
+      # Action runs on the issue comment, so we don't get the PR by default
+      # Use the gh cli to check out the PR
+      - name: Checkout Pull Request
+        run: gh pr checkout ${{ github.event.issue.number }}
+
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
 
       - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4
         with:
@@ -85,6 +108,7 @@ jobs:
 
       - name: Install nf-core tools development version
         run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
+
       - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v2
 
@@ -144,12 +168,10 @@ jobs:
       - name: Install subworkflow ${{ matrix.subworkflow }}
         run: |
           cd create-test-wf/nf-core-testpipeline
-          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
-        # This will only work for branches comming from the same repo, not from a fork
-        # TODO: possibly change the git-remote if the PR comes from a fork
+          PR_BRANCH=$(gh pr view ${{ github.event.issue.number }} --json headRefName --jq '.headRefName')
+          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "$PR_BRANCH" install ${{ matrix.subworkflow }}
 
-      # Test the component
-      - name: Run nf-test
+      - name: run pipeline nf-test and generate snapshot
         shell: bash
         env:
           NFT_DIFF: "pdiff"
@@ -157,39 +179,21 @@ jobs:
         run: |
           cd create-test-wf/nf-core-testpipeline
           PROFILE=${{ matrix.profile }}
-
           NFT_WORKDIR=~
+
           nf-test test \
             --profile=${{ matrix.profile }} \
-            --tap=test.tap \
             --verbose \
-            --ci \
             ${{ matrix.path }}
 
-      - uses: pcolby/tap-summary@0959cbe1d4422e62afc65778cdaea6716c41d936 # v1
-        with:
-          path: >-
-            test.tap
+          cp ./${{ matrix.path }}.snap ${{ github.workspace }}/${{ matrix.path }}.snap
 
-      - name: Clean up
-        if: always()
+      - name: Commit and push changes
         run: |
-          sudo rm -rf /home/ubuntu/tests/
-
-  confirm-pass:
-    runs-on: ubuntu-latest
-    needs: [nf-test-changes, nf-test]
-    if: always()
-    steps:
-      - name: All tests ok
-        if: ${{ success() || !contains(needs.*.result, 'failure') }}
-        run: exit 0
-      - name: One or more tests failed
-        if: ${{ contains(needs.*.result, 'failure') }}
-        run: exit 1
-
-      - name: debug-print
-        if: always()
-        run: |
-          echo "toJSON(needs) = ${{ toJSON(needs) }}"
-          echo "toJSON(needs.*.result) = ${{ toJSON(needs.*.result) }}"
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config push.default upstream
+          git add ${{ github.workspace }}/${{ matrix.path }}.snap
+          git status
+          git commit -m "Generate snapshot for ${{ matrix.subworkflow }} subworkflow"
+          git push
