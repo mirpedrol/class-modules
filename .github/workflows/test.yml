@@ -135,7 +135,7 @@ jobs:
           process {
               withName: '.*'{
                 cpus = 2
-                memory = 3.GB
+                memory = 15.GB
                 time = 2.h
               }
           }
@@ -147,6 +147,43 @@ jobs:
           nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
         # This will only work for branches comming from the same repo, not from a fork
         # TODO: possibly change the git-remote if the PR comes from a fork
+
+      # Generate snapshot if it doesn't exist
+      - name: check if snapshot has to be generated
+        run: |
+          if [ ! -f ${{ github.workspace }}/${{ matrix.path }}.snap ]; then
+              echo "generatesnapshot=YES" >> $GITHUB_ENV
+          else
+            echo "generatesnapshot=NO" >> $GITHUB_ENV
+          fi
+      # Generate snapshot if not there
+      - name: run pipeline nf-test and generate snapshot if previous step failed
+        if: env.generatesnapshot == 'YES'
+        shell: bash
+        env:
+          NFT_DIFF: "pdiff"
+          NFT_DIFF_ARGS: "--line-numbers --width 120 --expand-tabs=2"
+        run: |
+          cd create-test-wf/nf-core-testpipeline
+          PROFILE=${{ matrix.profile }}
+          NFT_WORKDIR=~
+
+          nf-test test \
+            --profile=${{ matrix.profile }} \
+            --verbose \
+            ${{ matrix.path }}
+
+          cp ./${{ matrix.path }}.snap ${{ github.workspace }}/${{ matrix.path }}.snap
+      - name: Commit and push changes
+        if: env.generatesnapshot == 'YES'
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config push.default origin
+          git add ${{ github.workspace }}/${{ matrix.path }}.snap
+          git status
+          git commit -m "Generate snapshot for ${{ matrix.subworkflow }} subworkflow"
+          git push
 
       # Test the component
       - name: Run nf-test
@@ -163,6 +200,7 @@ jobs:
             --profile=${{ matrix.profile }} \
             --tap=test.tap \
             --verbose \
+            --ci \
             ${{ matrix.path }}
 
       - uses: pcolby/tap-summary@0959cbe1d4422e62afc65778cdaea6716c41d936 # v1
