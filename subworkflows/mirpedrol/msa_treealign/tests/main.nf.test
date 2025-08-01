@@ -19,7 +19,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'clustalo_align'] )
-                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'clustalo_align'] )
+                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd', checkIfExists: true), 'clustalo_align'] )
                 """
             }
         }
@@ -38,7 +38,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'famsa_align'] )
-                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'famsa_align'] )
+                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd', checkIfExists: true), 'famsa_align'] )
                 """
             }
         }
@@ -57,7 +57,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'magus_align'] )
-                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'magus_align'] )
+                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd', checkIfExists: true), 'magus_align'] )
                 """
             }
         }
@@ -76,7 +76,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'tcoffee_align'] )
-                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true), 'tcoffee_align'] )
+                input[1] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd', checkIfExists: true), 'tcoffee_align'] )
                 """
             }
         }
