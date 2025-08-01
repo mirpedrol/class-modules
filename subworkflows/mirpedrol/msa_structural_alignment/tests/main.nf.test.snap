@@ -3,16 +3,26 @@
         "content": [
             {
                 "0": [
-
+                    [
+                        {
+                            "id": "test_tree"
+                        },
+                        "test_tree_aa.fa:md5,2c20e002e5efd0d43cde8c5e896e998e"
+                    ]
                 ],
                 "1": [
-
+                    "versions.yml:md5,079537a12ecb1a4e69170051f18a9c73"
                 ],
                 "alignment": [
-
+                    [
+                        {
+                            "id": "test_tree"
+                        },
+                        "test_tree_aa.fa:md5,2c20e002e5efd0d43cde8c5e896e998e"
+                    ]
                 ],
                 "versions": [
-
+                    "versions.yml:md5,079537a12ecb1a4e69170051f18a9c73"
                 ]
             }
         ],
@@ -26,16 +36,26 @@
         "content": [
             {
                 "0": [
-
+                    [
+                        {
+                            "id": "test_tree"
+                        },
+                        "test_tree.aln:md5,393e2f3480c2daddceef798c03201a9d"
+                    ]
                 ],
                 "1": [
-
+                    "versions.yml:md5,3c92191a04b0f0a03555dbb7fed62a5c"
                 ],
                 "alignment": [
-
+                    [
+                        {
+                            "id": "test_tree"
+                        },
+                        "test_tree.aln:md5,393e2f3480c2daddceef798c03201a9d"
+                    ]
                 ],
                 "versions": [
-
+                    "versions.yml:md5,3c92191a04b0f0a03555dbb7fed62a5c"
                 ]
             }
         ],
