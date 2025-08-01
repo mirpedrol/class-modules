@@ -15,6 +15,7 @@ nextflow_workflow {
     tag "muscle5/super5"
     tag "tcoffee/align"
 
+    config './nextflow.config'
 
     test("clustalo/align") {
 
@@ -71,6 +72,7 @@ nextflow_workflow {
     }
 
     test("learnmsa/align") {
+        options "-stub"
 
         when {
             workflow {
