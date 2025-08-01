@@ -161,15 +161,15 @@ jobs:
           NFT_WORKDIR=~
           nf-test test \
             --profile=${{ matrix.profile }} \
-            --tap=test.tap \
             --verbose \
-            --ci \
             ${{ matrix.path }}
 
-      - uses: pcolby/tap-summary@0959cbe1d4422e62afc65778cdaea6716c41d936 # v1
+      - name: Upload nf-test snapshot
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          path: >-
-            test.tap
+          name: nf-test-output-${{ matrix.profile }}-${{ matrix.subworkflow }}
+          path: ${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap
 
       - name: Clean up
         if: always()
