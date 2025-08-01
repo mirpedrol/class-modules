@@ -5,10 +5,9 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,74bb9a2820a91cf68db94dbd46787722"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
@@ -17,10 +16,9 @@
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,74bb9a2820a91cf68db94dbd46787722"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
@@ -40,26 +38,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,7cf7375f2ba360814ea978731838b972"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,c74ca8b91c442fc4ea29219ee1b724fd"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,7cf7375f2ba360814ea978731838b972"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c74ca8b91c442fc4ea29219ee1b724fd"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
@@ -75,26 +71,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
                         "test.aln:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,527ae9e8a292ad5c7342f26233e9e131"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
                         "test.aln:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,527ae9e8a292ad5c7342f26233e9e131"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
@@ -110,26 +104,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,5977ceee99543c07b2a22b69a578492a"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,48ec1b7cf99109e8495f3bc00d67a1eb"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,5977ceee99543c07b2a22b69a578492a"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,48ec1b7cf99109e8495f3bc00d67a1eb"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
@@ -145,26 +137,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,112100ff69bc49de28f129d811b988e5"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,9258e7c6deb7c3d816ba75cf111e09a8"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,112100ff69bc49de28f129d811b988e5"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,9258e7c6deb7c3d816ba75cf111e09a8"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
@@ -180,26 +170,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,c165ecf48fb89862cc2a991cc3cadb2d"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e7d33c95bb5d69e8573c8ad4eb2aca2c"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,c165ecf48fb89862cc2a991cc3cadb2d"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e7d33c95bb5d69e8573c8ad4eb2aca2c"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
@@ -215,26 +203,24 @@
                 "0": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "test"
                         },
-                        "test.aln:md5,f08dbba05ecea689078f45d60f7608a6"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,c5208e86b43e8c973c39c2bd8ca2932a"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ],
                 "alignment": [
                     [
                         {
                             "id": "test",
-                             "single_end": false
                         },
-                        "test.aln:md5,f08dbba05ecea689078f45d60f7608a6"
+                        "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c5208e86b43e8c973c39c2bd8ca2932a"
+                    "versions.yml:md5,75356bf56559adcb33a9c93aba830309"
                 ]
             }
         ],
