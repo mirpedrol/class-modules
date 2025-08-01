@@ -17,7 +17,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'clustalo_guidetree'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'clustalo_guidetree'] )
                 """
             }
         }
@@ -35,7 +35,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'famsa_guidetree'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'famsa_guidetree'] )
                 """
             }
         }
@@ -53,7 +53,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true), 'magus_guidetree'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'magus_guidetree'] )
                 """
             }
         }
