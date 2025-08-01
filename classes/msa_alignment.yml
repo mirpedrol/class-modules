@@ -49,4 +49,4 @@ components:
     - tcoffee/align
 testdata:
   - - "[ id:'test' ]"
-    - "file(params.modules_testdata_base_path + ''../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true)"
+    - "file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true)"
