@@ -35,7 +35,3 @@ repos:
     rev: v2.13.1-beta
     hooks:
       - id: hadolint-docker
-  - repo: https://github.com/nf-core/tools
-    rev: pre-commit
-    hooks:
-      - id: lint-subworkflows

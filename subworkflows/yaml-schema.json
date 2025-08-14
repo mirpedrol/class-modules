@@ -34,13 +34,16 @@
                     { "type": "string" },
                     {
                         "type": "object",
-                        "properties": {
-                            "git_remote": {
-                                "type": "string",
-                                "description": "Git URL of the remote."
+                        "patternProperties": {
+                            ".*": {
+                                "type": "object",
+                                "properties": {
+                                    "git_remote": { "type": "string" }
+                                },
+                                "required": ["git_remote"]
                             }
                         },
-                        "required": ["git_remote"]
+                        "additionalProperties": false
                     }
                 ]
             },
