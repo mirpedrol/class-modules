@@ -149,9 +149,18 @@ jobs:
         # This will only work for branches comming from the same repo, not from a fork
         # TODO: possibly change the git-remote if the PR comes from a fork
 
+      - name: Check if snapshot exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap" ]; then
+            echo "Error: Snapshot file not found at ${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap please download the snapshot artifact and add it to the subworkflow test/ directory."
+            exit 1
+          fi
+          echo "Snapshot file found successfully"
+
       # Test the component
       - name: Run nf-test
         shell: bash
+        if: always()
         env:
           NFT_DIFF: "pdiff"
           NFT_DIFF_ARGS: "--line-numbers --width 120 --expand-tabs=2"
