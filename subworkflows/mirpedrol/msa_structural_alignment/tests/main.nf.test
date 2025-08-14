@@ -7,8 +7,8 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_structural_alignment"
-    tag "foldmason/easymsa"
-    tag "mtmalign/align"
+    tag "subworkflows/../../modules/nf-core/foldmason/easymsa"
+    tag "subworkflows/../../modules/nf-core/mtmalign/align"
 
 
     test("foldmason/easymsa") {

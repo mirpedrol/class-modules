@@ -7,13 +7,13 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_alignment"
-    tag "clustalo/align"
-    tag "famsa/align"
-    tag "kalign/align"
-    tag "learnmsa/align"
-    tag "magus/align"
-    tag "muscle5/super5"
-    tag "tcoffee/align"
+    tag "subworkflows/../../modules/nf-core/clustalo/align"
+    tag "subworkflows/../../modules/nf-core/famsa/align"
+    tag "subworkflows/../../modules/nf-core/kalign/align"
+    tag "subworkflows/../../modules/nf-core/learnmsa/align"
+    tag "subworkflows/../../modules/nf-core/magus/align"
+    tag "subworkflows/../../modules/nf-core/muscle5/super5"
+    tag "subworkflows/../../modules/nf-core/tcoffee/align"
 
     config './nextflow.config'
 

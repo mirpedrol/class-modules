@@ -7,9 +7,9 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_guidetree"
-    tag "clustalo/guidetree"
-    tag "famsa/guidetree"
-    tag "magus/guidetree"
+    tag "subworkflows/../../modules/nf-core/clustalo/guidetree"
+    tag "subworkflows/../../modules/nf-core/famsa/guidetree"
+    tag "subworkflows/../../modules/nf-core/magus/guidetree"
 
 
     test("clustalo/guidetree") {

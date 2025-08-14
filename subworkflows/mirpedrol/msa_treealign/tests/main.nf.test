@@ -7,10 +7,10 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_mirpedrol"
     tag "subworkflows/msa_treealign"
-    tag "clustalo/align"
-    tag "famsa/align"
-    tag "magus/align"
-    tag "tcoffee/align"
+    tag "subworkflows/../../modules/nf-core/clustalo/align"
+    tag "subworkflows/../../modules/nf-core/famsa/align"
+    tag "subworkflows/../../modules/nf-core/magus/align"
+    tag "subworkflows/../../modules/nf-core/tcoffee/align"
 
 
     test("clustalo/align") {
