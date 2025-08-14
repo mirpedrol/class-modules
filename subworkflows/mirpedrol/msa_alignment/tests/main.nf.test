@@ -71,7 +71,7 @@ nextflow_workflow {
         }
     }
 
-    test("learnmsa/align") {
+    test("learnmsa/align - stub") {
         options "-stub"
 
         when {

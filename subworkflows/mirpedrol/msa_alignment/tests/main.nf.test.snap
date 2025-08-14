@@ -65,7 +65,7 @@
         },
         "timestamp": "2025-07-31T13:38:19.076634506"
     },
-    "learnmsa/align": {
+    "learnmsa/align - stub": {
         "content": [
             {
                 "0": [
@@ -214,7 +214,7 @@
                 "alignment": [
                     [
                         {
-                            "id": "test",
+                            "id": "test"
                         },
                         "test.aln:md5,9c01d20f8ba2dc66d4a671f739f48fa7"
                     ]
