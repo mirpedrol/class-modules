@@ -1,0 +1,95 @@
+name: Run Linting
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
+        with:
+          extra_args: ""
+
+  lint-changes:
+    name: lint-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # https://github.com/dorny/paths-filter?tab=readme-ov-file#custom-processing-of-changed-files
+      subworkflows: ${{ steps.filter.outputs.subworkflows }}
+      subworkflows_files: ${{ steps.subworkflow_names.outputs.result }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
+        id: filter
+        with:
+          filters: |
+            subworkflows:
+              - added|modified: 'subworkflows/mirpedrol/**'
+          token: ""
+          list-files: "json"
+      - name: Get subworkflow name
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        id: subworkflow_names
+        with:
+          script: |
+            return [...new Set(${{ steps.filter.outputs.subworkflows_files }}
+              .map(path => path
+                .replace('tests/', '')
+                .replace('subworkflows/mirpedrol/', '')
+                .split('/')
+                .slice(0, 2)
+                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test') && !x.endsWith('.snap') && !x.endsWith('.config'))
+                .join('/'))
+              )
+            ];
+
+      - name: debug
+        run: |
+          echo ${{ steps.filter.outputs.subworkflows_files }}
+          echo ${{ steps.subworkflow_names.outputs.result }}
+
+  nf-core-lint-subworkflows:
+    runs-on: ubuntu-latest
+    name: nf-core-lint-subworkflows
+    needs: lint-changes
+    if: ( needs.lint-changes.outputs.subworkflows_files != '[]')
+    strategy:
+      fail-fast: false
+      matrix:
+        tags: ["${{ fromJson(needs.lint-changes.outputs.subworkflows_files) }}"]
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pip
+        run: python -m pip install --upgrade pip
+
+      - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2
+
+      - name: Install nf-core tools development version
+        run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
+
+      - name: Lint subworkflow ${{ matrix.tags }}
+        run: nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules lint ${{ matrix.tags }}

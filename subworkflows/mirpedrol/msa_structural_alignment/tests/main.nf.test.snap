@@ -1,80 +1,68 @@
 {
-    "mtmalign_align_versions": {
-        "content": [
-            [
-                "versions.yml:md5,3c92191a04b0f0a03555dbb7fed62a5c"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
-        },
-        "timestamp": "2025-01-31T14:50:42.750728"
-    },
-    "one": {
+    "foldmason/easymsa": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test_tree"
                         },
-                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                        "test_tree_aa.fa:md5,2c20e002e5efd0d43cde8c5e896e998e"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
+                    "versions.yml:md5,079537a12ecb1a4e69170051f18a9c73"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test"
+                            "id": "test_tree"
                         },
-                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                        "test_tree_aa.fa:md5,2c20e002e5efd0d43cde8c5e896e998e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
+                    "versions.yml:md5,079537a12ecb1a4e69170051f18a9c73"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-01-31T14:50:29.846277"
+        "timestamp": "2025-08-01T12:22:19.477678328"
     },
-    "run foldmason/easymsa": {
+    "mtmalign/align": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test_tree"
                         },
-                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                        "test_tree.aln:md5,393e2f3480c2daddceef798c03201a9d"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
+                    "versions.yml:md5,3c92191a04b0f0a03555dbb7fed62a5c"
                 ],
                 "alignment": [
                     [
                         {
-                            "id": "test"
+                            "id": "test_tree"
                         },
-                        "test.aln.gz:md5,e7da437c6ddb5ced60ff7c49b147a65d"
+                        "test_tree.aln:md5,393e2f3480c2daddceef798c03201a9d"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ec7b47414ce796fac6fbda77188103c2"
+                    "versions.yml:md5,3c92191a04b0f0a03555dbb7fed62a5c"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-02-17T10:02:20.633878"
+        "timestamp": "2025-08-01T12:22:27.340342692"
     }
 }

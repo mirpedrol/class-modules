@@ -43,10 +43,10 @@ components:
     - famsa/align
     - kalign/align
     - learnmsa/align
-    #- mafft/align # Needs change upstream
+    #- mafft/align # Multiple inputs - to fix upstream
     - magus/align
     - muscle5/super5
-    - tcoffee/align
+    - tcoffee/align # Needs an argument to return the alignment in fasta
 testdata:
-  - - "[ id:'test', single_end:false ]"
-    - file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/scaffolds.fasta', checkIfExists: true)
+  - - "[ id:'test' ]"
+    - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true)"

@@ -1,4 +1,4 @@
-name: Run tests
+name: Run Tests
 on:
   pull_request:
     branches: [main]
@@ -10,58 +10,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
-      - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
-        # FIXME Flip this off once we get to less than a couple hundred. Adding
-        # this so it will only run against changed files. It'll make it much
-        # easier to fix these as they come up rather than everything at once.
-        with:
-          extra_args: ""
-
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-
-      - name: Install NodeJS
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
-        with:
-          node-version: "20"
-
-      - name: Install Prettier
-        run: npm install -g prettier@3.1.0
-
-      - name: Run Prettier --check
-        run: prettier --check .
-
-  editorconfig:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-
-      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
-        with:
-          node-version: "20"
-
-      - name: Install editorconfig-checker
-        run: npm install -g editorconfig-checker
-
-      - name: Run ECLint check
-        run: editorconfig-checker -exclude README.md $(git ls-files | grep -v test)
-
   nf-test-changes:
     name: nf-test-changes
     runs-on: ubuntu-latest
     outputs:
-      # Expose detected tags as 'workflows' output variables
-      paths: ${{ steps.list.outputs.components }}
-      subworkflows: ${{ steps.outputs.outputs.subworkflows}}
-      # Prod for version bumping
+      matrix: ${{ steps.zip.outputs.matrix }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -79,99 +32,44 @@ jobs:
       - name: Select subworkflows
         id: outputs
         run: |
-          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/mirpedrol/"; ""))') >> $GITHUB_OUTPUT
+          echo subworkflows=$(echo '${{ steps.list.outputs.components }}' | jq '. | map(select(contains("subworkflows"))) | map(gsub("subworkflows/mirpedrol/"; "")) | map(gsub("/tests/main.nf.test"; ""))') >> $GITHUB_OUTPUT
 
       - name: debug
         run: |
           echo ${{ steps.outputs.outputs.subworkflows }}
 
-  lint-changes:
-    name: lint-changes
-    runs-on: ubuntu-latest
-    outputs:
-      # https://github.com/dorny/paths-filter?tab=readme-ov-file#custom-processing-of-changed-files
-      subworkflows: ${{ steps.filter.outputs.subworkflows }}
-      subworkflows_files: ${{ steps.subworkflow_names.outputs.result }}
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          fetch-depth: 2 # To retrieve the preceding commit.
-
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3
-        id: filter
-        with:
-          filters: |
-            subworkflows:
-              - added|modified: 'subworkflows/mirpedrol/**'
-          token: ""
-          list-files: "json"
-      - name: Get subworkflow name
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
-        id: subworkflow_names
-        with:
-          script: |
-            return [...new Set(${{ steps.filter.outputs.subworkflows_files }}
-              .map(path => path
-                .replace('tests/', '')
-                .replace('subworkflows/mirpedrol/', '')
-                .split('/')
-                .slice(0, 2)
-                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test') && !x.endsWith('.snap'))
-                .join('/'))
-              )
-            ];
-
-      - name: debug
+      - name: Zip paths and subworkflows
+        id: zip
         run: |
-          echo ${{ steps.filter.outputs.subworkflows_files }}
-          echo ${{ steps.subworkflow_names.outputs.result }}
-  nf-core-lint-subworkflows:
-    runs-on: ubuntu-latest
-    name: nf-core-lint-subworkflows
-    needs: lint-changes
-    if: ( needs.lint-changes.outputs.subworkflows_files != '[]')
-    strategy:
-      fail-fast: false
-      matrix:
-        tags: ["${{ fromJson(needs.lint-changes.outputs.subworkflows_files) }}"]
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-
-      - name: Set up Python
-        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
-        with:
-          python-version: "3.11"
-
-      - name: Install pip
-        run: python -m pip install --upgrade pip
-
-      - uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4
-        with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Setup Nextflow
-        uses: nf-core/setup-nextflow@561fcfc7146dcb12e3871909b635ab092a781f34 # v2
-
-      - name: Install nf-core tools development version
-        run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
-
-      - name: Lint subworkflow ${{ matrix.tags }}
-        run: nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules lint ${{ matrix.tags }}
+          paths=$(echo '${{ steps.list.outputs.components }}' | jq '.')
+          subworkflows=$(echo '${{ steps.outputs.outputs.subworkflows }}' | jq '.')
+          profiles='["conda", "docker", "singularity"]'
+          profiles=$(echo $profiles | jq '.')
+          echo matrix=$(
+            jq -n --argjson paths "$paths" --argjson subworkflows "$subworkflows" --argjson profiles "$profiles" '
+              [range(0; ($paths|length)) as $i
+                | $profiles[] as $profile
+                | {
+                    path: $paths[$i],
+                    subworkflow: $subworkflows[$i],
+                    profile: $profile
+                  }
+              ]
+              | map(select(.profile != "conda" or .subworkflow != "msa_alignment"))
+              | map(select(.profile != "conda" or .subworkflow != "msa_guidetree"))
+            '
+          ) >> $GITHUB_OUTPUT
+      # Filter out conda failing testes with a map
 
   nf-test:
     runs-on: ubuntu-latest
     name: nf-test
     needs: nf-test-changes
-    if: ( needs.nf-test-changes.outputs.paths != '[]' )
+    if: ( needs.nf-test-changes.outputs.matrix != '[]' )
     strategy:
       fail-fast: false
       matrix:
-        path: ["${{ fromJson(needs.nf-test-changes.outputs.paths) }}"]
-        profile: [conda, docker, singularity]
-        exclude:
-          - profile: conda
-            path: subworkflows/mirpedrol/msa_alignment
+        include: ${{ fromJson(needs.nf-test-changes.outputs.matrix) }}
     env:
       NXF_ANSI_LOG: false
       NFTEST_VER: "0.8.4"
@@ -186,10 +84,10 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: Install nf-core tools development version
+        run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
       - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v2
-        with:
-          version: "24.10.2"
 
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
@@ -224,26 +122,64 @@ jobs:
       - name: Install Python dependencies
         run: python -m pip install --upgrade pip cryptography
 
+      # Install the subworkflow to a pipeline
+      - name: create a pipeline
+        run: |
+          mkdir create-test-wf
+          cd create-test-wf
+          nf-core --log-file log.txt pipelines create -n testpipeline -d "This pipeline is for testing subworkflows" -a "Me"
+
+      - name: update resource limits
+        run: |
+          cd create-test-wf
+          cat <<EOF >> nf-core-testpipeline/tests/nextflow.config
+          process {
+              withName: '.*'{
+                cpus = 2
+                memory = 15.GB
+                time = 2.h
+              }
+          }
+          EOF
+
+      - name: Install subworkflow ${{ matrix.subworkflow }}
+        run: |
+          cd create-test-wf/nf-core-testpipeline
+          nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules --branch "${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}" install ${{ matrix.subworkflow }}
+        # This will only work for branches comming from the same repo, not from a fork
+        # TODO: possibly change the git-remote if the PR comes from a fork
+
+      - name: Check if snapshot exists
+        run: |
+          if [ ! -f "${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap" ]; then
+            echo "Error: Snapshot file not found at ${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap please download the snapshot artifact and add it to the subworkflow test/ directory."
+            exit 1
+          fi
+          echo "Snapshot file found successfully"
+
       # Test the component
       - name: Run nf-test
         shell: bash
+        if: always()
         env:
           NFT_DIFF: "pdiff"
           NFT_DIFF_ARGS: "--line-numbers --width 120 --expand-tabs=2"
         run: |
+          cd create-test-wf/nf-core-testpipeline
           PROFILE=${{ matrix.profile }}
 
-          NFT_WORKDIR=~ \
+          NFT_WORKDIR=~
           nf-test test \
             --profile=${{ matrix.profile }} \
-            --tap=test.tap \
             --verbose \
             ${{ matrix.path }}
 
-      - uses: pcolby/tap-summary@0959cbe1d4422e62afc65778cdaea6716c41d936 # v1
+      - name: Upload nf-test snapshot
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          path: >-
-            test.tap
+          name: nf-test-output-${{ matrix.profile }}-${{ matrix.subworkflow }}
+          path: ${{ github.workspace }}/create-test-wf/nf-core-testpipeline/${{ matrix.path }}.snap
 
       - name: Clean up
         if: always()
@@ -252,7 +188,7 @@ jobs:
 
   confirm-pass:
     runs-on: ubuntu-latest
-    needs: [prettier, editorconfig, nf-core-lint-subworkflows, nf-test-changes, nf-test]
+    needs: [nf-test-changes, nf-test]
     if: always()
     steps:
       - name: All tests ok

@@ -1,5 +1,5 @@
 {
-    "sarscov2 - famsa/guidetree": {
+    "famsa/guidetree": {
         "content": [
             {
                 "0": [
@@ -7,32 +7,32 @@
                         {
                             "id": "test"
                         },
-                        "test.dnd:md5,f3ef8b16a7a16cb4548942ebf2e7bad6"
+                        "test.dnd:md5,3fddb6ad96904101d105d090ddff061d"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,723b3358beebc97847b4681f562bcea0"
+                    "versions.yml:md5,9362f729d456eebde15c076a3927b340"
                 ],
-                "guidetree": [
+                "tree": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.dnd:md5,f3ef8b16a7a16cb4548942ebf2e7bad6"
+                        "test.dnd:md5,3fddb6ad96904101d105d090ddff061d"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,723b3358beebc97847b4681f562bcea0"
+                    "versions.yml:md5,9362f729d456eebde15c076a3927b340"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-07-16T13:12:32.7754812"
+        "timestamp": "2025-08-01T12:21:33.436132015"
     },
-    "sarscov2 - clustalo/guidetree": {
+    "clustalo/guidetree": {
         "content": [
             {
                 "0": [
@@ -40,41 +40,29 @@
                         {
                             "id": "test"
                         },
-                        "test.dnd:md5,5428bad500a0a0bd985744bec1a12a70"
+                        "test.dnd:md5,90cf248dac7bf20a706e2b1552fd41f1"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b1ee3efbf09bc7cf7b4970916a00fddc"
+                    "versions.yml:md5,08d14ffe74bfaff6d04f86a87f1adb4f"
                 ],
-                "guidetree": [
+                "tree": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.dnd:md5,5428bad500a0a0bd985744bec1a12a70"
+                        "test.dnd:md5,90cf248dac7bf20a706e2b1552fd41f1"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b1ee3efbf09bc7cf7b4970916a00fddc"
+                    "versions.yml:md5,08d14ffe74bfaff6d04f86a87f1adb4f"
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2024-07-16T13:12:06.216087789"
-    },
-    "versions1": {
-        "content": [
-            [
-                "versions.yml:md5,75333144e16039f25cae8e933f30d003"
-            ]
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.3"
-        },
-        "timestamp": "2024-07-16T13:13:24.823000398"
+        "timestamp": "2025-08-01T12:21:24.785688977"
     }
 }

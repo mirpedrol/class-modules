@@ -2,7 +2,13 @@
 name: "msa_guidetree"
 description: Compute a guide tree for multiple sequence alignment
 keywords: ["align", "guide tree", "guidetree", "msa"]
-components: ["famsa/guidetree", "magus/guidetree", "clustalo/guidetree"]
+components:
+  - clustalo/guidetree:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - famsa/guidetree:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - magus/guidetree:
+      git_remote: "https://github.com/nf-core/modules.git"
 
 input:
   - ch_fasta:
@@ -29,22 +35,26 @@ output:
   - tree:
       description: Output channel tree
       structure:
-        - meta:
-            description: "Groovy Map containing sample information
+        - - meta:
+              description: "Groovy Map containing sample information
 
-              e.g. `[ id:'test']`
+                e.g. `[ id:'test']`
 
-              "
-            type: map
-        - "*.dnd":
-            description: Guide tree file in Newick format
-            pattern: "*.{dnd}"
-            type: file
+                "
+              type: map
+          - "*.dnd":
+              description: Guide tree file in Newick format
+              ontologies:
+                - edam: http://edamontology.org/format_2006
+              pattern: "*.{dnd}"
+              type: file
   - versions:
       description: Output channel versions
       structure:
         - versions.yml:
             description: File containing software versions
+            ontologies:
+              - edam: http://edamontology.org/format_3750
             pattern: versions.yml
             type: file
 

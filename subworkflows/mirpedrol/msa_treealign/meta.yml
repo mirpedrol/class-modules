@@ -2,7 +2,15 @@
 name: "msa_treealign"
 description: Perform multiple sequence alignment from a provided guide tree
 keywords: ["alignment", "treealignment", "msa"]
-components: ["famsa/treealign", "magus/treealign", "clustalo/treealign", "tcoffee/treealign"]
+components:
+  - clustalo/align:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - famsa/align:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - magus/align:
+      git_remote: "https://github.com/nf-core/modules.git"
+  - tcoffee/align:
+      git_remote: "https://github.com/nf-core/modules.git"
 
 input:
   - ch_fasta:
@@ -46,24 +54,26 @@ output:
   - alignment:
       description: Output channel alignment
       structure:
-        - meta:
-            description: "Groovy Map containing sample information
+        - - meta:
+              description: "Groovy Map containing sample information
 
-              e.g. `[ id:'test']`
+                e.g. `[ id:'test']`
 
-              "
-            type: map
-        - "*.aln.gz":
-            description: Alignment file, in gzipped fasta format
-            ontologies:
-              - edam: http://edamontology.org/format_1984
-            pattern: "*.aln.gz"
-            type: file
+                "
+              type: map
+          - "*.aln.gz":
+              description: Alignment file, in gzipped fasta format
+              ontologies:
+                - edam: http://edamontology.org/format_1984
+              pattern: "*.aln.gz"
+              type: file
   - versions:
       description: Output channel versions
       structure:
         - versions.yml:
             description: File containing software versions
+            ontologies:
+              - edam: http://edamontology.org/format_3750
             pattern: versions.yml
             type: file
 

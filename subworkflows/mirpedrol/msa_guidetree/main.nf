@@ -1,6 +1,6 @@
-include { FAMSA_GUIDETREE } from '../../../modules/mirpedrol/famsa/guidetree/main'
-include { MAGUS_GUIDETREE } from '../../../modules/mirpedrol/magus/guidetree/main'
-include { CLUSTALO_GUIDETREE } from '../../../modules/mirpedrol/clustalo/guidetree/main'
+include { CLUSTALO_GUIDETREE } from '../../../modules/nf-core/clustalo/guidetree/main'
+include { FAMSA_GUIDETREE } from '../../../modules/nf-core/famsa/guidetree/main'
+include { MAGUS_GUIDETREE } from '../../../modules/nf-core/magus/guidetree/main'
 
 
 workflow MSA_GUIDETREE {
@@ -15,14 +15,18 @@ workflow MSA_GUIDETREE {
     ch_fasta
         .branch {
             meta, fasta, tool ->
+                clustalo_guidetree: tool == "clustalo_guidetree"
+                    return [ meta, fasta ]
                 famsa_guidetree: tool == "famsa_guidetree"
                     return [ meta, fasta ]
                 magus_guidetree: tool == "magus_guidetree"
                     return [ meta, fasta ]
-                clustalo_guidetree: tool == "clustalo_guidetree"
-                    return [ meta, fasta ]
         }
         .set { ch_fasta_branch }
+
+    CLUSTALO_GUIDETREE( ch_fasta_branch.clustalo_guidetree )
+    ch_out_tree = ch_out_tree.mix(CLUSTALO_GUIDETREE.out.tree)
+    ch_out_versions = ch_out_versions.mix(CLUSTALO_GUIDETREE.out.versions)
 
     FAMSA_GUIDETREE( ch_fasta_branch.famsa_guidetree )
     ch_out_tree = ch_out_tree.mix(FAMSA_GUIDETREE.out.tree)
@@ -31,10 +35,6 @@ workflow MSA_GUIDETREE {
     MAGUS_GUIDETREE( ch_fasta_branch.magus_guidetree )
     ch_out_tree = ch_out_tree.mix(MAGUS_GUIDETREE.out.tree)
     ch_out_versions = ch_out_versions.mix(MAGUS_GUIDETREE.out.versions)
-
-    CLUSTALO_GUIDETREE( ch_fasta_branch.clustalo_guidetree )
-    ch_out_tree = ch_out_tree.mix(CLUSTALO_GUIDETREE.out.tree)
-    ch_out_versions = ch_out_versions.mix(CLUSTALO_GUIDETREE.out.versions)
 
 
 

@@ -54,6 +54,6 @@ components:
     - tcoffee/align
 testdata:
   - - "[ id:'test' ]"
-    - "file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/fasta/contigs.fasta', checkIfExists: true)"
+    - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true)"
   - - "[ id:'test' ]"
-    - "file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/alignment/test.dnd, checkIfExists: true)"
+    - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.dnd', checkIfExists: true)"

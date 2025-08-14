@@ -69,8 +69,21 @@ components:
   modules:
     - tool/subtool
     - tool2
+testdata:
+  - - "[ id:'test' ]"
+    - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/my_organism/testfile.fa', checkIfExists: true)"
 ```
 
 The `components` section of the class YAML file can be edited to add new nf-core/modules to a class.
 This information will then be used to update the existing class subworkflow,
 or to generate a new class subworkflow.
+
+The `testdata` section specifyes the datasets that will be used to test the class subworkflow with nf-test.
+It should have the same structure as the input channel(s).
+
+### nf-test snapshots
+
+When a subworkflow is created with nf-class `nf-class subworkflows expand-class`, nf-test are craeted, generating a `main.nf.test` file.
+The snapshots are not generated, since the subworkflow needs to be installed into a pipeline, with all the corresponding modules, and run in order to generate the snapshot.
+To ease the snapshot generation process, the GHA which runs the tests will generate the snapshots the first time it's run (or update them if they exist).
+These snapshots are uploaded as an artifact, and can be downloaded to copy then to the working branch, and pushed to the PR.
