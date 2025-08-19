@@ -1,0 +1,22 @@
+Changes in component 'mirpedrol/msa_guidetree'
+'subworkflows/mirpedrol/msa_guidetree/meta.yml' is unchanged
+'subworkflows/mirpedrol/msa_guidetree/main.nf' is unchanged
+'subworkflows/mirpedrol/msa_guidetree/tests/main.nf.test.snap' was created
+Changes in 'msa_guidetree/tests/main.nf.test':
+--- subworkflows/mirpedrol/msa_guidetree/tests/main.nf.test
++++ subworkflows/mirpedrol/msa_guidetree/tests/main.nf.test
+@@ -61,7 +61,11 @@
+         then {
+             assertAll(
+                 { assert workflow.success },
+-                { assert snapshot(workflow.out).match("magus/guidetree") },
++                { assert path(workflow.out.tree[0][1]).getText().contains("1atx") },
++                { assert path(workflow.out.tree[0][1]).getText().contains("1bds") },
++                { assert path(workflow.out.tree[0][1]).getText().contains("1sh1") },
++                { assert path(workflow.out.tree[0][1]).getText().contains("1apf") },
++                { assert path(workflow.out.tree[0][1]).getText().contains("1ahl") },
+             )
+         }
+     }
+
+************************************************************

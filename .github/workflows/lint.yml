@@ -50,7 +50,7 @@ jobs:
                 .replace('subworkflows/mirpedrol/', '')
                 .split('/')
                 .slice(0, 2)
-                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test') && !x.endsWith('.snap') && !x.endsWith('.config'))
+                .filter(x => x !== 'main.nf' && x !== 'tests' && x !== 'meta.yml' && x !== 'environment.yml' && !x.endsWith('.test') && !x.endsWith('.snap') && !x.endsWith('.config') && !x.endsWith('.diff'))
                 .join('/'))
               )
             ];

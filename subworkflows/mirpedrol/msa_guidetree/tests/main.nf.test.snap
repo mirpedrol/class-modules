@@ -64,5 +64,17 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-08-01T12:21:24.785688977"
+    },
+    "magus/guidetree": {
+        "content": [
+            [
+                "versions.yml:md5,7234c3d5bc0089242622028903d2f4d1"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-19T13:46:43.306273138"
     }
 }
