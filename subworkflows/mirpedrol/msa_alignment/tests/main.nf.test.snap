@@ -133,30 +133,9 @@
     },
     "magus/align": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln:md5,283f09f9fb87a31ee82b7394304d96ce"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,9258e7c6deb7c3d816ba75cf111e09a8"
-                ],
-                "alignment": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.aln:md5,283f09f9fb87a31ee82b7394304d96ce"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,9258e7c6deb7c3d816ba75cf111e09a8"
-                ]
-            }
+            [
+                "versions.yml:md5,9258e7c6deb7c3d816ba75cf111e09a8"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.2",
