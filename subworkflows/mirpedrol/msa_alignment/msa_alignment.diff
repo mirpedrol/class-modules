@@ -24,6 +24,15 @@ Changes in 'msa_alignment/tests/main.nf.test':
  
          when {
              workflow {
+@@ -83,7 +85,7 @@
+         then {
+             assertAll(
+                 { assert workflow.success },
+-                { assert snapshot(workflow.out).match("learnmsa/align") },
++                { assert snapshot(workflow.out).match("learnmsa/align - stub") },
+             )
+         }
+     }
 @@ -101,7 +103,12 @@
          then {
              assertAll(
