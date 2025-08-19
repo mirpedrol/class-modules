@@ -9,19 +9,19 @@ Changes in 'msa_alignment/tests/main.nf.test':
 @@ -15,6 +15,7 @@
      tag "subworkflows/../../modules/nf-core/muscle5/super5"
      tag "subworkflows/../../modules/nf-core/tcoffee/align"
- 
+
 +    config './nextflow.config'
- 
+
      test("clustalo/align") {
- 
+
 @@ -70,7 +71,8 @@
          }
      }
- 
+
 -    test("learnmsa/align") {
 +    test("learnmsa/align - stub") {
 +        options "-stub"
- 
+
          when {
              workflow {
 @@ -83,7 +85,7 @@
@@ -38,11 +38,11 @@ Changes in 'msa_alignment/tests/main.nf.test':
              assertAll(
                  { assert workflow.success },
 -                { assert snapshot(workflow.out).match("magus/align") },
-+                { assert path(workflow.out.tree[0][1]).getText().contains("1atx") },
-+                { assert path(workflow.out.tree[0][1]).getText().contains("1bds") },
-+                { assert path(workflow.out.tree[0][1]).getText().contains("1sh1") },
-+                { assert path(workflow.out.tree[0][1]).getText().contains("1apf") },
-+                { assert path(workflow.out.tree[0][1]).getText().contains("1ahl") },
++                { assert path(workflow.out.alignment[0][1]).getText().contains("1atx") },
++                { assert path(workflow.out.alignment[0][1]).getText().contains("1bds") },
++                { assert path(workflow.out.alignment[0][1]).getText().contains("1sh1") },
++                { assert path(workflow.out.alignment[0][1]).getText().contains("1apf") },
++                { assert path(workflow.out.alignment[0][1]).getText().contains("1ahl") },
 +                { assert snapshot(workflow.out.versions).match("magus/align") },
              )
          }
