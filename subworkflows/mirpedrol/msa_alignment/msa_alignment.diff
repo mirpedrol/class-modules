@@ -1,0 +1,28 @@
+Changes in component 'mirpedrol/msa_alignment'
+'subworkflows/mirpedrol/msa_alignment/meta.yml' is unchanged
+'subworkflows/mirpedrol/msa_alignment/main.nf' is unchanged
+'subworkflows/mirpedrol/msa_alignment/tests/main.nf.test.snap' was created
+'subworkflows/mirpedrol/msa_alignment/tests/nextflow.config' was created
+Changes in 'msa_alignment/tests/main.nf.test':
+--- subworkflows/mirpedrol/msa_alignment/tests/main.nf.test
++++ subworkflows/mirpedrol/msa_alignment/tests/main.nf.test
+@@ -15,6 +15,7 @@
+     tag "subworkflows/../../modules/nf-core/muscle5/super5"
+     tag "subworkflows/../../modules/nf-core/tcoffee/align"
+ 
++    config './nextflow.config'
+ 
+     test("clustalo/align") {
+ 
+@@ -70,7 +71,8 @@
+         }
+     }
+ 
+-    test("learnmsa/align") {
++    test("learnmsa/align - stub") {
++        options "-stub"
+ 
+         when {
+             workflow {
+
+************************************************************

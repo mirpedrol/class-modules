@@ -22,7 +22,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'clustalo_align'] )
                 """
             }
         }
@@ -40,7 +40,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'famsa_align'] )
                 """
             }
         }
@@ -58,7 +58,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'kalign_align'] )
                 """
             }
         }
@@ -77,7 +77,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'learnmsa_align'] )
                 """
             }
         }
@@ -95,7 +95,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'magus_align'] )
                 """
             }
         }
@@ -113,7 +113,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'muscle5_super5'] )
                 """
             }
         }
@@ -131,7 +131,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + '../../multiplesequencealign/testdata/setoxin-ref.fa', checkIfExists: true), 'clustalo_align'] )
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'tcoffee_align'] )
                 """
             }
         }
