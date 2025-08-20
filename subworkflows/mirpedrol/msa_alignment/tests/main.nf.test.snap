@@ -135,16 +135,26 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                            "test.fas:md5,d443a4d46c7d85f5ea5f5f73148c6f34"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,4eac1bd98ea7280bd9822cc13631b619"
                 ],
                 "alignment": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.fas:md5,d443a4d46c7d85f5ea5f5f73148c6f34"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,4eac1bd98ea7280bd9822cc13631b619"
                 ]
             }
         ],
