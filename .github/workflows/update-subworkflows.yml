@@ -165,6 +165,7 @@ jobs:
             subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}
 
       - name: Commit changes
+        if: always()
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
