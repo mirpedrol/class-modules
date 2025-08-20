@@ -55,7 +55,7 @@ workflow MSA_ALIGNMENT {
     ch_out_alignment = ch_out_alignment.mix(LEARNMSA_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(LEARNMSA_ALIGN.out.versions)
 
-    MAFFT_ALIGN( ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, ch_fasta_branch.mafft_align, [] )
+    MAFFT_ALIGN( ch_fasta_branch.mafft_align, [[], []], [[], []], [[], []], [[], []], [[], []], [] )
     ch_out_alignment = ch_out_alignment.mix(MAFFT_ALIGN.out.fas)
     ch_out_versions = ch_out_versions.mix(MAFFT_ALIGN.out.versions)
 
