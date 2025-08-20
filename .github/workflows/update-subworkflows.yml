@@ -71,7 +71,7 @@ jobs:
           echo "author=$(yq eval '.authors[0]' subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}/meta.yml)" >> $GITHUB_OUTPUT
 
       - name: Update subworkflows
-        run: nf-class subworkflows expand-class ${{ needs.module-added.outputs.class_name }} --force --author ${{ steps.get-author.outputs.author }}
+        run: nf-class subworkflows --branch ${{ github.head_ref }} expand-class ${{ needs.module-added.outputs.class_name }} --force --author ${{ steps.get-author.outputs.author }}
 
       - name: Commit changes
         run: |
