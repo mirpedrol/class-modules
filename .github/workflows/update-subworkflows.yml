@@ -164,6 +164,10 @@ jobs:
             --verbose \
             subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}
 
+      - name: copy new snapshot
+        if: always()
+        run: |
+          cp ${{ github.workspace }}/create-test-wf/nf-core-testpipeline/subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}/tests/main.nf.test.snap ${{ github.workspace }}/subworkflows/mirpedrol/${{ needs.module-added.outputs.class_name }}/tests/main.nf.test.snap
       - name: Commit changes
         if: always()
         run: |
