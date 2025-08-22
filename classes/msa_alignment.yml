@@ -43,7 +43,7 @@ components:
     - famsa/align
     - kalign/align
     - learnmsa/align
-    #- mafft/align # Multiple inputs - to fix upstream
+    - mafft/align # Multiple inputs
     - magus/align
     - muscle5/super5
     - tcoffee/align # Needs an argument to return the alignment in fasta
