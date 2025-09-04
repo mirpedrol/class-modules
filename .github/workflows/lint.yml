@@ -60,9 +60,9 @@ jobs:
           echo ${{ steps.filter.outputs.subworkflows_files }}
           echo ${{ steps.subworkflow_names.outputs.result }}
 
-  nf-core-lint-subworkflows:
+  lint-subworkflows:
     runs-on: ubuntu-latest
-    name: nf-core-lint-subworkflows
+    name: lint-subworkflows
     needs: lint-changes
     if: ( needs.lint-changes.outputs.subworkflows_files != '[]')
     strategy:
@@ -90,6 +90,11 @@ jobs:
 
       - name: Install nf-core tools development version
         run: python -m pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
+      - name: Install nf-class
+        run: pip install git+https://github.com/mirpedrol/nf-class.git@dev
+      - name: Lint subworkflow ${{ matrix.tags }} nf-core
+        run: nf-class subworkflows lint ${{ matrix.tags }}
+        continue-on-error: true
 
-      - name: Lint subworkflow ${{ matrix.tags }}
-        run: nf-core subworkflows --git-remote https://github.com/mirpedrol/class-modules lint ${{ matrix.tags }}
+      - name: Lint subworkflow ${{ matrix.tags }} nf-class
+        run: nf-class classes lint ${{ matrix.tags }}
