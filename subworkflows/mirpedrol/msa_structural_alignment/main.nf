@@ -1,5 +1,6 @@
 include { FOLDMASON_EASYMSA } from '../../../modules/nf-core/foldmason/easymsa/main'
 include { MTMALIGN_ALIGN } from '../../../modules/nf-core/mtmalign/align/main'
+include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
 
 
 workflow MSA_STRUCTURAL_ALIGNMENT {
@@ -18,6 +19,8 @@ workflow MSA_STRUCTURAL_ALIGNMENT {
                     return [ meta, pdbs ]
                 mtmalign_align: tool == "mtmalign_align"
                     return [ meta, pdbs ]
+                tcoffee_align: tool == "tcoffee_align"
+                    return [ meta, pdbs ]
         }
         .set { ch_pdbs_branch }
 
@@ -28,6 +31,9 @@ workflow MSA_STRUCTURAL_ALIGNMENT {
     MTMALIGN_ALIGN( ch_pdbs_branch.mtmalign_align, [] )
     ch_out_alignment = ch_out_alignment.mix(MTMALIGN_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(MTMALIGN_ALIGN.out.versions)
+
+    ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 
 
 
