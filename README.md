@@ -19,7 +19,8 @@ A repository for hosting curated [Nextflow DSL2](https://www.nextflow.io/docs/la
 
 - [Using nf-core/tools](#using-nf-coretools)
 - [Classes of modules](#classes-of-modules)
-- [The class_module_index file](#the-class-module-index-file)
+  - [nf-test snapshots](#nf-test-snapshots)
+- [Automation](#automation)
 
 ## Using nf-core/tools
 
@@ -84,6 +85,33 @@ It should have the same structure as the input channel(s).
 ### nf-test snapshots
 
 When a subworkflow is created with nf-class `nf-class subworkflows expand-class`, nf-test are craeted, generating a `main.nf.test` file.
-The snapshots are not generated, since the subworkflow needs to be installed into a pipeline, with all the corresponding modules, and run in order to generate the snapshot.
+The snapshots are **not generated**, since the subworkflow needs to be installed into a pipeline, with all the corresponding modules, and run in order to generate the snapshot.
+
 To ease the snapshot generation process, the GHA which runs the tests will generate the snapshots the first time it's run (or update them if they exist).
-These snapshots are uploaded as an artifact, and can be downloaded to copy then to the working branch, and pushed to the PR.
+These snapshots are uploaded as an artifact, and can be downloaded to copy them to the working branch, and pushed to the PR. **This step must be done manually.**
+
+## Automation
+
+In this repository, there are several automated actions to help with the maintenance of classes.
+
+- Testing
+
+All subworkflows are tested with nf-test.
+
+To achieve this, a test pipeline is created with nf-core.
+Then, the subworkflow is installed in the pipeline, this will also install all the required nf-core modules.
+This subworkflow is tested with nf-test.
+
+Please refer to the [nf-test snapshots](#nf-test-snapshots) section for a description on how the nf-test snapshots can generated.
+
+- Linting
+
+All subworkflows are linted with nf-core to ensure that they follow the nf-core standards.
+
+All subworkflows are linted with nf-class to ensure that they follow nf-class standards.
+
+- Adding new modules to a class
+
+When a new module is added to a class under the `components` section,
+an action will update the corresponding subworkflow, adding the new nf-core module and updating the tests.
+A new commit will be automatically generated to the PR.
