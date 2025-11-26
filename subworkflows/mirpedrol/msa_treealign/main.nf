@@ -2,6 +2,8 @@ include { CLUSTALO_ALIGN } from '../../../modules/nf-core/clustalo/align/main'
 include { FAMSA_ALIGN } from '../../../modules/nf-core/famsa/align/main'
 include { MAGUS_ALIGN } from '../../../modules/nf-core/magus/align/main'
 include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
+include { TCOFFEE_REGRESSIVE } from '../../../modules/nf-core/tcoffee/regressive/main'
+include { UPP_ALIGN } from '../../../modules/nf-core/upp/align/main'
 
 
 workflow MSA_TREEALIGN {
@@ -25,6 +27,10 @@ workflow MSA_TREEALIGN {
                     return [ meta, fasta ]
                 tcoffee_align: tool == "tcoffee_align"
                     return [ meta, fasta ]
+                tcoffee_regressive: tool == "tcoffee_regressive"
+                    return [ meta, fasta ]
+                upp_align: tool == "upp_align"
+                    return [ meta, fasta ]
         }
         .set { ch_fasta_branch }
     ch_tree
@@ -37,6 +43,10 @@ workflow MSA_TREEALIGN {
                 magus_align: tool == "magus_align"
                     return [ meta, tree ]
                 tcoffee_align: tool == "tcoffee_align"
+                    return [ meta, tree ]
+                tcoffee_regressive: tool == "tcoffee_regressive"
+                    return [ meta, tree ]
+                upp_align: tool == "upp_align"
                     return [ meta, tree ]
         }
         .set { ch_tree_branch }
@@ -56,6 +66,8 @@ workflow MSA_TREEALIGN {
     TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, ch_tree_branch.tcoffee_align, [[], [], []], [] )
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
+
+
 
 
 
