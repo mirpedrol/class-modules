@@ -43,6 +43,7 @@ components:
   modules:
     - foldmason/easymsa
     - mtmalign/align
+    - tcoffee/align
 testdata:
   - - "[ id:'test_tree' ]"
     - "[file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/8tim.pdb', checkIfExists: true)]"
