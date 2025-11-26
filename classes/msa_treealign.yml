@@ -52,6 +52,8 @@ components:
     - famsa/align
     - magus/align
     - tcoffee/align
+    - tcoffee/regressive
+    - upp/align
 testdata:
   - - "[ id:'test' ]"
     - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true)"
