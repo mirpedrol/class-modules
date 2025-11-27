@@ -93,7 +93,7 @@ jobs:
       - name: Install nf-class
         run: pip install git+https://github.com/mirpedrol/nf-class.git@dev
       - name: Lint subworkflow ${{ matrix.tags }} nf-core
-        run: nf-class subworkflows lint ${{ matrix.tags }}
+        run: nf-core subworkflows lint ${{ matrix.tags }}
         continue-on-error: true
 
       - name: Lint subworkflow ${{ matrix.tags }} nf-class
