@@ -1,6 +1,7 @@
 include { CLUSTALO_GUIDETREE } from '../../../modules/nf-core/clustalo/guidetree/main'
 include { FAMSA_GUIDETREE } from '../../../modules/nf-core/famsa/guidetree/main'
 include { MAGUS_GUIDETREE } from '../../../modules/nf-core/magus/guidetree/main'
+include { MAFFT_GUIDETREE } from '../../../modules/nf-core/mafft/guidetree/main'
 
 
 workflow MSA_GUIDETREE {
@@ -21,6 +22,8 @@ workflow MSA_GUIDETREE {
                     return [ meta, fasta ]
                 magus_guidetree: tool == "magus_guidetree"
                     return [ meta, fasta ]
+                mafft_guidetree: tool == "mafft_guidetree"
+                    return [ meta, fasta ]
         }
         .set { ch_fasta_branch }
 
@@ -35,6 +38,10 @@ workflow MSA_GUIDETREE {
     MAGUS_GUIDETREE( ch_fasta_branch.magus_guidetree )
     ch_out_tree = ch_out_tree.mix(MAGUS_GUIDETREE.out.tree)
     ch_out_versions = ch_out_versions.mix(MAGUS_GUIDETREE.out.versions)
+
+    MAFFT_GUIDETREE( ch_fasta_branch.mafft_guidetree )
+    ch_out_tree = ch_out_tree.mix(MAFFT_GUIDETREE.out.tree)
+    ch_out_versions = ch_out_versions.mix(MAFFT_GUIDETREE.out.versions)
 
 
 

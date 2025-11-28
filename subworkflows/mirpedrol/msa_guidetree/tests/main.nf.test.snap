@@ -32,6 +32,39 @@
         },
         "timestamp": "2025-08-01T12:21:33.436132015"
     },
+    "mafft/guidetree": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,f3510ecc52655e1827658396aec90b24"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,995c0bd161578e9d638264659f5e55b5"
+                ],
+                "tree": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.dnd:md5,f3510ecc52655e1827658396aec90b24"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,995c0bd161578e9d638264659f5e55b5"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-26T14:46:56.709060689"
+    },
     "clustalo/guidetree": {
         "content": [
             {

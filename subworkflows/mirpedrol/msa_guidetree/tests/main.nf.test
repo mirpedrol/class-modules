@@ -10,6 +10,7 @@ nextflow_workflow {
     tag "subworkflows/../../modules/nf-core/clustalo/guidetree"
     tag "subworkflows/../../modules/nf-core/famsa/guidetree"
     tag "subworkflows/../../modules/nf-core/magus/guidetree"
+    tag "subworkflows/../../modules/nf-core/mafft/guidetree"
 
 
     test("clustalo/guidetree") {
@@ -66,7 +67,24 @@ nextflow_workflow {
                 { assert path(workflow.out.tree[0][1]).getText().contains("1sh1") },
                 { assert path(workflow.out.tree[0][1]).getText().contains("1apf") },
                 { assert path(workflow.out.tree[0][1]).getText().contains("1ahl") },
-                { assert snapshot(workflow.out.versions).match("magus/guidetree") },
+            )
+        }
+    }
+
+    test("mafft/guidetree") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'mafft_guidetree'] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match("mafft/guidetree") },
             )
         }
     }

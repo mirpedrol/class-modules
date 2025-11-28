@@ -43,6 +43,7 @@ components:
     - clustalo/guidetree
     - famsa/guidetree
     - magus/guidetree
+    - mafft/guidetree
 testdata:
   - - "[ id:'test' ]"
     - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true)"
