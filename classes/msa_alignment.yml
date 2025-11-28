@@ -47,6 +47,8 @@ components:
     - magus/align
     - muscle5/super5
     - tcoffee/align # Needs an argument to return the alignment in fasta
+    - tcoffee/regressive
+    - upp/align
 testdata:
   - - "[ id:'test' ]"
     - "file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true)"

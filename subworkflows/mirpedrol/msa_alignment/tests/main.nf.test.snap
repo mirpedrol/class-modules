@@ -65,6 +65,52 @@
         },
         "timestamp": "2025-07-31T13:38:19.076634506"
     },
+    "learnmsa/align": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "alignment": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-26T14:49:10.561513153"
+    },
+    "tcoffee/regressive": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "alignment": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-26T14:51:10.271917631"
+    },
     "learnmsa/align - stub": {
         "content": [
             {
@@ -208,5 +254,28 @@
             "nextflow": "25.04.6"
         },
         "timestamp": "2025-08-01T07:27:07.276478754"
+    },
+    "upp/align": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "alignment": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-26T14:51:18.37628695"
     }
 }
