@@ -67,7 +67,13 @@ workflow MSA_TREEALIGN {
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
 
+    TCOFFEE_REGRESSIVE( ch_fasta_branch.tcoffee_regressive, ch_tree_branch.tcoffee_regressive, [[], [], []], [] )
+    ch_out_alignment = ch_out_alignment.mix(TCOFFEE_REGRESSIVE.out.alignment)
+    ch_out_versions = ch_out_versions.mix(TCOFFEE_REGRESSIVE.out.versions)
 
+    UPP_ALIGN( ch_fasta_branch.upp_align, ch_tree_branch.upp_align, [] )
+    ch_out_alignment = ch_out_alignment.mix(UPP_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(UPP_ALIGN.out.versions)
 
 
 
