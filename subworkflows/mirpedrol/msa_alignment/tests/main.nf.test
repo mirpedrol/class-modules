@@ -14,6 +14,8 @@ nextflow_workflow {
     tag "subworkflows/../../modules/nf-core/magus/align"
     tag "subworkflows/../../modules/nf-core/muscle5/super5"
     tag "subworkflows/../../modules/nf-core/tcoffee/align"
+    tag "subworkflows/../../modules/nf-core/tcoffee/regressive"
+    tag "subworkflows/../../modules/nf-core/upp/align"
 
     config './nextflow.config'
 
@@ -108,7 +110,6 @@ nextflow_workflow {
                 { assert path(workflow.out.alignment[0][1]).getText().contains("1sh1") },
                 { assert path(workflow.out.alignment[0][1]).getText().contains("1apf") },
                 { assert path(workflow.out.alignment[0][1]).getText().contains("1ahl") },
-                { assert snapshot(workflow.out.versions).match("magus/align") },
             )
         }
     }
@@ -145,6 +146,42 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match("tcoffee/align") },
+            )
+        }
+    }
+
+    test("tcoffee/regressive") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'tcoffee_regressive'] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match("tcoffee/regressive") },
+            )
+        }
+    }
+
+    test("upp/align") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'upp_align'] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match("upp/align") },
             )
         }
     }

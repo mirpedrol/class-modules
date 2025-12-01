@@ -5,6 +5,8 @@ include { LEARNMSA_ALIGN } from '../../../modules/nf-core/learnmsa/align/main'
 include { MAGUS_ALIGN } from '../../../modules/nf-core/magus/align/main'
 include { MUSCLE5_SUPER5 } from '../../../modules/nf-core/muscle5/super5/main'
 include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
+include { TCOFFEE_REGRESSIVE } from '../../../modules/nf-core/tcoffee/regressive/main'
+include { UPP_ALIGN } from '../../../modules/nf-core/upp/align/main'
 
 
 workflow MSA_ALIGNMENT {
@@ -32,6 +34,10 @@ workflow MSA_ALIGNMENT {
                 muscle5_super5: tool == "muscle5_super5"
                     return [ meta, fasta ]
                 tcoffee_align: tool == "tcoffee_align"
+                    return [ meta, fasta ]
+                tcoffee_regressive: tool == "tcoffee_regressive"
+                    return [ meta, fasta ]
+                upp_align: tool == "upp_align"
                     return [ meta, fasta ]
         }
         .set { ch_fasta_branch }
@@ -63,6 +69,14 @@ workflow MSA_ALIGNMENT {
     TCOFFEE_ALIGN( ch_fasta_branch.tcoffee_align, [[], []], [[], [], []], [] )
     ch_out_alignment = ch_out_alignment.mix(TCOFFEE_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(TCOFFEE_ALIGN.out.versions)
+
+    TCOFFEE_REGRESSIVE( ch_fasta_branch.tcoffee_regressive, [[], []], [[], [], []], [] )
+    ch_out_alignment = ch_out_alignment.mix(TCOFFEE_REGRESSIVE.out.alignment)
+    ch_out_versions = ch_out_versions.mix(TCOFFEE_REGRESSIVE.out.versions)
+
+    UPP_ALIGN( ch_fasta_branch.upp_align, [[], []], [] )
+    ch_out_alignment = ch_out_alignment.mix(UPP_ALIGN.out.alignment)
+    ch_out_versions = ch_out_versions.mix(UPP_ALIGN.out.versions)
 
 
 
