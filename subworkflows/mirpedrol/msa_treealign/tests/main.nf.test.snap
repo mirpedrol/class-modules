@@ -44,7 +44,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,dc23c65f66a62f337556459f11efb7b3"
+                    "versions.yml:md5,a1ee55248052d51e7dea2c7ae59d27d7"
                 ],
                 "alignment": [
                     [
@@ -55,7 +55,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,dc23c65f66a62f337556459f11efb7b3"
+                    "versions.yml:md5,a1ee55248052d51e7dea2c7ae59d27d7"
                 ]
             }
         ],
@@ -169,16 +169,26 @@
         "content": [
             {
                 "0": [
-
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a543b6c4d215628c0307111268496557"
+                    ]
                 ],
                 "1": [
-
+                    "versions.yml:md5,480e12b84ba1a750dc9e347a0ee77d1b"
                 ],
                 "alignment": [
-
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a543b6c4d215628c0307111268496557"
+                    ]
                 ],
                 "versions": [
-
+                    "versions.yml:md5,480e12b84ba1a750dc9e347a0ee77d1b"
                 ]
             }
         ],
