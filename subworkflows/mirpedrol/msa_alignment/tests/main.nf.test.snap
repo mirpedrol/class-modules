@@ -246,16 +246,26 @@
         "content": [
             {
                 "0": [
-
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a543b6c4d215628c0307111268496557"
+                    ]
                 ],
                 "1": [
-
+                    "versions.yml:md5,2c5ca42adf5dc958969926ab31eedb2a"
                 ],
                 "alignment": [
-
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a543b6c4d215628c0307111268496557"
+                    ]
                 ],
                 "versions": [
-
+                    "versions.yml:md5,2c5ca42adf5dc958969926ab31eedb2a"
                 ]
             }
         ],
