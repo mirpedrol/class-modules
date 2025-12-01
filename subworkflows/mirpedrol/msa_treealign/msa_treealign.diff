@@ -1,0 +1,19 @@
+Changes in component 'mirpedrol/msa_treealign'
+'subworkflows/mirpedrol/msa_treealign/.nf-test.log' was created
+'subworkflows/mirpedrol/msa_treealign/meta.yml' is unchanged
+'subworkflows/mirpedrol/msa_treealign/main.nf' is unchanged
+'subworkflows/mirpedrol/msa_treealign/tests/main.nf.test.snap' was created
+'subworkflows/mirpedrol/msa_treealign/tests/nextflow.config' was created
+Changes in 'msa_treealign/tests/main.nf.test':
+--- subworkflows/mirpedrol/msa_treealign/tests/main.nf.test
++++ subworkflows/mirpedrol/msa_treealign/tests/main.nf.test
+@@ -111,6 +111,7 @@
+     }
+ 
+     test("upp/align") {
++        config "./nextflow.config"
+ 
+         when {
+             workflow {
+
+************************************************************

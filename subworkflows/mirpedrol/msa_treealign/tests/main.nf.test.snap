@@ -69,16 +69,27 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a399645e1b14b858ccc9aef57ce3d9f8"
+                    ]
+
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,167b47da97b1e1b8f168aa85495245b4"
                 ],
                 "alignment": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a399645e1b14b858ccc9aef57ce3d9f8"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,167b47da97b1e1b8f168aa85495245b4"
                 ]
             }
         ],
@@ -158,16 +169,16 @@
         "content": [
             {
                 "0": [
-                    
+
                 ],
                 "1": [
-                    
+
                 ],
                 "alignment": [
-                    
+
                 ],
                 "versions": [
-                    
+
                 ]
             }
         ],

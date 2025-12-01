@@ -111,6 +111,7 @@ nextflow_workflow {
     }
 
     test("upp/align") {
+        config "./nextflow.config"
 
         when {
             workflow {
