@@ -9,6 +9,7 @@ nextflow_workflow {
     tag "subworkflows/msa_structural_alignment"
     tag "subworkflows/../../modules/nf-core/foldmason/easymsa"
     tag "subworkflows/../../modules/nf-core/mtmalign/align"
+    tag "subworkflows/../../modules/nf-core/tcoffee/align"
 
 
     test("foldmason/easymsa") {
@@ -43,6 +44,24 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match("mtmalign/align") },
+            )
+        }
+    }
+
+    test("tcoffee/align") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of( [[ id:'test_tree' ], [file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/8tim.pdb', checkIfExists: true)], 'tcoffee_align'] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match("tcoffee/align") },
             )
         }
     }
