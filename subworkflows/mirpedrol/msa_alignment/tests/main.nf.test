@@ -17,6 +17,7 @@ nextflow_workflow {
     tag "subworkflows/../../modules/nf-core/tcoffee/regressive"
     tag "subworkflows/../../modules/nf-core/upp/align"
 
+    config './nextflow.config'
 
     test("clustalo/align") {
 
@@ -72,7 +73,8 @@ nextflow_workflow {
         }
     }
 
-    test("learnmsa/align") {
+    test("learnmsa/align - stub") {
+        options "-stub"
 
         when {
             workflow {
@@ -85,7 +87,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match("learnmsa/align") },
+                { assert snapshot(workflow.out).match("learnmsa/align - stub") },
             )
         }
     }
@@ -103,7 +105,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match("magus/align") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains("1atx") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains("1bds") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains("1sh1") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains("1apf") },
+                { assert path(workflow.out.alignment[0][1]).getText().contains("1ahl") },
             )
         }
     }
