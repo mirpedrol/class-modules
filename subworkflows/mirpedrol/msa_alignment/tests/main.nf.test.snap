@@ -44,7 +44,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,c74ca8b91c442fc4ea29219ee1b724fd"
+                    "versions.yml:md5,662446ba7a24e755a11692e9302e4895"
                 ],
                 "alignment": [
                     [
@@ -55,7 +55,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c74ca8b91c442fc4ea29219ee1b724fd"
+                    "versions.yml:md5,662446ba7a24e755a11692e9302e4895"
                 ]
             }
         ],
@@ -65,43 +65,30 @@
         },
         "timestamp": "2025-07-31T13:38:19.076634506"
     },
-    "learnmsa/align": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "alignment": [
-                    
-                ],
-                "versions": [
-                    
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2025-11-26T14:49:10.561513153"
-    },
     "tcoffee/regressive": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a399645e1b14b858ccc9aef57ce3d9f8"
+                    ]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,919b5de419f7e8355773808305cc9da5"
                 ],
                 "alignment": [
-                    
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.aln:md5,a399645e1b14b858ccc9aef57ce3d9f8"
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,919b5de419f7e8355773808305cc9da5"
                 ]
             }
         ],
@@ -259,16 +246,16 @@
         "content": [
             {
                 "0": [
-                    
+
                 ],
                 "1": [
-                    
+
                 ],
                 "alignment": [
-                    
+
                 ],
                 "versions": [
-                    
+
                 ]
             }
         ],
