@@ -43,6 +43,7 @@ components:
   modules:
     - foldmason/easymsa
     - mtmalign/align
+    # - tcoffee/align -> the pdb channel needs an additional file
 testdata:
   - - "[ id:'test_tree' ]"
     - "[file(params.modules_testdata_base_path + 'proteomics/pdb/1tim.pdb', checkIfExists: true), file(params.modules_testdata_base_path + 'proteomics/pdb/8tim.pdb', checkIfExists: true)]"
