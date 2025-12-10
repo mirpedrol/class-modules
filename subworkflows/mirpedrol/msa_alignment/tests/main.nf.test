@@ -11,6 +11,7 @@ nextflow_workflow {
     tag "subworkflows/../../modules/nf-core/famsa/align"
     tag "subworkflows/../../modules/nf-core/kalign/align"
     tag "subworkflows/../../modules/nf-core/learnmsa/align"
+    tag "subworkflows/../../modules/nf-core/mafft/align"
     tag "subworkflows/../../modules/nf-core/magus/align"
     tag "subworkflows/../../modules/nf-core/muscle5/super5"
     tag "subworkflows/../../modules/nf-core/tcoffee/align"
@@ -88,6 +89,24 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match("learnmsa/align - stub") },
+            )
+        }
+    }
+
+    test("mafft/align") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of( [[ id:'test' ], file(params.modules_testdata_base_path + 'genomics/eukaryotes/anemonia_sulcata/seatoxin-ref.aln', checkIfExists: true), 'mafft_align'] )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match("mafft/align") },
             )
         }
     }

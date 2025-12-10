@@ -2,6 +2,7 @@ include { CLUSTALO_ALIGN } from '../../../modules/nf-core/clustalo/align/main'
 include { FAMSA_ALIGN } from '../../../modules/nf-core/famsa/align/main'
 include { KALIGN_ALIGN } from '../../../modules/nf-core/kalign/align/main'
 include { LEARNMSA_ALIGN } from '../../../modules/nf-core/learnmsa/align/main'
+include { MAFFT_ALIGN } from '../../../modules/nf-core/mafft/align/main'
 include { MAGUS_ALIGN } from '../../../modules/nf-core/magus/align/main'
 include { MUSCLE5_SUPER5 } from '../../../modules/nf-core/muscle5/super5/main'
 include { TCOFFEE_ALIGN } from '../../../modules/nf-core/tcoffee/align/main'
@@ -28,6 +29,8 @@ workflow MSA_ALIGNMENT {
                 kalign_align: tool == "kalign_align"
                     return [ meta, fasta ]
                 learnmsa_align: tool == "learnmsa_align"
+                    return [ meta, fasta ]
+                mafft_align: tool == "mafft_align"
                     return [ meta, fasta ]
                 magus_align: tool == "magus_align"
                     return [ meta, fasta ]
@@ -57,6 +60,10 @@ workflow MSA_ALIGNMENT {
     LEARNMSA_ALIGN( ch_fasta_branch.learnmsa_align )
     ch_out_alignment = ch_out_alignment.mix(LEARNMSA_ALIGN.out.alignment)
     ch_out_versions = ch_out_versions.mix(LEARNMSA_ALIGN.out.versions)
+
+    MAFFT_ALIGN( ch_fasta_branch.mafft_align, [[], []], [[], []], [[], []], [[], []], [[], []], [] )
+    ch_out_alignment = ch_out_alignment.mix(MAFFT_ALIGN.out.fas)
+    ch_out_versions = ch_out_versions.mix(MAFFT_ALIGN.out.versions)
 
     MAGUS_ALIGN( ch_fasta_branch.magus_align, [[], []], [] )
     ch_out_alignment = ch_out_alignment.mix(MAGUS_ALIGN.out.alignment)
